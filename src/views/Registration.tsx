@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import kuva from '../kuva.png';
 import { IData } from '../types';
+import '../styles.css';
+import axios from 'axios';
 
 
 const Registration = () => {
@@ -30,6 +32,9 @@ const Registration = () => {
   const handleSubmit = (event:any) => {
     event.preventDefault();
     console.log(inputs);
+    axios.post("http://localhost:3001/userData", inputs).then((response) => {
+      console.log('Post succesful', response);
+    });
   }
 
   return (
@@ -46,47 +51,94 @@ const Registration = () => {
             <h5 style={{margin: 5}}>Ilmoittaudu</h5>
           </NavLink>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '92%', height: '90%'}}>
-    <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', height: '100%', width: '100%', alignItems: 'center'}}>
-      <div style={{display: 'flex', flexDirection:  'row'}}>
-        <label style={{width: '27%', height: '10%'}}> Firstname:   </label>
-        <input 
-          style={{  
-            width: '73%',
-            height:'5%',
-            padding: 12,
-            borderStyle: 'solid',
-            borderRadius: 4,
-            resize: 'vertical'
-          }}
-          type="text" 
-          name="firstName" 
-          value={inputs?.firstName || ""} 
-          onChange={handleChange}
-        />
-      </div>
-      
-      <div style={{display: 'flex', flexDirection:  'row', justifyContent: 'flex-start'}}>
-        <label  style={{width: '27%', height: '5%'}}>Surname:  </label>
-        <input 
-          style={{  
-            width: '73%',
-            height:'5%',
-            padding: 12,
-            borderStyle: 'solid',
-            borderRadius: 4,
-            resize: 'vertical'
-          }}
-          type="number" 
-          name="age" 
-          value={inputs?.age || ""} 
-          onChange={handleChange}
-        />
-      </div>
-    
-       
-        <input type="submit" />
-    </form>
+        <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '100%', height: '90%'}}>
+          <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', height: '100%', width: '100%', alignItems: 'center'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+              <label className='columnLabel'> Firstname: </label>
+              <input 
+                className='inputStyle'
+                type="text" 
+                name="firstName" 
+                value={inputs?.firstName || ""} 
+                onChange={handleChange}
+              />
+              
+            </div>
+            
+            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+              <label className='columnLabel'>Surname:</label>
+              <input 
+                className='inputStyle'
+                type="number" 
+                name="age" 
+                value={inputs?.age || ""} 
+                onChange={handleChange}
+              />
+            </div>
+
+            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+              <label className='columnLabel'>Age:</label>
+              <input 
+                className='inputStyle'
+                type="number" 
+                name="age" 
+                value={inputs?.age || ""} 
+                onChange={handleChange}
+              />
+            </div>
+
+            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+              <label className='columnLabel'>Gender:</label>
+              <input 
+                className='inputStyle'
+                type="text" 
+                name="gender" 
+                value={inputs?.age || ""} 
+                onChange={handleChange}
+              />
+            </div>
+            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+              <label className='columnLabel'>Team:</label>
+              <input 
+                className='inputStyle'
+                type="text" 
+                name="team" 
+                value={inputs?.age || ""} 
+                onChange={handleChange}
+              />
+            </div>
+            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+              <label className='columnLabel'>T-Shirt:</label>
+              <input 
+                className='inputStyle'
+                type="text" 
+                name="tshirt" 
+                value={inputs?.age || ""} 
+                onChange={handleChange}
+              />
+            </div>
+            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+              <label className='columnLabel'>Free text:</label>
+              <input 
+                className='inputStyle'
+                type="text" 
+                name="freeText" 
+                value={inputs?.age || ""} 
+                onChange={handleChange}
+              />
+            </div>
+            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+              <label className='columnLabel'>Phone:</label>
+              <input 
+                className='inputStyle'
+                type="text" 
+                name="phone" 
+                value={inputs?.age || ""} 
+                onChange={handleChange}
+              />
+            </div>
+            <input type="submit" />
+          </form>
         </div>
       </div>
   )

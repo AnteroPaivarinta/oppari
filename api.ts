@@ -31,7 +31,7 @@ app.get('/', async (req, res) => {
   return res.status(200).send("It's working");
 });
 
-app.post('/file', async function(req,res) {
+app.post('/userData', async function(req,res) {
   connection.connect(function(err) {
     if (err) {
       console.error('Database connection failed: ' + err.stack);
