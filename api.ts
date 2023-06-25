@@ -5,7 +5,7 @@ const cors = require('cors')
 const  AWS = require('aws-sdk');
 const mysql = require('mysql');
 const dotenv = require('dotenv').config();
-
+const jwt = require('jsonwebtoken');
 
 const connection = mysql.createConnection({
   host     : process.env.RDS_HOSTNAME,
@@ -27,8 +27,33 @@ const s3 = new AWS.S3({
 app.use(cors())
 app.use(express.json())
 
+
+let jwtSecretKey = process.env.JWT_SECRET_KEY;
+let data = {
+    time: Date(),
+    userId: 12,
+}
+
+const token = jwt.sign(data, jwtSecretKey);
 app.get('/', async (req, res) => {
-  return res.status(200).send("It's working");
+  
+  let tokenHeaderKey = process.env.TOKEN_HEADER_KEY;
+  let jwtSecretKey = process.env.JWT_SECRET_KEY;
+  console.log('req', req.header());
+  try {
+      const token = req.header(tokenHeaderKey);
+
+      const verified = jwt.verify(token, jwtSecretKey);
+      if(verified){
+          return res.send("Successfully Verified");
+      }else{
+          // Access Denied
+          return res.status(401).send(error);
+      }
+  } catch (error) {
+      // Access Denied
+      return res.status(401).send(error);
+  }
 });
 
 app.post('/userData', async function(req,res) {

@@ -11,3 +11,8 @@ export interface IData {
     hopes: string; 
     freeText: string;
 }
+
+export interface IAdmin {
+    user: string;
+    password: string;
+}
