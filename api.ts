@@ -34,26 +34,28 @@ let data = {
     userId: 12,
 }
 
-const token = jwt.sign(data, jwtSecretKey);
-app.get('/', async (req, res) => {
-  
-  let tokenHeaderKey = process.env.TOKEN_HEADER_KEY;
-  let jwtSecretKey = process.env.JWT_SECRET_KEY;
-  console.log('req', req.header());
-  try {
-      const token = req.header(tokenHeaderKey);
 
-      const verified = jwt.verify(token, jwtSecretKey);
-      if(verified){
-          return res.send("Successfully Verified");
-      }else{
-          // Access Denied
-          return res.status(401).send(error);
-      }
-  } catch (error) {
-      // Access Denied
-      return res.status(401).send(error);
-  }
+app.get('/', async (req, res) => {
+     // Tokens are generally passed in header of request
+    // Due to security reasons.
+  
+    let tokenHeaderKey = process.env.TOKEN_HEADER_KEY;
+    let jwtSecretKey = process.env.JWT_SECRET_KEY;
+  
+    try {
+        const token = jwt.sign(data, jwtSecretKey);
+        const verified = jwt.verify(token, jwtSecretKey);
+        if(verified){
+            return res.send("Successfully Verified");
+        }else{
+            // Access Denied
+            return res.status(401).send(error);
+        }
+    } catch (error) {
+        // Access Denied
+        return res.status(401).send(error);
+    } 
+ 
 });
 
 app.post('/userData', async function(req,res) {
@@ -64,6 +66,7 @@ app.post('/userData', async function(req,res) {
     }
     console.log('Connected to database.');
   });
+  console.log('Req', req.body)
   const use = "USE kaleva;";
   const sql= "INSERT INTO COMPANY VALUES (5, 'seura1')";
   connection.query(use);
