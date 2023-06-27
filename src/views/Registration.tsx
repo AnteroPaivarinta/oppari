@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const Registration = () => {
 
-  const [inputs, setInputs] = useState< IData >
+  const [inputs, setInputs] = useState < IData >
   ({
     email: '',
     tshirt: '', 
@@ -70,8 +70,8 @@ const Registration = () => {
               <input 
                 className='inputStyle'
                 type="number" 
-                name="age" 
-                value={inputs?.age || ""} 
+                name="lastName" 
+                value={inputs?.lastName || ""} 
                 onChange={handleChange}
               />
             </div>
@@ -86,14 +86,13 @@ const Registration = () => {
                 onChange={handleChange}
               />
             </div>
-
             <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
               <label className='columnLabel'>Gender:</label>
               <input 
                 className='inputStyle'
                 type="text" 
                 name="gender" 
-                value={inputs?.age || ""} 
+                value={inputs?.gender || ""} 
                 onChange={handleChange}
               />
             </div>
@@ -103,7 +102,7 @@ const Registration = () => {
                 className='inputStyle'
                 type="text" 
                 name="team" 
-                value={inputs?.age || ""} 
+                value={inputs?.team || ""} 
                 onChange={handleChange}
               />
             </div>
@@ -113,7 +112,7 @@ const Registration = () => {
                 className='inputStyle'
                 type="text" 
                 name="tshirt" 
-                value={inputs?.age || ""} 
+                value={inputs?.tshirt || ""} 
                 onChange={handleChange}
               />
             </div>

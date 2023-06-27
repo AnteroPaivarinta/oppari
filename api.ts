@@ -35,6 +35,18 @@ let data = {
 }
 
 
+app.post('/admin', async (req, res) => {
+
+  const {user, password} = req.body;
+  const adminUser = process.env.RDS_USERNAME;
+  const adminPassword = process.env.RDS_PASSWORD;
+  if (user === adminUser && adminPassword === password) {
+    return res.status(200).send("Right user and password");
+  } else {
+    return res.status(401).send("Wrong password");
+  }
+});
+
 app.get('/', async (req, res) => {
      // Tokens are generally passed in header of request
     // Due to security reasons.
