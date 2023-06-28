@@ -35,8 +35,11 @@ const Admin = () => {
       });
     }
 
-    const onDelete = () => {
-
+    const onDelete = (index: string) => {
+      axios.delete("http://localhost:3001/delete/"+index).then((response) => {
+          console.log('Delete succesful', response);
+          
+      });
     }
 
     const onUpdate = () => {
@@ -56,7 +59,7 @@ const Admin = () => {
           <td>{value.team}</td>
           <td>{value.hopes}</td>
           <td>{value.freeText}</td>
-          <button onClick={() => onDelete(  )}>DELETE</button>
+          <button onClick={() => onDelete(value.PersonID)}>DELETE</button>
           <button>UPDATE</button>
         </tr>
       )

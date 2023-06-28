@@ -1,5 +1,5 @@
 export interface IData {
-    id?:string;
+    PersonID:string;
     firstName: string;
     lastName: string;
     age: string;

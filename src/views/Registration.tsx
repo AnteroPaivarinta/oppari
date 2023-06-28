@@ -10,6 +10,7 @@ const Registration = () => {
 
   const [inputs, setInputs] = useState < IData >
   ({
+    PersonID: '',
     email: '',
     tshirt: '', 
     gender: '', 

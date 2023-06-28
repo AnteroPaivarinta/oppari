@@ -93,11 +93,19 @@ app.get('/userData', function(req,res) {
 });
 
 app.delete('/delete/:id', function(req,res) {
+
+  const connection = mysql.createConnection({
+    host     : process.env.RDS_HOSTNAME,
+    user     : process.env.RDS_USERNAME,
+    password : process.env.RDS_PASSWORD,
+    port     : process.env.RDS_PORT
+  });
   
   let id = req.params.id;
-  const index = dataArray.findIndex((value) => value.id === id);
+  const index = dataArray.findIndex((value) => value.PersonID.toString() === id.toString());
   dataArray.slice(index, 1);
-  const deleteQuery = 'DELETE FROM PERSON WHERE PersonID =='+index+';';
+  console.log('INDEX', index, id, dataArray)
+  const deleteQuery = 'DELETE FROM PERSON WHERE PersonID ='+id.toString()+';';
   connection.connect(function(err) {
     if (err) {
       console.error('Database connection failed: ' + err.stack);
@@ -105,8 +113,9 @@ app.delete('/delete/:id', function(req,res) {
     }
     console.log('Connected to database.');
   });
+  const use = "USE kaleva;";
+  connection.query(use);
   connection.query(deleteQuery);
-  connection.end();
   return res.status(200).send('Deleted');
 });
 
