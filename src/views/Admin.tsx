@@ -30,12 +30,16 @@ const Admin = () => {
 
           console.log('Post succesful', response);
           if(response.data === 'Right user and password'){
-            console.log('HereWecon')
             setLogResponse(true);
           } 
       });
-      
+    }
 
+    const onDelete = () => {
+
+    }
+
+    const onUpdate = () => {
 
     }
 
@@ -52,6 +56,8 @@ const Admin = () => {
           <td>{value.team}</td>
           <td>{value.hopes}</td>
           <td>{value.freeText}</td>
+          <button onClick={() => onDelete(  )}>DELETE</button>
+          <button>UPDATE</button>
         </tr>
       )
       return (array)
@@ -99,6 +105,7 @@ const Admin = () => {
           <tr>
             <th>FirstName</th>
             <th>LastName</th>
+            <th>Age</th>
             <th>Email</th>
             <th>Gender</th>
             <th>Phone</th>

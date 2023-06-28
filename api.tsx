@@ -92,6 +92,24 @@ app.get('/userData', function(req,res) {
   return res.status(200).send(dataArray);
 });
 
+app.delete('/delete/:id', function(req,res) {
+  
+  let id = req.params.id;
+  const index = dataArray.findIndex((value) => value.id === id);
+  dataArray.slice(index, 1);
+  const deleteQuery = 'DELETE FROM PERSON WHERE PersonID =='+index+';';
+  connection.connect(function(err) {
+    if (err) {
+      console.error('Database connection failed: ' + err.stack);
+      return;
+    }
+    console.log('Connected to database.');
+  });
+  connection.query(deleteQuery);
+  connection.end();
+  return res.status(200).send('Deleted');
+});
+
 const PORT = 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)

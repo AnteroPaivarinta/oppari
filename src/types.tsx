@@ -1,4 +1,5 @@
 export interface IData {
+    id?:string;
     firstName: string;
     lastName: string;
     age: string;
