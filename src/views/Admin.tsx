@@ -16,6 +16,7 @@ const Admin = () => {
       password: ''
     });
     const [logResponse, setLogResponse ] = useState(false);
+    const [dataBase, setDatabase ] = useState([]);
 
     const handleChange = (event:any) => {
         const name = event.target.name;
@@ -25,6 +26,7 @@ const Admin = () => {
 
     const handleSubmit = () => {
       axios.post("http://localhost:3001/admin", inputs).then((response) => {
+
           console.log('Post succesful', response);
           if(response.data === 'Right user and password'){
             setLogResponse(true);
@@ -32,10 +34,7 @@ const Admin = () => {
       });
     }
 
-    useEffect(() => {
-      
-      
-    },  []);
+   
 
   return (
     <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: '100%', height: '100vh', backgroundSize: 'cover' }}>

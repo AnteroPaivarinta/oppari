@@ -14,26 +14,26 @@ const connection = mysql.createConnection({
   port     : process.env.RDS_PORT
 });
 
-
-const s3 = new AWS.S3({
-  region: 'eu-north-1',
-  apiVersion: '2006-03-01',
-  credentials: {
-    accessKeyId: process.env.AWS_S3_ACCESS_KEY,
-    secretAccessKey: process.env.AWS_S3_SECRET_KEY,
-  },
+connection.connect(function(err) {
+  if (err) {
+    console.error('Database connection failed: ' + err.stack);
+    return;
+  }
+  console.log('Connected to database.');
 });
+const use = "USE kaleva;";
+const dataArray = [];
+connection.query(use);
+connection.query(sql);
+connection.query("SELECT * FROM PERSON", function (err, result, fields) {
+  const array = JSON.parse(JSON.stringify(result))
+  dataArray.push(...array);
+
+});
+connection.end();
 
 app.use(cors())
 app.use(express.json())
-
-
-let jwtSecretKey = process.env.JWT_SECRET_KEY;
-let data = {
-    time: Date(),
-    userId: 12,
-}
-
 
 app.post('/admin', async (req, res) => {
 
@@ -83,7 +83,15 @@ app.post('/userData', async function(req,res) {
   const sql= "INSERT INTO COMPANY VALUES (5, 'seura1')";
   connection.query(use);
   connection.query(sql);
+  connection.end();
+  dataArray.push(req.body);
   return res.status(200).send("It's working");
+});
+
+
+app.get('/userData', function(req,res) {
+  console.log('USERDATA', dataArray);
+  return res.status(200).send(dataArray);
 });
 
 const PORT = 3001
