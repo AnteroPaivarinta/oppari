@@ -24,7 +24,6 @@ connection.connect(function(err) {
 const use = "USE kaleva;";
 const dataArray = [];
 connection.query(use);
-connection.query(sql);
 connection.query("SELECT * FROM PERSON", function (err, result, fields) {
   const array = JSON.parse(JSON.stringify(result))
   dataArray.push(...array);
@@ -90,7 +89,6 @@ app.post('/userData', async function(req,res) {
 
 
 app.get('/userData', function(req,res) {
-  console.log('USERDATA', dataArray);
   return res.status(200).send(dataArray);
 });
 
