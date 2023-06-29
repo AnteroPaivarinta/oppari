@@ -38,6 +38,8 @@ const Admin = () => {
     const onDelete = (index: string) => {
       axios.delete("http://localhost:3001/delete/"+index).then((response) => {
           console.log('Delete succesful', response);
+          setDatabase(response.data);
+          setLogResponse(true);
           
       });
     }
@@ -68,6 +70,7 @@ const Admin = () => {
 
     useEffect(() => {
       console.log('logresponse', logResponse)
+      console.log('array', dataBase)
       if(logResponse === true) {
         axios.get("http://localhost:3001/userData")
         .then(function (response) {
@@ -77,6 +80,8 @@ const Admin = () => {
         });
       }
     }, [logResponse]);
+
+ 
 
   return (
     <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: '100%', height: '100vh', backgroundSize: 'cover' }}>

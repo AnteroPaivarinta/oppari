@@ -4,10 +4,9 @@ import kuva from '../kuva.png';
 import { IData } from '../types';
 import '../styles.css';
 import axios from 'axios';
-
-
+import { v4 as uuid } from 'uuid';
 const Registration = () => {
-
+  
   const [inputs, setInputs] = useState < IData >
   ({
     PersonID: '',
@@ -16,7 +15,7 @@ const Registration = () => {
     gender: '', 
     phone: '', 
     freeText:'',
-    licenseCard: false,
+    licenseCard: '',
     firstName:'',
     lastName: '',
     hopes: '',
@@ -33,7 +32,10 @@ const Registration = () => {
   const handleSubmit = (event:any) => {
     event.preventDefault();
     console.log(inputs);
-    axios.post("http://localhost:3001/userData", inputs).then((response) => {
+    let uid = uuid();
+    console.log('UID', uid);
+    const object = {...inputs, PersonID : uid};
+    axios.post("http://localhost:3001/userData", object).then((response) => {
       console.log('Post succesful', response);
     });
   }
@@ -63,14 +65,13 @@ const Registration = () => {
                 value={inputs?.firstName || ""} 
                 onChange={handleChange}
               />
-              
             </div>
-            
+
             <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
               <label className='columnLabel'>Surname:</label>
               <input 
                 className='inputStyle'
-                type="number" 
+                type="text" 
                 name="lastName" 
                 value={inputs?.lastName || ""} 
                 onChange={handleChange}
@@ -81,7 +82,7 @@ const Registration = () => {
               <label className='columnLabel'>Age:</label>
               <input 
                 className='inputStyle'
-                type="number" 
+                type="text" 
                 name="age" 
                 value={inputs?.age || ""} 
                 onChange={handleChange}
@@ -123,7 +124,7 @@ const Registration = () => {
                 className='inputStyle'
                 type="text" 
                 name="freeText" 
-                value={inputs?.age || ""} 
+                value={inputs?.freeText || ""} 
                 onChange={handleChange}
               />
             </div>
@@ -133,7 +134,38 @@ const Registration = () => {
                 className='inputStyle'
                 type="text" 
                 name="phone" 
-                value={inputs?.age || ""} 
+                value={inputs?.phone || ""} 
+                onChange={handleChange}
+              />
+            </div>
+
+            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+              <label className='columnLabel'>License Card:</label>
+              <input 
+                className='inputStyle'
+                type="text" 
+                name="licenseCard" 
+                value={inputs?.licenseCard || ""} 
+                onChange={handleChange}
+              />
+            </div>
+            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+              <label className='columnLabel'> Hopes:</label>
+              <input 
+                className='inputStyle'
+                type="text" 
+                name="hopes" 
+                value={inputs?.hopes || ""} 
+                onChange={handleChange}
+              />
+            </div>
+            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+              <label className='columnLabel'> Email:</label>
+              <input 
+                className='inputStyle'
+                type="text" 
+                name="email" 
+                value={inputs?.email || ""} 
                 onChange={handleChange}
               />
             </div>

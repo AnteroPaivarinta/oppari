@@ -8,7 +8,7 @@ export interface IData {
     phone: string;
     tshirt: string;
     team: string;
-    licenseCard: boolean;
+    licenseCard: '';
     hopes: string; 
     freeText: string;
 }

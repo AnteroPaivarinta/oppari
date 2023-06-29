@@ -22,7 +22,7 @@ connection.connect(function(err) {
   console.log('Connected to database.');
 });
 const use = "USE kaleva;";
-const dataArray = [];
+let dataArray = [];
 connection.query(use);
 connection.query("SELECT * FROM PERSON", function (err, result, fields) {
   const array = JSON.parse(JSON.stringify(result))
@@ -70,6 +70,12 @@ app.get('/', async (req, res) => {
 });
 
 app.post('/userData', async function(req,res) {
+  const connection = mysql.createConnection({
+    host     : process.env.RDS_HOSTNAME,
+    user     : process.env.RDS_USERNAME,
+    password : process.env.RDS_PASSWORD,
+    port     : process.env.RDS_PORT
+  });
   connection.connect(function(err) {
     if (err) {
       console.error('Database connection failed: ' + err.stack);
@@ -77,9 +83,10 @@ app.post('/userData', async function(req,res) {
     }
     console.log('Connected to database.');
   });
-  console.log('Req', req.body)
+  const object = req.body;
+  console.log('Object', object);
   const use = "USE kaleva;";
-  const sql= "INSERT INTO COMPANY VALUES (5, 'seura1')";
+  const sql= `INSERT INTO PERSON VALUES ('${object.firstName}', '${object.lastName}', '${object.age}', '${object.email}', '${object.gender}', '${object.phone}', '${object.tshirt}', '${object.team}', '${object.licenseCard}', '${object.hopes}', '${object.freeText}', '${object.PersonID}');`;
   connection.query(use);
   connection.query(sql);
   connection.end();
@@ -102,10 +109,7 @@ app.delete('/delete/:id', function(req,res) {
   });
   
   let id = req.params.id;
-  const index = dataArray.findIndex((value) => value.PersonID.toString() === id.toString());
-  dataArray.slice(index, 1);
-  console.log('INDEX', index, id, dataArray)
-  const deleteQuery = 'DELETE FROM PERSON WHERE PersonID ='+id.toString()+';';
+  const deleteQuery = `DELETE FROM PERSON WHERE PersonID ='${id}';`;
   connection.connect(function(err) {
     if (err) {
       console.error('Database connection failed: ' + err.stack);
@@ -116,7 +120,13 @@ app.delete('/delete/:id', function(req,res) {
   const use = "USE kaleva;";
   connection.query(use);
   connection.query(deleteQuery);
-  return res.status(200).send('Deleted');
+  connection.end();
+  //const index = dataArray.findIndex((value) => value.PersonID === id);
+  console.log('DATA1', dataArray)
+  let array = dataArray.filter((value) => value.PersonID != id);
+  console.log('DATA2', array)
+  dataArray = array;
+  return res.status(200).send(array);
 });
 
 const PORT = 3001
