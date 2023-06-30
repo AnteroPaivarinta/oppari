@@ -122,7 +122,6 @@ app.delete('/delete/:id', function(req,res) {
   connection.query(deleteQuery);
   connection.end();
   //const index = dataArray.findIndex((value) => value.PersonID === id);
-  console.log('DATA1', dataArray)
   let array = dataArray.filter((value) => value.PersonID != id);
   console.log('DATA2', array)
   dataArray = array;

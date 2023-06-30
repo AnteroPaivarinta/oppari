@@ -5,7 +5,7 @@ import '../App.css';
 import kuva from '../kuva.png';
 import '../styles.css';
 import axios from 'axios';
-import { IAdmin, IData } from '../types';
+import { IAdmin, IData, IDataBoolean, IDataIndex } from '../types';
 
 
 const Admin = () => {
@@ -15,8 +15,11 @@ const Admin = () => {
       user: '',
       password: ''
     });
+
     const [logResponse, setLogResponse ] = useState(false);
     const [dataBase, setDatabase ] = useState<IData[]>([]);
+    const [rowData, setRowData] = useState<IDataIndex[]>([]);
+    const [updatedRowData, setUpdatedRowData] = useState<IDataIndex[]>([]);
     
     const handleChange = (event:any) => {
         const name = event.target.name;
@@ -27,42 +30,70 @@ const Admin = () => {
     const handleSubmit = () => {
       setLogResponse(true);
       axios.post("http://localhost:3001/admin", inputs).then((response) => {
-
-          console.log('Post succesful', response);
-          if(response.data === 'Right user and password'){
-            setLogResponse(true);
-          } 
+        
+        console.log('Post succesful', response);
+        if(response.data === 'Right user and password'){
+          setLogResponse(true);
+        } 
       });
     }
 
     const onDelete = (index: string) => {
       axios.delete("http://localhost:3001/delete/"+index).then((response) => {
-          console.log('Delete succesful', response);
-          setDatabase(response.data);
-          setLogResponse(true);
-          
+        setDatabase(response.data);
+        setLogResponse(true);
       });
     }
 
-    const onUpdate = () => {
+    const onUpdate = (index:number) => {
 
+      const array: IDataIndex[] = rowData;
+      array[index] = {...array[index], update: true};
+      setUpdatedRowData(array);
+    
+    }
+
+    
+
+    const handleChangeUpdate = (event:any, dataObject:IDataIndex) => {
+      const name = event.target.name;
+      const value = event.target.value;
+      const object = {
+        index: dataObject.index,
+        data: {...dataObject.data, [name] : value},
+        update: true,
+      };
+      console.log('ROWDATA', rowData)
+      let objIndex = rowData.findIndex((obj => obj.index === dataObject.index));
+      const array = rowData;
+      array[objIndex] = object;
+      console.log('ARRAY', array);
+    
+      setUpdatedRowData(array);
+    }
+
+    const check = () => {
+     
+      return rowData.find((value:IDataIndex) => value.update === true) ? true: false;
     }
 
     const renderTable = () => {
-      const array = dataBase.map((value:IData, index:number ) => 
+      console.log('ROWDATA', rowData);
+      const mapArray = check()? updatedRowData: rowData;
+      const array = mapArray.map((value:IDataIndex, index:number ) => 
         <tr key={index.toString()}>
-          <td>{value.firstName}</td>
-          <td>{value.lastName}</td>
-          <td>{value.age}</td>
-          <td>{value.email}</td>
-          <td>{value.gender}</td>
-          <td>{value.phone}</td>
-          <td>{value.tshirt}</td>
-          <td>{value.team}</td>
-          <td>{value.hopes}</td>
-          <td>{value.freeText}</td>
-          <button onClick={() => onDelete(value.PersonID)}>DELETE</button>
-          <button>UPDATE</button>
+          <td> {value.update ? <input className='smallInput' name='firstName' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.firstName } </td> 
+          <td> {value.update ? <input className='smallInput' name='lastName' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.lastName } </td> 
+          <td> {value.update ? <input className='smallInput' name='age' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.age } </td> 
+          <td> {value.update ? <input className='smallInput' name='email' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.email } </td> 
+          <td> {value.update ? <input className='smallInput' name='gender' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.gender } </td> 
+          <td> {value.update ? <input className='smallInput' name='phone' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.phone } </td> 
+          <td> {value.update ? <input className='smallInput' name='tshirt' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.tshirt } </td> 
+          <td> {value.update ? <input className='smallInput' name='team' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.team } </td> 
+          <td> {value.update ? <input className='smallInput' name='hopes' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.hopes } </td> 
+          <td> {value.update ? <input className='smallInput' name='freeText' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.freeText } </td> 
+          {  !value.update && <button onClick={() => onDelete(value.data.PersonID)}>DELETE</button>}
+          { !value.update ?<button onClick={() => onUpdate(value.index)}> UPDATE</button> :  <div style={{flexDirection: 'row', display: 'flex'}}> <button>Save</button><button>Cancel</button></div>}
         </tr>
       )
       return (array)
@@ -70,13 +101,16 @@ const Admin = () => {
 
     useEffect(() => {
       console.log('logresponse', logResponse)
-      console.log('array', dataBase)
       if(logResponse === true) {
         axios.get("http://localhost:3001/userData")
         .then(function (response) {
-          console.log(response);
-          
-          setDatabase(response.data)
+          const array = response.data;
+          const newRowData: any[] = [];
+          array.forEach((element: IData, index:number) => {
+            newRowData.push({index: index, data:element, update: false })
+          });
+          setRowData(newRowData);
+          setDatabase(response.data);
         });
       }
     }, [logResponse]);
@@ -109,21 +143,25 @@ const Admin = () => {
           </div>  
          
           <button style={{height: '3%', width: '5%', marginTop: '1%'}} onClick={handleSubmit}>Kirjaudu</button>
-        { logResponse &&<table>
-          <tr>
-            <th>FirstName</th>
-            <th>LastName</th>
-            <th>Age</th>
-            <th>Email</th>
-            <th>Gender</th>
-            <th>Phone</th>
-            <th>T-shirt</th>
-            <th>Team</th>
-            <th>Hopes</th>
-            <th>Free text</th>
-          </tr>
-          {renderTable()}
-        </table>}
+        { logResponse && 
+          <div style={{justifyContent: 'center', display: 'flex', justifyItems:'center', width: '60%'}}> 
+            <table>
+                <tr>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Phone</th>
+                <th>T-shirt</th>
+                <th>Team</th>
+                <th>Hopes</th>
+                <th>Free text</th>
+              </tr>
+            {renderTable()}
+          </table>
+          
+          </div>}
 
         </div>
       </div>

@@ -15,3 +15,15 @@ h1 {
     margin-top: 3px;
 
 }
+
+
+.smallInput {
+  width: 60%;
+  padding: 12;
+  margin-left: 50;
+  border-style: solid;
+  border-radius: 5px;
+  resize: vertical;
+  margin-top: 3px;
+
+}
