@@ -95,6 +95,47 @@ app.post('/userData', async function(req,res) {
 });
 
 
+app.put('/userData', function(req,res) {
+  const {
+    firstName,
+    lastName,
+    age,
+    gender,
+    phone,
+    email,
+    team,
+    freeText,
+    hopes,
+    tshirt,
+    PersonID,
+  } = req.body.data;
+
+  const connection = mysql.createConnection({
+    host     : process.env.RDS_HOSTNAME,
+    user     : process.env.RDS_USERNAME,
+    password : process.env.RDS_PASSWORD,
+    port     : process.env.RDS_PORT
+  });
+
+  connection.connect(function(err) {
+    if (err) {
+      console.error('Database connection failed: ' + err.stack);
+      return;
+    }
+    console.log('Connected to database.');
+  });
+  console.log('RQ', req.body.data);
+  const useSql = 'USE kaleva;'
+  connection.query(useSql);
+  const sql = `UPDATE PERSON SET firstName = '${firstName}', lastName = '${lastName}', age ='${age}', email ='${email}', gender = '${gender}', phone ='${phone}', tshirt = '${tshirt}', team = '${team}' , freeText = '${freeText}', hopes = '${hopes}' WHERE PersonID = '${PersonID}'`;
+  connection.query(sql);
+  connection.end();
+  
+
+  return res.status(200).send('made query');
+});
+
+
 app.get('/userData', function(req,res) {
   return res.status(200).send(dataArray);
 });
@@ -123,7 +164,6 @@ app.delete('/delete/:id', function(req,res) {
   connection.end();
   //const index = dataArray.findIndex((value) => value.PersonID === id);
   let array = dataArray.filter((value) => value.PersonID != id);
-  console.log('DATA2', array)
   dataArray = array;
   return res.status(200).send(array);
 });

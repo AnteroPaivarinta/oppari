@@ -50,7 +50,6 @@ const Admin = () => {
       const array: IDataIndex[] = rowData;
       array[index] = {...array[index], update: true};
       setUpdatedRowData(array);
-    
     }
 
     
@@ -63,13 +62,23 @@ const Admin = () => {
         data: {...dataObject.data, [name] : value},
         update: true,
       };
-      console.log('ROWDATA', rowData)
       let objIndex = rowData.findIndex((obj => obj.index === dataObject.index));
       const array = rowData;
-      array[objIndex] = object;
-      console.log('ARRAY', array);
-    
-      setUpdatedRowData(array);
+      const newArray = [...array, array[objIndex] = object]
+      console.log('NEWAR', newArray)
+      setUpdatedRowData(newArray);
+    }
+
+    const onSaveUpdate = (index: number) => {
+
+      const array = updatedRowData.map((object: IDataIndex) => object.update === true? {...object, update: false} : object );
+      console.log('ARRRRRRR', updatedRowData);
+      const ob = array.find((object) => object.index === index);
+      axios.put("http://localhost:3001/userData", ob).then((response) => {
+        
+        console.log('Putsuccesful', response);
+      });
+      setRowData(array);
     }
 
     const check = () => {
@@ -79,7 +88,7 @@ const Admin = () => {
 
     const renderTable = () => {
       console.log('ROWDATA', rowData);
-      const mapArray = check()? updatedRowData: rowData;
+      const mapArray = rowData;
       const array = mapArray.map((value:IDataIndex, index:number ) => 
         <tr key={index.toString()}>
           <td> {value.update ? <input className='smallInput' name='firstName' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.firstName } </td> 
@@ -92,8 +101,8 @@ const Admin = () => {
           <td> {value.update ? <input className='smallInput' name='team' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.team } </td> 
           <td> {value.update ? <input className='smallInput' name='hopes' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.hopes } </td> 
           <td> {value.update ? <input className='smallInput' name='freeText' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.freeText } </td> 
-          {  !value.update && <button onClick={() => onDelete(value.data.PersonID)}>DELETE</button>}
-          { !value.update ?<button onClick={() => onUpdate(value.index)}> UPDATE</button> :  <div style={{flexDirection: 'row', display: 'flex'}}> <button>Save</button><button>Cancel</button></div>}
+          { !value.update && <button onClick={() => onDelete(value.data.PersonID)}> DELETE</button>}
+          { !value.update ?<button onClick={() => onUpdate(value.index)}> UPDATE</button> :  <div style={{flexDirection: 'row', display: 'flex'}}> <button onClick={() => onSaveUpdate(index)}>Save</button><button>Cancel</button></div>}
         </tr>
       )
       return (array)
