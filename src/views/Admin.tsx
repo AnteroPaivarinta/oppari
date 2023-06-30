@@ -63,10 +63,9 @@ const Admin = () => {
         update: true,
       };
       let objIndex = rowData.findIndex((obj => obj.index === dataObject.index));
-      const array = rowData;
-      const newArray = [...array, array[objIndex] = object]
-      console.log('NEWAR', newArray)
-      setUpdatedRowData(newArray);
+      const array = [...rowData];
+      array[objIndex] = object
+      setUpdatedRowData(array);
     }
 
     const onSaveUpdate = (index: number) => {
