@@ -17,7 +17,6 @@ const Admin = () => {
     });
 
     const [logResponse, setLogResponse ] = useState(false);
-    const [dataBase, setDatabase ] = useState<IData[]>([]);
     const [rowData, setRowData] = useState<IDataIndex[]>([]);
     const [updatedRowData, setUpdatedRowData] = useState<IDataIndex[]>([]);
     
@@ -45,13 +44,12 @@ const Admin = () => {
           newRowData.push({index: index, data:element, update: false })
         });
         setRowData(newRowData);
-        setDatabase(response.data);
         setLogResponse(true);
       });
     }
 
     const onUpdate = (index:number) => {
-
+      console.log('????????????')
       const array: IDataIndex[] = rowData;
       array[index] = {...array[index], update: true};
       setUpdatedRowData(array);
@@ -59,18 +57,22 @@ const Admin = () => {
 
     
 
-    const handleChangeUpdate = (event:any, dataObject:IDataIndex) => {
+    const handleChangeUpdate = (event:any, index:number) => {
+
       const name = event.target.name;
       const value = event.target.value;
-      const object = {
-        index: dataObject.index,
-        data: {...dataObject.data, [name] : value},
-        update: true,
-      };
-      let objIndex = rowData.findIndex((obj => obj.index === dataObject.index));
-      const array = [...rowData];
-      array[objIndex] = object
-      setUpdatedRowData(array);
+      const dataObject = updatedRowData.find((value) => value.index === index);
+      const array =  [...updatedRowData];
+      
+      if(dataObject){
+        let object = {
+          index: dataObject?.index,
+          data: {...dataObject?.data, [name] : value},
+          update: true,
+        };
+        array[index] = object;
+        setUpdatedRowData(array);
+      }
     }
 
     const onSaveUpdate = (index: number) => {
@@ -82,7 +84,7 @@ const Admin = () => {
         console.log('Putsuccesful', response);
       });
       setRowData(array);
-    }
+    };
 
     const check = () => {
      
@@ -90,19 +92,19 @@ const Admin = () => {
     }
 
     const renderTable = () => {
-      const mapArray = rowData;
-      const array = mapArray.map((value:IDataIndex, index:number ) => 
+      
+      const array = rowData.map((value:IDataIndex, index:number ) => 
         <tr key={index.toString()}>
-          <td> {value.update ? <input className='smallInput' name='firstName' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.firstName } </td> 
-          <td> {value.update ? <input className='smallInput' name='lastName' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.lastName } </td> 
-          <td> {value.update ? <input className='smallInput' name='age' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.age } </td> 
-          <td> {value.update ? <input className='smallInput' name='email' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.email } </td> 
-          <td> {value.update ? <input className='smallInput' name='gender' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.gender } </td> 
-          <td> {value.update ? <input className='smallInput' name='phone' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.phone } </td> 
-          <td> {value.update ? <input className='smallInput' name='tshirt' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.tshirt } </td> 
-          <td> {value.update ? <input className='smallInput' name='team' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.team } </td> 
-          <td> {value.update ? <input className='smallInput' name='hopes' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.hopes } </td> 
-          <td> {value.update ? <input className='smallInput' name='freeText' onChange={(e) => handleChangeUpdate(e, value)}/> : value.data.freeText } </td> 
+          <td> {value.update ? <input className='smallInput' name='firstName' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.firstName } </td> 
+          <td> {value.update ? <input className='smallInput' name='lastName' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.lastName } </td> 
+          <td> {value.update ? <input className='smallInput' name='age' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.age } </td> 
+          <td> {value.update ? <input className='smallInput' name='email' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.email } </td> 
+          <td> {value.update ? <input className='smallInput' name='gender' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.gender } </td> 
+          <td> {value.update ? <input className='smallInput' name='phone' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.phone } </td> 
+          <td> {value.update ? <input className='smallInput' name='tshirt' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.tshirt } </td> 
+          <td> {value.update ? <input className='smallInput' name='team' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.team } </td> 
+          <td> {value.update ? <input className='smallInput' name='hopes' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.hopes } </td> 
+          <td> {value.update ? <input className='smallInput' name='freeText' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.freeText } </td> 
           { !value.update && <button onClick={() => onDelete(value.data.PersonID)}> DELETE</button>}
           { !value.update ?<button onClick={() => onUpdate(value.index)}> UPDATE</button> :  <div style={{flexDirection: 'row', display: 'flex'}}> <button onClick={() => onSaveUpdate(index)}>Save</button><button>Cancel</button></div>}
         </tr>
@@ -121,7 +123,6 @@ const Admin = () => {
             newRowData.push({index: index, data:element, update: false })
           });
           setRowData(newRowData);
-          setDatabase(response.data);
         });
       }
     }, [logResponse]);
