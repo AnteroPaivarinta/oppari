@@ -40,6 +40,11 @@ const Admin = () => {
 
     const onDelete = (index: string) => {
       axios.delete("http://localhost:3001/delete/"+index).then((response) => {
+        const newRowData: any[] = [];
+        response.data.forEach((element: IData, index:number) => {
+          newRowData.push({index: index, data:element, update: false })
+        });
+        setRowData(newRowData);
         setDatabase(response.data);
         setLogResponse(true);
       });
@@ -71,7 +76,6 @@ const Admin = () => {
     const onSaveUpdate = (index: number) => {
 
       const array = updatedRowData.map((object: IDataIndex) => object.update === true? {...object, update: false} : object );
-      console.log('ARRRRRRR', updatedRowData);
       const ob = array.find((object) => object.index === index);
       axios.put("http://localhost:3001/userData", ob).then((response) => {
         
@@ -86,7 +90,6 @@ const Admin = () => {
     }
 
     const renderTable = () => {
-      console.log('ROWDATA', rowData);
       const mapArray = rowData;
       const array = mapArray.map((value:IDataIndex, index:number ) => 
         <tr key={index.toString()}>
