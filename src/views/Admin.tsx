@@ -19,7 +19,7 @@ const Admin = () => {
     const [logResponse, setLogResponse ] = useState(false);
     const [rowData, setRowData] = useState<IDataIndex[]>([]);
     const [updatedRowData, setUpdatedRowData] = useState<IDataIndex[]>([]);
-    
+    const [token, setToken] = useState<string> ('');
     const handleChange = (event:any) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -27,11 +27,12 @@ const Admin = () => {
     }
 
     const handleSubmit = () => {
-      setLogResponse(true);
       axios.post("http://localhost:3001/admin", inputs).then((response) => {
         
         console.log('Post succesful', response);
-        if(response.data === 'Right user and password'){
+        if(response.data.loginResponse === 'Right user and password'){
+          console.log('?')
+          setToken(response.data.token);
           setLogResponse(true);
         } 
       });
@@ -43,8 +44,9 @@ const Admin = () => {
         response.data.forEach((element: IData, index:number) => {
           newRowData.push({index: index, data:element, update: false })
         });
-        setRowData(newRowData);
         setLogResponse(true);
+
+        setRowData(newRowData);
       });
     }
 
@@ -114,8 +116,13 @@ const Admin = () => {
 
     useEffect(() => {
       console.log('logresponse', logResponse)
+      const config = {
+        headers: {
+           Authorization: "Bearer " + token
+        }
+     }
       if(logResponse === true) {
-        axios.get("http://localhost:3001/userData")
+        axios.get("http://localhost:3001/userData", config)
         .then(function (response) {
           const array = response.data;
           const newRowData: any[] = [];
