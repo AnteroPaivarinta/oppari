@@ -6,7 +6,7 @@ import '../styles.css';
 import axios from 'axios';
 import { v4 as uuid } from 'uuid';
 import Select from 'react-select';
-
+import Switch from "react-switch";
 
 
 const Registration = () => {
@@ -19,7 +19,7 @@ const Registration = () => {
     gender: '', 
     phone: '', 
     freeText:'',
-    licenseCard: '',
+    licenseCard: false,
     firstName:'',
     lastName: '',
     hopes: '',
@@ -35,6 +35,8 @@ const Registration = () => {
     { value: 'XL', label: 'XL' },
     { value: 'XXL', label: 'XXL' },
   ];
+
+
   
 
 
@@ -49,6 +51,10 @@ const Registration = () => {
     setInputs(values => ({...values, tshirt: selectedOption.value}))
   }
 
+  const handleLicenseCard = (checked:any) => {
+    setInputs(values => ({...values, licenseCard: checked}))
+  }
+
   const handleSubmit = (event:any) => {
     event.preventDefault();
     console.log(inputs);
@@ -58,7 +64,8 @@ const Registration = () => {
     axios.post("http://localhost:3001/userData", object).then((response) => {
       console.log('Post succesful', response);
     });
-  }
+  };
+  
 
   return (
     <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: '100%', height: '100vh', backgroundSize:'cover' }}>
@@ -155,13 +162,8 @@ const Registration = () => {
 
             <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
               <label className='columnLabel'>License Card:</label>
-              <input 
-                className='inputStyle'
-                type="text" 
-                name="licenseCard" 
-                value={inputs?.licenseCard || ""} 
-                onChange={handleChange}
-              />
+            
+               <Switch onChange={handleLicenseCard} checked={inputs.licenseCard} />
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
               <label className='columnLabel'> Hopes:</label>

@@ -130,7 +130,7 @@ app.post('/userData', async function(req,res) {
     }
     console.log('Connected to database.');
   });
- 
+  // Muokkaa sql kyselyä niin, että tietokantaan menee arvo 1 tai 0 license cardin kohdalla
   const object = req.body;
   const use = "USE kaleva;";
   const sql= `INSERT INTO PERSON VALUES ('${object.firstName}', '${object.lastName}', '${object.age}', '${object.email}', '${object.gender}', '${object.phone}', '${object.tshirt}', '${object.team}', '${object.licenseCard}', '${object.hopes}', '${object.freeText}', '${object.PersonID}');`;
