@@ -130,10 +130,10 @@ app.post('/userData', async function(req,res) {
     }
     console.log('Connected to database.');
   });
-  // Muokkaa sql kyselyä niin, että tietokantaan menee arvo 1 tai 0 license cardin kohdalla
   const object = req.body;
+  const licenseCard = object.licenseCard === true? 1 : 0
   const use = "USE kaleva;";
-  const sql= `INSERT INTO PERSON VALUES ('${object.firstName}', '${object.lastName}', '${object.age}', '${object.email}', '${object.gender}', '${object.phone}', '${object.tshirt}', '${object.team}', '${object.licenseCard}', '${object.hopes}', '${object.freeText}', '${object.PersonID}');`;
+  const sql= `INSERT INTO PERSON VALUES ('${object.firstName}', '${object.lastName}', '${object.age}', '${object.email}', '${object.gender}', '${object.phone}', '${object.tshirt}', '${object.team}', '${licenseCard}', '${object.hopes}', '${object.freeText}', '${object.PersonID}');`;
   connection.query(use);
   connection.query(sql);
   connection.end();
@@ -184,7 +184,7 @@ app.put('/userData', function(req,res) {
 
 
 app.get('/userData', verifyUserToken,  function(req,res) {
-  res.json(dataArray)
+  res.json(dataArray.map((value) => value.licenseCard === 1 ? {...value, licenseCad: true} : {...value, licenseCard: false}))
 });
 
  
