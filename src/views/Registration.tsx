@@ -5,6 +5,10 @@ import { IData } from '../types';
 import '../styles.css';
 import axios from 'axios';
 import { v4 as uuid } from 'uuid';
+import Select from 'react-select';
+
+
+
 const Registration = () => {
   
   const [inputs, setInputs] = useState < IData >
@@ -23,10 +27,26 @@ const Registration = () => {
     age:''
   });
 
+  const options = [
+    { value: 'XS', label: 'XS' },
+    { value: 'S', label: 'S' },
+    { value: 'M', label: 'M' },
+    { value: 'L', label: 'L' },
+    { value: 'XL', label: 'XL' },
+    { value: 'XXL', label: 'XXL' },
+  ];
+  
+
+
+
   const handleChange = (event:any) => {
     const name = event.target.name;
     const value = event.target.value;
     setInputs(values => ({...values, [name]: value}))
+  }
+
+  const selectHandleChange = (selectedOption:any) => {
+    setInputs(values => ({...values, tshirt: selectedOption.value}))
   }
 
   const handleSubmit = (event:any) => {
@@ -110,13 +130,7 @@ const Registration = () => {
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
               <label className='columnLabel'>T-Shirt:</label>
-              <input 
-                className='inputStyle'
-                type="text" 
-                name="tshirt" 
-                value={inputs?.tshirt || ""} 
-                onChange={handleChange}
-              />
+               <Select value={{label: inputs.tshirt, value: inputs.tshirt}} options={options}  onChange={(e) => selectHandleChange(e)}   />
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
               <label className='columnLabel'>Free text:</label>
