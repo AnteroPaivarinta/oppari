@@ -47,6 +47,7 @@ const Registration = () => {
     setInputs(values => ({...values, [name]: value}))
   }
 
+
   const selectHandleChange = (selectedOption:any) => {
     setInputs(values => ({...values, tshirt: selectedOption.value}))
   }
@@ -65,6 +66,9 @@ const Registration = () => {
       console.log('Post succesful', response);
     });
   };
+
+ 
+  
   
 
   return (

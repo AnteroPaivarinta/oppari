@@ -6,6 +6,8 @@ import kuva from '../kuva.png';
 import '../styles.css';
 import axios from 'axios';
 import { IAdmin, IData, IDataBoolean, IDataIndex } from '../types';
+import * as ExcelJS from 'exceljs';
+import FileSaver, { saveAs } from 'file-saver';
 
 
 const Admin = () => {
@@ -38,6 +40,21 @@ const Admin = () => {
       });
     }
 
+    const makeExcel = async() => {
+    
+      const wb = new ExcelJS.Workbook();
+      const ws = wb.addWorksheet('My Sheet');
+      ws.addRows(
+        ['PersonID', 'First name', 'LastName', ' Gender', 'Tshirt', 'License Card', 'Hopes', 'Team', 'Free text']
+      );
+      rowData.forEach((el:IDataIndex)=>{
+        ws.addRows(
+          [el.data.PersonID, el.data.firstName, el.data.lastName, el.data.gender, el.data.tshirt, el.data.licenseCard, el.data.hopes, el.data.team, el.data.freeText]
+        );
+      })
+      await wb.xlsx.writeBuffer().then(buffer => FileSaver.saveAs(new Blob([buffer]), `Järjestäjät.xlsx`))
+      .catch(err => console.log('Error writing excel export', err))
+    }
     const onDelete = (index: string) => {
       axios.delete("http://localhost:3001/delete/"+index).then((response) => {
         const newRowData: any[] = [];
@@ -51,7 +68,7 @@ const Admin = () => {
     }
 
     const onUpdate = (index:number) => {
-      console.log('????????????')
+
       const array: IDataIndex[] = rowData;
       array[index] = {...array[index], update: true};
       setUpdatedRowData(array);
@@ -88,10 +105,6 @@ const Admin = () => {
       setRowData(array);
     };
 
-    const check = () => {
-     
-      return rowData.find((value:IDataIndex) => value.update === true) ? true: false;
-    }
 
     const renderTable = () => {
       
@@ -179,6 +192,7 @@ const Admin = () => {
               </tr>
             {renderTable()}
           </table>
+          <button onClick={() => makeExcel()}> DOWNLOAD IN EXCEL</button>
           
           </div>}
 

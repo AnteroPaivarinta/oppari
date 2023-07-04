@@ -9,6 +9,8 @@ const jwt = require("jsonwebtoken");
 const jwtKey = "kalevakoodi"
 const jwtExpirySeconds = 300;
 const jwtSecret = '123';
+const reader = require('xlsx');
+const file = reader.readFile('./test.xlsx')
 
 const verifyUserToken = (req, res, next) => {
   if (!req.headers.authorization) {
@@ -27,12 +29,11 @@ const verifyUserToken = (req, res, next) => {
   }
 };
 
-
 const connection = mysql.createConnection({
-  host     : process.env.RDS_HOSTNAME,
-  user     : process.env.RDS_USERNAME,
-  password : process.env.RDS_PASSWORD,
-  port     : process.env.RDS_PORT
+  host     : process.env.LOCAL_NAME,
+  user     : process.env.LOCAL_USER,
+  password : process.env.LOCAL_PASSWORD,
+  port     : process.env.LOCAL_USERPW
 });
 
 connection.connect(function(err) {
@@ -94,23 +95,22 @@ const verifyToken = (req, res, next) => {
 app.get('/', async (req, res) => {
      // Tokens are generally passed in header of request
     // Due to security reasons.
-  
-    let tokenHeaderKey = process.env.TOKEN_HEADER_KEY;
-    let jwtSecretKey = process.env.JWT_SECRET_KEY;
-  
-    try {
-        const token = jwt.sign(data, jwtSecretKey);
-        const verified = jwt.verify(token, jwtSecretKey);
-        if (verified) {
-            return res.send("Successfully Verified");
-        } else {
-            // Access Denied
-            return res.status(401).send(error);
-        }
-    } catch (error) {
-        // Access Denied
-        return res.status(401).send(error);
-    } 
+    let student_data = [{
+      Student:'Nikhil',
+      Age:22,
+      Branch:'ISE',
+      Marks: 70
+  },
+  {
+      Student:'Amitha',
+      Age:21,
+      Branch:'EC',
+      Marks:80
+  }]
+  const ws = reader.utils.json_to_sheet(student_data)
+  reader.utils.book_append_sheet(file, ws, "Sheet3")
+  reader.writeFile(file,'./test.xlsx')
+  res.send('Hello');
  
 });
 
