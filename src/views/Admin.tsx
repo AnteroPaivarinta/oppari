@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
-import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
+import { useEffect, useState } from 'react';
 import '../App.css';
 import kuva from '../kuva.png';
 import '../styles.css';
 import axios from 'axios';
-import { IAdmin, IData, IDataBoolean, IDataIndex } from '../types';
+import { IAdmin, IData, IDataIndex } from '../types';
 import * as ExcelJS from 'exceljs';
-import FileSaver, { saveAs } from 'file-saver';
+import FileSaver from 'file-saver';
 
 
 const Admin = () => {
@@ -150,7 +148,7 @@ const Admin = () => {
  
 
   return (
-    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: '100%', height: '100vh', backgroundSize: 'cover' }}>
+    <div data-testid='Admin' style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: '100%', height: '100vh', backgroundSize: 'cover' }}>
       <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'row', }}>
         <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column',  width: '100%', height: '100%', marginTop: '5%'}}>
           <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
