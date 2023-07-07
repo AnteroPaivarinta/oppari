@@ -19,6 +19,12 @@ export interface IDataIndex {
     update: boolean;
 }
 
+export interface IAdminObject {
+    loginResponse: boolean,
+    inputVerify: boolean,
+    token: string,
+}
+
 export interface IDataBoolean {
     PersonID: boolean;
     firstName: boolean ;

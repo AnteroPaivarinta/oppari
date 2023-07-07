@@ -3,7 +3,7 @@ import '../App.css';
 import kuva from '../kuva.png';
 import '../styles.css';
 import axios from 'axios';
-import { IAdmin, IData, IDataIndex } from '../types';
+import { IAdmin, IAdminObject, IData, IDataIndex } from '../types';
 import * as ExcelJS from 'exceljs';
 import FileSaver from 'file-saver';
 
@@ -19,7 +19,11 @@ const Admin = () => {
     const [logResponse, setLogResponse ] = useState(false);
     const [rowData, setRowData] = useState<IDataIndex[]>([]);
     const [updatedRowData, setUpdatedRowData] = useState<IDataIndex[]>([]);
-    const [token, setToken] = useState<string> ('');
+    const [inputCode, setInpuCode] = useState<string>('');
+    const [inputVerify, setInputVerify] = useState<boolean>(false);
+    const [adiminObject, setAdminObject ] = useState<IAdminObject>({inputVerify: false, token:'', loginResponse: false});
+
+
     const handleChange = (event:any) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -31,9 +35,18 @@ const Admin = () => {
         
         console.log('Post succesful', response);
         if(response.data.loginResponse === 'Right user and password'){
-          console.log('?')
-          setToken(response.data.token);
-          setLogResponse(true);
+
+          setInputVerify(true);
+        } 
+      });
+    }
+
+    const sendVerifyCode = () => {
+      axios.post("http://localhost:3001/admin/verify", inputCode).then((response) => {
+        
+        console.log('Post succesful', response);
+        if(response.data.token){
+          setAdminObject({inputVerify: false, token: response.data.token, loginResponse: true})
         } 
       });
     }
@@ -60,7 +73,6 @@ const Admin = () => {
           newRowData.push({index: index, data:element, update: false })
         });
         setLogResponse(true);
-
         setRowData(newRowData);
       });
     }
@@ -126,13 +138,12 @@ const Admin = () => {
     }
 
     useEffect(() => {
-      console.log('logresponse', logResponse)
       const config = {
         headers: {
-           Authorization: "Bearer " + token
+           Authorization: "Bearer " + adiminObject.token
         }
      }
-      if(logResponse === true) {
+      if(adiminObject.loginResponse === true) {
         axios.get("http://localhost:3001/userData", config)
         .then(function (response) {
           const array = response.data;
@@ -190,6 +201,7 @@ const Admin = () => {
               </tr>
             {renderTable()}
           </table>
+          { inputVerify && <div><input value={inputCode} onChange={(e) => setInpuCode(e.target.value)}></input> <button onClick={() => sendVerifyCode()}> SEND VERIFY CODE</button> </div>}
           <button onClick={() => makeExcel()}> DOWNLOAD IN EXCEL</button>
           
           </div>}

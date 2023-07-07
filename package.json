@@ -31,7 +31,7 @@
     "xlsx": "^0.18.5"
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"node api.tsx\"",
+    "start": "concurrently \"react-scripts start\" \"node backend/api.tsx\"",
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!my-library-dir)/'",
     "eject": "react-scripts eject"

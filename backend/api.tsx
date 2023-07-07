@@ -6,11 +6,22 @@ const  AWS = require('aws-sdk');
 const mysql = require('mysql');
 const dotenv = require('dotenv').config();
 const jwt = require("jsonwebtoken");
-const jwtKey = "kalevakoodi"
+const jwtKey = "kalevakoodi";
 const jwtExpirySeconds = 300;
 const jwtSecret = '123';
 const reader = require('xlsx');
-const file = reader.readFile('./test.xlsx')
+const file = reader.readFile('./backend/test.xlsx')
+const nodemailer = require('nodemailer');
+
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'youremail@gmail.com',
+    pass: 'yourpassword'
+  }
+});
+
 
 const verifyUserToken = (req, res, next) => {
   if (!req.headers.authorization) {
@@ -61,40 +72,57 @@ app.post('/admin', async (req, res) => {
   const {user, password} = req.body;
   const adminUser = process.env.RDS_USERNAME;
   const adminPassword = process.env.RDS_PASSWORD;
-
   if (user === adminUser && adminPassword === password) {
     
-    let token = jwt.sign({ foo: 'bar' }, jwtSecret);
-    return res.status(200).send({token: token, loginResponse: 'Right user and password'});
+    let code = Math.floor(1000 + Math.random() * 9000);
+    
+    let mailOptions = {
+      from: 'youremail@gmail.com',
+      to: 'myfriend@yahoo.com',
+      subject: 'Verify  Code',
+      text: code.toString(),
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+    return res.status(200).send({ loginResponse: 'Right user and password', code});
   } else {
     return res.status(401).send("Wrong password");
   }
 });
+
+app.post('/admin/verify', async (req, res) => {
+  
+  const {inputCode, code} = req.body;
+  if (inputCode === code) {
+    let token = jwt.sign({ foo: 'bar' }, jwtSecret);
+    return res.status(200).send({token: token});
+  } else {
+    return res.status(401).send("Wrong verify code");
+  }
+});
 const verifyToken = (req, res, next) => {
-  // Hae token pyynnön otsakkeista, esimerkiksi Authorization-headerista
+
   const token = req.headers['authorization'];
 
   if (!token) {
-    // Tokenia ei annettu
     return res.status(401).json({ message: 'Token puuttuu' });
   }
 
   try {
-    // Tarkista tokenin validius
     const decoded = jwt.verify(token, jwtSecret);
-    // Token varmennettu, voit esimerkiksi tallentaa varmennetun käyttäjän tiedot req-objektiin jatkokäsittelyä varten
     req.user = decoded;
-    // Siirry seuraavaan middlewareen
     next();
   } catch (err) {
-    // Token on virheellinen
     return res.status(401).json({ message: 'Virheellinen token' });
   }
 }
 
 app.get('/', async (req, res) => {
-     // Tokens are generally passed in header of request
-    // Due to security reasons.
     let student_data = [{
       Student:'Nikhil',
       Age:22,
@@ -212,7 +240,6 @@ app.delete('/delete/:id', function(req,res) {
   connection.query(use);
   connection.query(deleteQuery);
   connection.end();
-  //const index = dataArray.findIndex((value) => value.PersonID === id);
 
   let array = dataArray.filter((value) => value.PersonID != id);
   dataArray = array;
