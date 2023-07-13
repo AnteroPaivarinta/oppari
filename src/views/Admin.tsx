@@ -22,7 +22,7 @@ const Admin = () => {
     const [inputCode, setInpuCode] = useState<string>('');
     const [inputVerify, setInputVerify] = useState<boolean>(false);
     const [adiminObject, setAdminObject ] = useState<IAdminObject>({inputVerify: false, token:'', loginResponse: false});
-
+    const [filterInput, setFiterInput] = useState<string>('');
 
     const handleChange = (event:any) => {
         const name = event.target.name;
@@ -84,6 +84,8 @@ const Admin = () => {
       setUpdatedRowData(array);
     }
 
+ 
+
     
 
     const handleChangeUpdate = (event:any, index:number) => {
@@ -117,8 +119,8 @@ const Admin = () => {
 
 
     const renderTable = () => {
-      
-      const array = rowData.map((value:IDataIndex, index:number ) => 
+      const mapArray = filterInput ? rowData.filter((value:IDataIndex) => value.data.lastName === filterInput) : rowData;
+      const array = mapArray.map((value: IDataIndex, index:number ) => 
         <tr key={index.toString()}>
           <td> {value.update ? <input className='smallInput' name='firstName' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.firstName } </td> 
           <td> {value.update ? <input className='smallInput' name='lastName' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.lastName } </td> 
@@ -183,7 +185,8 @@ const Admin = () => {
             />
           </div>  
          
-          <button style={{height: '3%', width: '5%', marginTop: '1%'}} onClick={handleSubmit}>Kirjaudu</button>
+          <button style={{height: '3%', width: '5%', marginTop: '1%'}} onClick={handleSubmit}>Kirjaudu</button> 
+          <input onChange={(e) =>setFiterInput(e.target.value)}/> <div>Seach by Surname</div>
         { logResponse && 
           <div style={{justifyContent: 'center', display: 'flex', justifyItems:'center', width: '60%'}}> 
             <table>
@@ -201,7 +204,12 @@ const Admin = () => {
               </tr>
             {renderTable()}
           </table>
-          { inputVerify && <div><input value={inputCode} onChange={(e) => setInpuCode(e.target.value)}></input> <button onClick={() => sendVerifyCode()}> SEND VERIFY CODE</button> </div>}
+          { inputVerify && 
+            <div>
+              <input value={inputCode} onChange={(e) => setInpuCode(e.target.value)}></input> 
+              <button onClick={() => sendVerifyCode()}> SEND VERIFY CODE</button> 
+
+            </div>}
           <button onClick={() => makeExcel()}> DOWNLOAD IN EXCEL</button>
           
           </div>}

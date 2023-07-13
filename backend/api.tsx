@@ -160,8 +160,15 @@ app.post('/userData', async function(req,res) {
   });
   const object = req.body;
   const licenseCard = object.licenseCard === true? 1 : 0
+  let currentTime = new Date();
+  let clockTime = currentTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+  let pv = currentTime.getDate();
+  let kk = currentTime.getMonth() + 1; 
+  let vuosi = currentTime.getFullYear();
+
+  let time = clockTime + '/' + pv + '/' + kk + '/' + vuosi
   const use = "USE kaleva;";
-  const sql= `INSERT INTO PERSON VALUES ('${object.firstName}', '${object.lastName}', '${object.age}', '${object.email}', '${object.gender}', '${object.phone}', '${object.tshirt}', '${object.team}', '${licenseCard}', '${object.hopes}', '${object.freeText}', '${object.PersonID}');`;
+  const sql= `INSERT INTO PERSON VALUES ('${object.firstName}', '${object.lastName}', '${object.age}', '${object.email}', '${object.gender}', '${object.phone}', '${object.tshirt}', '${object.team}', '${licenseCard}', '${object.hopes}', '${object.freeText}', '${object.PersonID}', '${time}');`;
   connection.query(use);
   connection.query(sql);
   connection.end();
