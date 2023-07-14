@@ -17,8 +17,8 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'youremail@gmail.com',
-    pass: 'yourpassword'
+    user: 'opparitesti3@gmail.com',
+    pass: process.env.emailpassword
   }
 });
 
@@ -77,8 +77,8 @@ app.post('/admin', async (req, res) => {
     let code = Math.floor(1000 + Math.random() * 9000);
     
     let mailOptions = {
-      from: 'youremail@gmail.com',
-      to: 'myfriend@yahoo.com',
+      from: 'opparitesti3@gmail.com',
+      to: 'antero.paivarinta@gmail.com',
       subject: 'Verify  Code',
       text: code.toString(),
     };
