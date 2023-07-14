@@ -43,8 +43,8 @@ const verifyUserToken = (req, res, next) => {
 const connection = mysql.createConnection({
   host     : process.env.LOCAL_NAME,
   user     : process.env.LOCAL_USER,
-  password : process.env.LOCAL_PASSWORD,
-  port     : process.env.LOCAL_USERPW
+  password : process.env.LOCAL_USERPW,
+  port     : process.env.LOCAL_RDSPORT
 });
 
 connection.connect(function(err) {

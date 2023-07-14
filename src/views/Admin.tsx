@@ -187,7 +187,15 @@ const Admin = () => {
          
           <button style={{height: '3%', width: '5%', marginTop: '1%'}} onClick={handleSubmit}>Kirjaudu</button> 
           <input onChange={(e) =>setFiterInput(e.target.value)}/> <div>Seach by Surname</div>
-        { logResponse && 
+          { inputVerify && 
+            <div style={{color:'black'}}>
+              <input value={inputCode} onChange={(e) => setInpuCode(e.target.value)}></input> 
+              <button onClick={() => sendVerifyCode()}> SEND VERIFY CODE</button> 
+
+            </div>}
+          <button onClick={() => makeExcel()}> DOWNLOAD IN EXCEL</button>
+          
+        { adiminObject.token && 
           <div style={{justifyContent: 'center', display: 'flex', justifyItems:'center', width: '60%'}}> 
             <table>
                 <tr>
@@ -204,14 +212,7 @@ const Admin = () => {
               </tr>
             {renderTable()}
           </table>
-          { inputVerify && 
-            <div>
-              <input value={inputCode} onChange={(e) => setInpuCode(e.target.value)}></input> 
-              <button onClick={() => sendVerifyCode()}> SEND VERIFY CODE</button> 
-
-            </div>}
-          <button onClick={() => makeExcel()}> DOWNLOAD IN EXCEL</button>
-          
+         
           </div>}
 
         </div>
