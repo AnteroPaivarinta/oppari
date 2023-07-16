@@ -145,10 +145,10 @@ app.get('/', async (req, res) => {
 app.post('/userData', async function(req,res) {
 
   const connection = mysql.createConnection({
-    host     : process.env.RDS_HOSTNAME,
-    user     : process.env.RDS_USERNAME,
-    password : process.env.RDS_PASSWORD,
-    port     : process.env.RDS_PORT
+    host     : process.env.LOCAL_NAME,
+    user     : process.env.LOCAL_USER,
+    password : process.env.LOCAL_USERPW,
+    port     : process.env.LOCAL_RDSPORT
   });
 
   connection.connect(function(err) {
@@ -168,7 +168,7 @@ app.post('/userData', async function(req,res) {
 
   let time = clockTime + '/' + pv + '/' + kk + '/' + vuosi
   const use = "USE kaleva;";
-  const sql= `INSERT INTO PERSON VALUES ('${object.firstName}', '${object.lastName}', '${object.age}', '${object.email}', '${object.gender}', '${object.phone}', '${object.tshirt}', '${object.team}', '${licenseCard}', '${object.hopes}', '${object.freeText}', '${object.PersonID}', '${time}');`;
+  const sql= `INSERT INTO PERSON VALUES ('${object.PersonID}', '${object.firstName}', '${object.lastName}', '${object.age}', '${object.email}', '${object.gender}', '${object.phone}', '${object.tshirt}', '${object.team}', '${licenseCard}', '${object.hopes}', '${object.freeText}', '${time}');`;
   connection.query(use);
   connection.query(sql);
   connection.end();
@@ -193,10 +193,10 @@ app.put('/userData', function(req,res) {
   } = req.body.data;
 
   const connection = mysql.createConnection({
-    host     : process.env.RDS_HOSTNAME,
-    user     : process.env.RDS_USERNAME,
-    password : process.env.RDS_PASSWORD,
-    port     : process.env.RDS_PORT
+    host     : process.env.LOCAL_NAME,
+    user     : process.env.LOCAL_USER,
+    password : process.env.LOCAL_USERPW,
+    port     : process.env.LOCAL_RDSPORT
   });
 
   connection.connect(function(err) {
@@ -227,10 +227,10 @@ app.get('/userData', verifyUserToken,  function(req,res) {
 app.delete('/delete/:id', function(req,res) {
 
   const connection = mysql.createConnection({
-    host     : process.env.RDS_HOSTNAME,
-    user     : process.env.RDS_USERNAME,
-    password : process.env.RDS_PASSWORD,
-    port     : process.env.RDS_PORT
+    host     : process.env.LOCAL_NAME,
+    user     : process.env.LOCAL_USER,
+    password : process.env.LOCAL_USERPW,
+    port     : process.env.LOCAL_RDSPORT
   });
   
   let id = req.params.id;

@@ -133,7 +133,7 @@ const Admin = () => {
           <td> {value.update ? <input className='smallInput' name='hopes' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.hopes } </td> 
           <td> {value.update ? <input className='smallInput' name='freeText' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.freeText } </td> 
           { !value.update && <button onClick={() => onDelete(value.data.PersonID)}> DELETE</button>}
-          { !value.update ?<button onClick={() => onUpdate(value.index)}> UPDATE</button> :  <div style={{flexDirection: 'row', display: 'flex'}}> <button onClick={() => onSaveUpdate(index)}>Save</button><button>Cancel</button></div>}
+          { !value.update ? <button onClick={() => onUpdate(value.index)}> UPDATE</button> :  <div style={{flexDirection: 'row', display: 'flex'}}> <button onClick={() => onSaveUpdate(index)}>Save</button><button>Cancel</button></div>}
         </tr>
       )
       return (array)
