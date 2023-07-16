@@ -11,6 +11,12 @@ export interface IData {
     licenseCard: boolean;
     hopes: string; 
     freeText: string;
+    tasks: ISelect[];
+}
+
+export interface ISelect {
+    value: string;
+    label: string;
 }
 
 export interface IDataIndex {

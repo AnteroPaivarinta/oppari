@@ -165,10 +165,10 @@ app.post('/userData', async function(req,res) {
   let pv = currentTime.getDate();
   let kk = currentTime.getMonth() + 1; 
   let vuosi = currentTime.getFullYear();
-
   let time = clockTime + '/' + pv + '/' + kk + '/' + vuosi
+  let tasks = object.tasks.map((value) => value.label).toString();
   const use = "USE kaleva;";
-  const sql= `INSERT INTO PERSON VALUES ('${object.PersonID}', '${object.firstName}', '${object.lastName}', '${object.age}', '${object.email}', '${object.gender}', '${object.phone}', '${object.tshirt}', '${object.team}', '${licenseCard}', '${object.hopes}', '${object.freeText}', '${time}');`;
+  const sql= `INSERT INTO PERSON VALUES ('${object.PersonID}', '${object.firstName}', '${object.lastName}', '${object.age}', '${object.email}', '${object.gender}', '${object.phone}', '${object.tshirt}', '${object.team}', '${licenseCard}', '${object.hopes}', '${object.freeText}', '${time}', '${tasks}');`;
   connection.query(use);
   connection.query(sql);
   connection.end();

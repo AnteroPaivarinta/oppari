@@ -7,6 +7,7 @@ import axios from 'axios';
 import { v4 as uuid } from 'uuid';
 import Select from 'react-select';
 import Switch from "react-switch";
+import SelectBoxes from '../components/SelectBoxes';
 
 
 const Registration = () => {
@@ -24,7 +25,8 @@ const Registration = () => {
     lastName: '',
     hopes: '',
     team: '',
-    age:''
+    age:'',
+    tasks: [],
   });
 
   const options = [
@@ -36,6 +38,7 @@ const Registration = () => {
     { value: 'XXL', label: 'XXL' },
   ];
 
+  const [tasks, setTasks ] = useState<any[]>();
 
   
 
@@ -54,6 +57,11 @@ const Registration = () => {
 
   const handleLicenseCard = (checked:any) => {
     setInputs(values => ({...values, licenseCard: checked}))
+  }
+
+  const handleTasks = (e:any) => {
+    setInputs(values => ({...values, tasks: e}))
+
   }
 
   const handleSubmit = (event:any) => {
@@ -189,6 +197,7 @@ const Registration = () => {
                 onChange={handleChange}
               />
             </div>
+            <SelectBoxes selectHandleChange={handleTasks} />
             <input type="submit" />
           </form>
         </div>

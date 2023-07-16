@@ -7,7 +7,6 @@ import { IAdmin, IAdminObject, IData, IDataIndex } from '../types';
 import * as ExcelJS from 'exceljs';
 import FileSaver from 'file-saver';
 
-
 const Admin = () => {
 
     const [inputs, setInputs] = useState< IAdmin >
