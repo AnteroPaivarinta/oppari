@@ -46,6 +46,7 @@ const Admin = () => {
         console.log('Post succesful', response);
         if(response.data.token){
           setAdminObject({inputVerify: false, token: response.data.token, loginResponse: true})
+          setInputVerify(false);
         } 
       });
     }
@@ -54,10 +55,11 @@ const Admin = () => {
     
       const wb = new ExcelJS.Workbook();
       const ws = wb.addWorksheet('My Sheet');
+      console.log('ROWDATA', rowData)
       ws.addRows(
         ['PersonID', 'First name', 'LastName', ' Gender', 'Tshirt', 'License Card', 'Hopes', 'Team', 'Free text']
       );
-      rowData.forEach((el:IDataIndex)=>{
+      rowData.forEach((el:IDataIndex)=> {
         ws.addRows(
           [el.data.PersonID, el.data.firstName, el.data.lastName, el.data.gender, el.data.tshirt, el.data.licenseCard, el.data.hopes, el.data.team, el.data.freeText]
         );
@@ -192,13 +194,12 @@ const Admin = () => {
             />
           </div>  
          
-          { !inputVerify &&<button style={{height: '3%', width: '5%', marginTop: '1%'}} onClick={handleSubmit}>Kirjaudu</button>} 
+          { (!inputVerify && !adiminObject.token) &&<button style={{height: '3%', width: '5%', marginTop: '1%'}} onClick={handleSubmit}>Kirjaudu</button>} 
          
-          { (inputVerify && !adiminObject ) && 
+          { (inputVerify ) && 
             <div style={{color:'black'}}>
               <input value={inputCode} onChange={(e) => setInpuCode(e.target.value)}></input> 
               <button onClick={() => sendVerifyCode()}> SEND VERIFY CODE</button> 
-
             </div>}
        
           
