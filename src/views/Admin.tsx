@@ -125,7 +125,7 @@ const Admin = () => {
 
 
     const renderTable = () => {
-      const mapArray = filterInput ? rowData.filter((value:IDataIndex) => value.data.lastName === filterInput) : rowData;
+      const mapArray = filterInput ? rowData.filter((value:IDataIndex) => value.data.lastName.includes(filterInput)) : rowData;
       const array = mapArray.map((value: IDataIndex, index:number ) => 
         <tr key={index.toString()}>
           <td> {value.update ? <input className='smallInput' name='firstName' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.firstName } </td> 
@@ -192,9 +192,9 @@ const Admin = () => {
             />
           </div>  
          
-          <button style={{height: '3%', width: '5%', marginTop: '1%'}} onClick={handleSubmit}>Kirjaudu</button> 
+          { !inputVerify &&<button style={{height: '3%', width: '5%', marginTop: '1%'}} onClick={handleSubmit}>Kirjaudu</button>} 
          
-          { inputVerify && 
+          { (inputVerify && !adiminObject ) && 
             <div style={{color:'black'}}>
               <input value={inputCode} onChange={(e) => setInpuCode(e.target.value)}></input> 
               <button onClick={() => sendVerifyCode()}> SEND VERIFY CODE</button> 

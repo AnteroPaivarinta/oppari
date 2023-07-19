@@ -1,7 +1,7 @@
 
-const express = require('express')
+const express = require('express');
 const app = express();
-const cors = require('cors')
+const cors = require('cors');
 const  AWS = require('aws-sdk');
 const mysql = require('mysql');
 const dotenv = require('dotenv').config();
@@ -55,8 +55,8 @@ connection.connect(function(err) {
   console.log('Connected to database.');
 });
 const use = "USE kaleva;";
-let dataArray = [];
 connection.query(use);
+let dataArray = [];
 connection.query("SELECT * FROM PERSON", function (err, result, fields) {
   const array = JSON.parse(JSON.stringify(result))
   dataArray.push(...array);
@@ -69,30 +69,50 @@ app.use(express.json())
 
 app.post('/admin', async (req, res) => {
 
-  const {user, password} = req.body;
-  const adminUser = process.env.RDS_USERNAME;
-  const adminPassword = process.env.RDS_PASSWORD;
-  if (user === adminUser && adminPassword === password) {
+  const connection = mysql.createConnection({
+    host     : process.env.LOCAL_NAME,
+    user     : process.env.LOCAL_USER,
+    password : process.env.LOCAL_USERPW,
+    port     : process.env.LOCAL_RDSPORT
+  });
+  
+  connection.connect(function(err) {
+    if (err) {
+      console.error('Database connection failed: ' + err.stack);
+      return;
+    }
+    console.log('Connected to database.');
+  });
+  
+  const { user, password } = req.body;
+
+  const sqlQuery = `SELECT * FROM ADMIN WHERE email ='${user}';`
+  const use = "USE kaleva;";
+  connection.query(use);
+  connection.query(sqlQuery, async function (err, result, fields) {
+    if (err) throw err;
+    const userData = result[0];
+    if (user === userData.email && userData.password === password) {
     
-    let code = Math.floor(1000 + Math.random() * 9000);
-    
-    let mailOptions = {
-      from: 'opparitesti3@gmail.com',
-      to: 'antero.paivarinta@gmail.com',
-      subject: 'Verify  Code',
-      text: code.toString(),
-    };
-    transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-      }
-    });
-    return res.status(200).send({ loginResponse: 'Right user and password', code});
-  } else {
-    return res.status(401).send("Wrong password");
-  }
+      let code = Math.floor(1000 + Math.random() * 9000);
+      let mailOptions = {
+        from: 'opparitesti3@gmail.com',
+        to: userData.email,
+        subject: 'Verify  Code',
+        text: code.toString(),
+      };
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+      return res.status(200).send({ loginResponse: 'Right user and password', code});
+    } else {
+      return res.status(401).send("Wrong password");
+    }
+  });
 });
 
 app.post('/admin/verify', async (req, res) => {
