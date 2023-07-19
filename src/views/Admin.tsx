@@ -54,19 +54,18 @@ const Admin = () => {
     const makeExcel = async() => {
     
       const wb = new ExcelJS.Workbook();
-      const ws = wb.addWorksheet('My Sheet');
-      console.log('ROWDATA', rowData)
-      ws.addRows(
-        ['PersonID', 'First name', 'LastName', ' Gender', 'Tshirt', 'License Card', 'Hopes', 'Team', 'Free text']
-      );
+      const ws = wb.addWorksheet('My Sheet2');
+      ws.addRow(['PersonID', 'First Name', 'Lastname', 'Gender', 'T-shirt', 'License Card', 'hopes', 'team', 'freeText']);
       rowData.forEach((el:IDataIndex)=> {
-        ws.addRows(
-          [el.data.PersonID, el.data.firstName, el.data.lastName, el.data.gender, el.data.tshirt, el.data.licenseCard, el.data.hopes, el.data.team, el.data.freeText]
-        );
+         const arr =  [el.data.PersonID, el.data.firstName, el.data.lastName, el.data.gender, el.data.tshirt, el.data.licenseCard, el.data.hopes, el.data.team, el.data.freeText]
+         ws.addRow(arr);
       })
-      await wb.xlsx.writeBuffer().then(buffer => FileSaver.saveAs(new Blob([buffer]), `Järjestäjät.xlsx`))
+    
+      wb.xlsx.writeBuffer()
+      .then(buffer => FileSaver.saveAs(new Blob([buffer]), `TIEDOSTO.xlsx`))
       .catch(err => console.log('Error writing excel export', err))
     }
+    
     const onDelete = (index: string) => {
       axios.delete("http://localhost:3001/delete/"+index).then((response) => {
         const newRowData: any[] = [];
