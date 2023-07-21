@@ -55,15 +55,15 @@ const Admin = () => {
     
       const wb = new ExcelJS.Workbook();
       const ws = wb.addWorksheet('My Sheet2');
-      ws.addRow(['PersonID', 'First Name', 'Lastname', 'Gender', 'T-shirt', 'License Card', 'hopes', 'team', 'freeText']);
+      ws.addRow(['PersonID', 'First Name', 'Lastname', 'Gender', 'T-shirt', 'License Card', 'hopes', 'team', 'freeText', 'date']);
       rowData.forEach((el:IDataIndex)=> {
-         const arr =  [el.data.PersonID, el.data.firstName, el.data.lastName, el.data.gender, el.data.tshirt, el.data.licenseCard, el.data.hopes, el.data.team, el.data.freeText]
-         ws.addRow(arr);
+        const arr =  [el.data.PersonID, el.data.firstName, el.data.lastName, el.data.gender, el.data.tshirt, el.data.licenseCard, el.data.hopes, el.data.team, el.data.freeText]
+        ws.addRow(arr);
       })
     
       wb.xlsx.writeBuffer()
-      .then(buffer => FileSaver.saveAs(new Blob([buffer]), `TIEDOSTO.xlsx`))
-      .catch(err => console.log('Error writing excel export', err))
+        .then(buffer => FileSaver.saveAs(new Blob([buffer]), `TIEDOSTO.xlsx`))
+        .catch(err => console.log('Error writing excel export', err))
     }
     
     const onDelete = (index: string) => {
@@ -129,16 +129,16 @@ const Admin = () => {
       const mapArray = filterInput ? rowData.filter((value:IDataIndex) => value.data.lastName.includes(filterInput)) : rowData;
       const array = mapArray.map((value: IDataIndex, index:number ) => 
         <tr key={index.toString()}>
-          <td> {value.update ? <input className='smallInput' name='firstName' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.firstName } </td> 
-          <td> {value.update ? <input className='smallInput' name='lastName' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.lastName } </td> 
-          <td> {value.update ? <input className='smallInput' name='age' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.age } </td> 
-          <td> {value.update ? <input className='smallInput' name='email' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.email } </td> 
-          <td> {value.update ? <input className='smallInput' name='gender' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.gender } </td> 
-          <td> {value.update ? <input className='smallInput' name='phone' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.phone } </td> 
-          <td> {value.update ? <input className='smallInput' name='tshirt' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.tshirt } </td> 
-          <td> {value.update ? <input className='smallInput' name='team' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.team } </td> 
-          <td> {value.update ? <input className='smallInput' name='hopes' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.hopes } </td> 
-          <td> {value.update ? <input className='smallInput' name='freeText' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.freeText } </td> 
+          <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.firstName} name='firstName' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.firstName } </td> 
+          <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.lastName} name='lastName' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.lastName } </td> 
+          <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.age} name='age' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.age } </td> 
+          <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.email} name='email' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.email } </td> 
+          <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.gender} name='gender' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.gender } </td> 
+          <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.phone} name='phone' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.phone } </td> 
+          <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.tshirt} name='tshirt' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.tshirt } </td> 
+          <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.team} name='team' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.team } </td> 
+          <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.hopes} name='hopes' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.hopes } </td> 
+          <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.freeText} name='freeText' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.freeText } </td> 
           { !value.update && <button onClick={() => onDelete(value.data.PersonID)}> DELETE</button>}
           { !value.update ? <button onClick={() => onUpdate(value.index)}> UPDATE</button> :  <div style={{flexDirection: 'row', display: 'flex'}}> <button onClick={() => onSaveUpdate(index)}>Save</button><button onClick={() => onCancel(index)}>Cancel</button></div>}
         </tr>
