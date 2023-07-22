@@ -11,6 +11,7 @@
     "@types/react-dom": "^18.2.6",
     "aws-sdk": "^2.1401.0",
     "axios": "^1.4.0",
+    "chroma-js": "^2.4.2",
     "concurrently": "^8.2.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
@@ -18,6 +19,7 @@
     "express": "^4.18.2",
     "file-saver": "^2.0.5",
     "jsonwebtoken": "^9.0.0",
+    "multiselect-react-dropdown": "^2.0.25",
     "mysql": "^2.18.1",
     "nodemailer": "^6.9.3",
     "react": "^18.2.0",
@@ -58,6 +60,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
+    "@types/chroma-js": "^2.4.0",
     "@types/file-saver": "^2.0.5",
     "@types/uuid": "^9.0.2"
   }

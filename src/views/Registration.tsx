@@ -38,11 +38,6 @@ const Registration = () => {
     { value: 'XXL', label: 'XXL' },
   ];
 
-  const [tasks, setTasks ] = useState<any[]>();
-
-  
-
-
 
   const handleChange = (event:any) => {
     const name = event.target.name;
@@ -60,7 +55,10 @@ const Registration = () => {
   }
 
   const handleTasks = (e:any) => {
-    setInputs(values => ({...values, tasks: e}))
+
+    const tasks = inputs.tasks;
+    tasks.push(e);
+    setInputs(values => ({...values, tasks: tasks}))
 
   }
 
@@ -80,7 +78,7 @@ const Registration = () => {
   
 
   return (
-    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: '100%', height: '100vh', backgroundSize:'cover' }}>
+    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: '100%', maxHeight: '100%', height: '100vh', backgroundSize:'cover' }}>
         <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'flex-end', width:'100%', height: '10%', marginLeft: -260}}>
           <NavLink
             to="/"
@@ -151,16 +149,7 @@ const Registration = () => {
               <label className='columnLabel'>T-Shirt:</label>
                <Select value={{label: inputs.tshirt, value: inputs.tshirt}} options={options}  onChange={(e) => selectHandleChange(e)}   />
             </div>
-            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
-              <label className='columnLabel'>Free text:</label>
-              <input 
-                className='inputStyle'
-                type="text" 
-                name="freeText" 
-                value={inputs?.freeText || ""} 
-                onChange={handleChange}
-              />
-            </div>
+           
             <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
               <label className='columnLabel'>Phone:</label>
               <input 
@@ -197,7 +186,23 @@ const Registration = () => {
                 onChange={handleChange}
               />
             </div>
-            <SelectBoxes selectHandleChange={handleTasks} />
+            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '15%'}}>
+              <label className='columnLabel'> Tasks</label>
+              <SelectBoxes selectedValues={inputs.tasks} selectHandleChange={handleTasks} />
+            </div>
+           
+            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+              <label className='columnLabel'>Free text:</label>
+              
+              <textarea
+                name="freeText"
+                className='inputStyleFreeText'
+                rows={3}
+                cols={40}
+                onChange={(e) => handleChange(e)}
+                value={inputs?.freeText}
+              />
+            </div>
             <input type="submit" />
           </form>
         </div>

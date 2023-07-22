@@ -6,14 +6,87 @@ h1 {
   width: 27%;
   height: 10%
 }
-.inputStyle {
-    width: 45%;
-    padding: 12;
-    border-style: solid;
-    border-radius: 5px;
-    resize: vertical;
-    margin-top: 3px;
 
+.columnLabelFreeText {
+  width: 27%;
+  height: 40%
+}
+
+.square {
+  flex-direction: column;
+  height: 100%;
+  margin: 0.1%;
+  display: flex;
+  width: 45%;
+  border-color: #515c4c;
+  border-style: solid;
+  border-color: green;
+  border-width: 3px;
+  border-radius: 5px;
+  align-items: flex-end;
+}
+
+.taskDropDown {
+  width: 100%;
+  height: 100%;
+}
+
+.taskSelectedListItem {
+  inline-size: 150px; 
+  width: 30%;
+  background-color: white;
+  border-radius: 10px;
+  flex:'display';
+  font-size: x-small;
+  text-align: center;
+
+}
+
+.taskList {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: 'column';
+  width: 100%;
+  max-width:  100%;
+  margin-bottom: 50%;
+}
+
+.inputStyle {
+  width: 45%;
+  padding: 12;
+  border-style: solid;
+  border-radius: 5px;
+  resize: vertical;
+  margin-top: 3px;
+}
+
+
+
+.multiSelect {
+  max-width: 20%;
+}
+
+
+.inputStyleTshirt {
+ 
+  max-height: 60%;
+  min-width: 300%;
+  max-width: 300%;
+
+  border-style: solid;
+  border-radius: 5px;
+  
+  margin-top: 3px;
+}
+
+.inputStyleFreeText {
+  width: 45%;
+  padding: 12;
+  border-style: solid;
+  border-radius: 5px;
+  resize: vertical;
+  margin-top: 3px;
+  height: 120%;
 }
 
 
