@@ -23,6 +23,7 @@ export interface IDataIndex {
     index: number;
     data: IData;
     update: boolean;
+    deleting: boolean;
 }
 
 export interface IAdminObject {

@@ -34,7 +34,6 @@ const Admin = () => {
         
         console.log('Post succesful', response);
         if(response.data.loginResponse === 'Right user and password'){
-
           setInputVerify(true);
         } 
       });
@@ -66,11 +65,11 @@ const Admin = () => {
         .catch(err => console.log('Error writing excel export', err))
     }
     
-    const onDelete = (index: string) => {
-      axios.delete("http://localhost:3001/delete/"+index).then((response) => {
+    const onDelete = (PersonID: string, i: number) => {
+      axios.delete("http://localhost:3001/delete/"+PersonID).then((response) => {
         const newRowData: any[] = [];
         response.data.forEach((element: IData, index:number) => {
-          newRowData.push({index: index, data:element, update: false })
+          newRowData.push({index: index, data:element, update: false, deleting: false})
         });
         setLogResponse(true);
         setRowData(newRowData);
@@ -91,10 +90,6 @@ const Admin = () => {
       setUpdatedRowData(array);
     }
 
- 
-
-    
-
     const handleChangeUpdate = (event:any, index:number) => {
 
       const name = event.target.name;
@@ -107,6 +102,7 @@ const Admin = () => {
           index: dataObject?.index,
           data: {...dataObject?.data, [name] : value},
           update: true,
+          deleting: false,
         };
         array[index] = object;
         setUpdatedRowData(array);
@@ -124,6 +120,12 @@ const Admin = () => {
       setRowData(array);
     };
 
+    const deletingWarning = (index: number) => {
+      const array: IDataIndex[] = rowData;
+      array[index] = {...array[index], deleting: true};
+      setUpdatedRowData(array);
+    }
+
 
     const renderTable = () => {
       const mapArray = filterInput ? rowData.filter((value:IDataIndex) => value.data.lastName.includes(filterInput)) : rowData;
@@ -139,7 +141,15 @@ const Admin = () => {
           <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.team} name='team' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.team } </td> 
           <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.hopes} name='hopes' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.hopes } </td> 
           <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.freeText} name='freeText' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.freeText } </td> 
-          { !value.update && <button onClick={() => onDelete(value.data.PersonID)}> DELETE</button>}
+          { !value.update &&
+            <div>
+              { !value.deleting ?<button onClick={() => deletingWarning(index)}> DELETE</button> : 
+                <div>
+                  <button onClick={() => onDelete(value.data.PersonID, index)}>Kyllä</button> 
+                  <button>Ei</button> 
+                </div>}
+            </div> 
+          }
           { !value.update ? <button onClick={() => onUpdate(value.index)}> UPDATE</button> :  <div style={{flexDirection: 'row', display: 'flex'}}> <button onClick={() => onSaveUpdate(index)}>Save</button><button onClick={() => onCancel(index)}>Cancel</button></div>}
         </tr>
       )
