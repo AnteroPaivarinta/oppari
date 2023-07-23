@@ -193,6 +193,36 @@ app.post('/userData', async function(req,res) {
   connection.query(sql);
   connection.end();
   dataArray.push(req.body);
+  const message = 'Hei, olet ilmoittanut Kalevan 2024 kisoihin näillä tiedoilla: \n ';
+  const firstNameLine = `Etunimi: ${object.firstName} \n`
+  const lastNameline = `Sukunimi: ${object.lastName} \n`
+  const age = `Ikä: ${object.age} \n`
+  const email = `Sähköposti: ${object.email} \n`
+  const gender = `Sukupuoli: ${object.gender} \n`
+  const phone = `Puhelinnumero: ${object.phone} \n`
+  const tshirt = `T-paita: ${object.tshirt} \n`
+  const team = `Seura: ${object.team} \n`
+  const licenseCad = `Lisenssikortti: ${object.licenseCard} \n`
+  const hopes = `Toivomukset: ${object.hopes} \n`
+  const freeText = `Vapaamuotoinen teksti: ${object.freeText} \n`
+  const tasksLine = `Tehtävät: ${tasks} \n`
+  const total = message+firstNameLine+lastNameline+age+email+gender+phone+tshirt+team+licenseCard+hopes+freeText+tasksLine;
+  
+
+  let mailOptions = {
+    from: 'opparitesti3@gmail.com',
+    to: object.email,
+    subject: 'Ilmoittautumisvahvistus',
+    text: total,
+  };
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+
   return res.status(200).send("It's working");
 });
 
