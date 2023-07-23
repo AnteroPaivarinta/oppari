@@ -56,7 +56,7 @@ const Admin = () => {
       const ws = wb.addWorksheet('My Sheet2');
       ws.addRow(['PersonID', 'First Name', 'Lastname', 'Gender', 'T-shirt', 'License Card', 'hopes', 'team', 'freeText', 'date']);
       rowData.forEach((el:IDataIndex)=> {
-        const arr =  [el.data.PersonID, el.data.firstName, el.data.lastName, el.data.gender, el.data.tshirt, el.data.licenseCard, el.data.hopes, el.data.team, el.data.freeText]
+        const arr =  [el.data.PersonID, el.data.firstName, el.data.lastName, el.data.gender, el.data.tshirt, el.data.licenseCard, el.data.hopes, el.data.team, el.data.freeText, el.data.date]
         ws.addRow(arr);
       })
     
@@ -140,7 +140,8 @@ const Admin = () => {
           <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.tshirt} name='tshirt' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.tshirt } </td> 
           <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.team} name='team' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.team } </td> 
           <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.hopes} name='hopes' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.hopes } </td> 
-          <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.freeText} name='freeText' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.freeText } </td> 
+          <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.freeText} name='freeText' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.freeText } </td>
+          <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.date} name='freeText' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.date } </td>  
           { !value.update &&
             <div>
               { !value.deleting ?<button onClick={() => deletingWarning(index)}> DELETE</button> : 
@@ -228,6 +229,7 @@ const Admin = () => {
                 <th>Team</th>
                 <th>Hopes</th>
                 <th>Free text</th>
+                <th>Date</th>
               </tr>
             {renderTable()}
           </table>

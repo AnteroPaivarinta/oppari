@@ -67,7 +67,14 @@ const Registration = () => {
     console.log(inputs);
     let uid = uuid();
     console.log('UID', uid);
-    const object = {...inputs, PersonID : uid};
+      
+    const date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let currentDate = `${day}-${month}-${year}`;
+    const object = {...inputs, PersonID : uid, date: currentDate};
+  
     axios.post("http://localhost:3001/userData", object).then((response) => {
       console.log('Post succesful', response);
     });

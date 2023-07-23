@@ -12,6 +12,7 @@ export interface IData {
     hopes: string; 
     freeText: string;
     tasks: ISelect[];
+    date?: string;
 }
 
 export interface ISelect {
