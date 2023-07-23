@@ -13,11 +13,19 @@ export interface IData {
     freeText: string;
     tasks: ISelect[];
     date?: string;
+    days: IDays;
+    
 }
 
 export interface ISelect {
     value: string;
     label: string;
+}
+
+export interface IDays{
+    first: boolean;
+    second: boolean;
+    third: boolean
 }
 
 export interface IDataIndex {

@@ -27,6 +27,11 @@ const Registration = () => {
     team: '',
     age:'',
     tasks: [],
+    days: {
+      first: false, 
+      second: false,
+      third: false,
+    }
   });
 
   const [checked, setChecked  ] = useState<boolean>(false);
@@ -76,12 +81,13 @@ const Registration = () => {
     let year = date.getFullYear();
     let currentDate = `${day}-${month}-${year}`;
     const object = {...inputs, PersonID : uid, date: currentDate};
-  
+    
     axios.post("http://localhost:3001/userData", object).then((response) => {
       console.log('Post succesful', response);
       setLogResponseMessage('Tietojen lähettäminen onnistui. Voit sulkea ikkunan.')
     }).catch((error) => {
-      setLogResponseMessage('Tietojen lähettäminen epäonnistui. Ota yhteyttä ylläpitäjään..')
+      console.log('Error', error)
+      setErrorMessage('Tietojen lähettäminen epäonnistui. Ota yhteyttä ylläpitäjään..')
     });
   };
 
@@ -191,6 +197,12 @@ const Registration = () => {
                 value={inputs?.hopes || ""} 
                 onChange={handleChange}
               />
+            </div>
+            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
+              <label className='columnLabel'> Kisojen osallistumispäivät:</label>
+              <input type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, first: !inputs.days.first}})} /> <p>28.6.2024</p>
+              <input type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, second: !inputs.days.second}})} /> <p>29.6.2024</p>
+              <input type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, third: !inputs.days.third}})} /> <p>30.6.2024</p>
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'> Email:</label>

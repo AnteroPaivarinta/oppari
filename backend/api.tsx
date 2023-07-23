@@ -187,8 +187,24 @@ app.post('/userData', async function(req,res) {
   let vuosi = currentTime.getFullYear();
   let time = clockTime + '/' + pv + '/' + kk + '/' + vuosi
   let tasks = object.tasks.map((value) => value.label).toString();
+  let days = object.days;
+  let arrayDays = []
+  for (const key in days) {
+    if(key.toString() === 'first' && days[key] === true){
+      arrayDays.push('28.6.2024')
+    }
+
+    if(key.toString() === 'second' && days[key] === true){
+      arrayDays.push('29.6.2024')
+    }
+
+    if(key.toString() === 'third' && days[key] === true){
+      arrayDays.push('30.6.2024')
+    }
+  }
+
   const use = "USE kaleva;";
-  const sql= `INSERT INTO PERSON VALUES ('${object.PersonID}', '${object.firstName}', '${object.lastName}', '${object.age}', '${object.email}', '${object.gender}', '${object.phone}', '${object.tshirt}', '${object.team}', '${licenseCard}', '${object.hopes}', '${object.freeText}', '${time}', '${tasks}');`;
+  const sql= `INSERT INTO PERSON VALUES ('${object.PersonID}', '${object.firstName}', '${object.lastName}', '${object.age}', '${object.email}', '${object.gender}', '${object.phone}', '${object.tshirt}', '${object.team}', '${licenseCard}', '${object.hopes}', '${object.freeText}', '${time}', '${tasks}', '${object.date}', '${arrayDays.toString}');`;
   connection.query(use);
   connection.query(sql);
   connection.end();
