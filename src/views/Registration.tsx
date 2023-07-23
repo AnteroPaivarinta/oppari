@@ -30,7 +30,8 @@ const Registration = () => {
   });
 
   const [checked, setChecked  ] = useState<boolean>(false);
-
+  const [responseMessage, setLogResponseMessage ] = useState('');
+  const [errorMessage, setErrorMessage ] = useState('');
   const options = [
     { value: 'XS', label: 'XS' },
     { value: 'S', label: 'S' },
@@ -46,7 +47,6 @@ const Registration = () => {
     const value = event.target.value;
     setInputs(values => ({...values, [name]: value}))
   }
-
 
   const selectHandleChange = (selectedOption:any) => {
     setInputs(values => ({...values, tshirt: selectedOption.value}))
@@ -79,6 +79,9 @@ const Registration = () => {
   
     axios.post("http://localhost:3001/userData", object).then((response) => {
       console.log('Post succesful', response);
+      setLogResponseMessage('Tietojen lähettäminen onnistui. Voit sulkea ikkunan.')
+    }).catch((error) => {
+      setLogResponseMessage('Tietojen lähettäminen epäonnistui. Ota yhteyttä ylläpitäjään..')
     });
   };
 
@@ -215,7 +218,9 @@ const Registration = () => {
                 value={inputs?.freeText}
               />
             </div>
-            <input type='submit' disabled={!checked} value='Lähetä'/>
+            <input type='submit' disabled={!checked} value='Lähetä'/>  
+            <p style={{color:'green'}}> {responseMessage? responseMessage: null}</p>
+            <p style={{color:'red'}}> {errorMessage? errorMessage: null}</p>
           </form>
           <div style={{flexDirection:'row'}}>
             <input type="checkbox" onClick={() => setChecked(!checked)} /> En ole robotti
