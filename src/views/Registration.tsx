@@ -29,6 +29,8 @@ const Registration = () => {
     tasks: [],
   });
 
+  const [checked, setChecked  ] = useState<boolean>(false);
+
   const options = [
     { value: 'XS', label: 'XS' },
     { value: 'S', label: 'S' },
@@ -204,7 +206,6 @@ const Registration = () => {
            
              <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Free text:</label>
-              
               <textarea
                 name="freeText"
                 className='inputStyleFreeText'
@@ -214,8 +215,11 @@ const Registration = () => {
                 value={inputs?.freeText}
               />
             </div>
-            <input type="submit" />
+            <input type='submit' disabled={!checked} value='Lähetä'/>
           </form>
+          <div style={{flexDirection:'row'}}>
+            <input type="checkbox" onClick={() => setChecked(!checked)} /> En ole robotti
+          </div>
         </div>
       </div>
   )

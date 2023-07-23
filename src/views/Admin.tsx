@@ -141,7 +141,7 @@ const Admin = () => {
           <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.team} name='team' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.team } </td> 
           <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.hopes} name='hopes' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.hopes } </td> 
           <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.freeText} name='freeText' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.freeText } </td>
-          <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.date} name='freeText' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.date } </td>  
+          <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.date} name='date' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.date } </td>  
           { !value.update &&
             <div>
               { !value.deleting ?<button onClick={() => deletingWarning(index)}> DELETE</button> : 
