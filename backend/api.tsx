@@ -222,7 +222,8 @@ app.post('/userData', async function(req,res) {
   const hopes = `Toivomukset: ${object.hopes} \n`
   const freeText = `Vapaamuotoinen teksti: ${object.freeText} \n`
   const tasksLine = `Tehtävät: ${tasks} \n`
-  const total = message+firstNameLine+lastNameline+age+email+gender+phone+tshirt+team+licenseCardLine+hopes+freeText+tasksLine;
+  const daysLine = `Päivät: ${arrayDays.toString()} \n`
+  const total = message+firstNameLine+lastNameline+age+email+gender+phone+tshirt+team+licenseCardLine+hopes+freeText+daysLine;
   
 
   let mailOptions = {
