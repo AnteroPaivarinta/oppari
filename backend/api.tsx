@@ -202,11 +202,11 @@ app.post('/userData', async function(req,res) {
   const phone = `Puhelinnumero: ${object.phone} \n`
   const tshirt = `T-paita: ${object.tshirt} \n`
   const team = `Seura: ${object.team} \n`
-  const licenseCad = `Lisenssikortti: ${object.licenseCard} \n`
+  const licenseCardLine = `Lisenssikortti: ${object.licenseCard} \n`
   const hopes = `Toivomukset: ${object.hopes} \n`
   const freeText = `Vapaamuotoinen teksti: ${object.freeText} \n`
   const tasksLine = `Tehtävät: ${tasks} \n`
-  const total = message+firstNameLine+lastNameline+age+email+gender+phone+tshirt+team+licenseCard+hopes+freeText+tasksLine;
+  const total = message+firstNameLine+lastNameline+age+email+gender+phone+tshirt+team+licenseCardLine+hopes+freeText+tasksLine;
   
 
   let mailOptions = {
