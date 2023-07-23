@@ -2,7 +2,8 @@ import makeAnimated from 'react-select/animated';
 import Select from 'react-select';
 import Multiselect from 'multiselect-react-dropdown';
 import '../styles.css'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleRight, faCircleXmark} from '@fortawesome/free-solid-svg-icons'
 const SelectBoxes = (props: any) => {
   const selectedValues = props.selectedValues.map((value:any) => value.label)
   // 
@@ -28,7 +29,13 @@ const SelectBoxes = (props: any) => {
         <Select options={options.filter((value)=> !selectedValues.includes(value.label))}  onChange={(e) =>props.selectHandleChange(e)}   />
       </div>
       <div className='taskList'>
-        {selectedValues.map((value : string) => <div className='taskSelectedListItem'>{value}</div> ) } 
+        {selectedValues.map((value : string) => 
+          <div className='taskSelectedListItem'>
+            <div onClick={() => props.remove(value)} style={{alignSelf:'flex-start'}}><FontAwesomeIcon icon={faCircleXmark} color='red '  size='2x'/> </div>
+             <div>{value} </div>
+            
+          </div> ) 
+        } 
       </div>
     </div>
   );

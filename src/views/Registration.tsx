@@ -73,6 +73,10 @@ const Registration = () => {
     });
   };
 
+  const removeSelectedTask = (taskName: string) => {
+    setInputs({...inputs, tasks: inputs.tasks.filter((value)=> taskName != value.label)})
+  }
+
  
   
   
@@ -91,9 +95,9 @@ const Registration = () => {
             <h5 style={{margin: 5}}>Ilmoittaudu</h5>
           </NavLink>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '100%', height: '90%'}}>
+        <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '100%', height: '90%', alignSelf:'center'}}>
           <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', height: '100%', width: '100%', alignItems: 'center'}}>
-            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'> Firstname: </label>
               <input 
                 className='inputStyle'
@@ -104,7 +108,7 @@ const Registration = () => {
               />
             </div>
 
-            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Surname:</label>
               <input 
                 className='inputStyle'
@@ -115,7 +119,7 @@ const Registration = () => {
               />
             </div>
 
-            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Age:</label>
               <input 
                 className='inputStyle'
@@ -125,7 +129,7 @@ const Registration = () => {
                 onChange={handleChange}
               />
             </div>
-            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Gender:</label>
               <input 
                 className='inputStyle'
@@ -135,7 +139,7 @@ const Registration = () => {
                 onChange={handleChange}
               />
             </div>
-            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Team:</label>
               <input 
                 className='inputStyle'
@@ -145,12 +149,12 @@ const Registration = () => {
                 onChange={handleChange}
               />
             </div>
-            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>T-Shirt:</label>
                <Select value={{label: inputs.tshirt, value: inputs.tshirt}} options={options}  onChange={(e) => selectHandleChange(e)}   />
             </div>
            
-            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Phone:</label>
               <input 
                 className='inputStyle'
@@ -161,12 +165,12 @@ const Registration = () => {
               />
             </div>
 
-            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>License Card:</label>
             
                <Switch onChange={handleLicenseCard} checked={inputs.licenseCard} />
             </div>
-            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'> Hopes:</label>
               <input 
                 className='inputStyle'
@@ -176,7 +180,7 @@ const Registration = () => {
                 onChange={handleChange}
               />
             </div>
-            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'> Email:</label>
               <input 
                 className='inputStyle'
@@ -186,12 +190,12 @@ const Registration = () => {
                 onChange={handleChange}
               />
             </div>
-            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '15%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '40%'}}>
               <label className='columnLabel'> Tasks</label>
-              <SelectBoxes selectedValues={inputs.tasks} selectHandleChange={handleTasks} />
+              <SelectBoxes selectedValues={inputs.tasks} selectHandleChange={handleTasks} remove={removeSelectedTask} />
             </div>
            
-            <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
+             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Free text:</label>
               
               <textarea
