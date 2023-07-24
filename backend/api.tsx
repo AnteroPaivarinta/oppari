@@ -260,10 +260,10 @@ app.put('/userData', function(req,res) {
   } = req.body.data;
 
   const connection = mysql.createConnection({
-    host     : process.env.LOCAL_NAME,
-    user     : process.env.LOCAL_USER,
-    password : process.env.LOCAL_USERPW,
-    port     : process.env.LOCAL_RDSPORT
+    host     : process.env.RDS_HOSTNAME,
+    user     : 'admin',
+    password : process.env.RDS_PASSWORD,
+    port     : '3306'
   });
 
   connection.connect(function(err) {
