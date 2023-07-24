@@ -209,7 +209,7 @@ app.post('/userData', async function(req,res) {
   connection.query(sql);
   connection.end();
   dataArray.push(req.body);
-  const message = 'Hei, olet ilmoittanut Kalevan 2024 kisoihin näillä tiedoilla: \n ';
+  const message = 'Hei, olet ilmoittanut Kalevan 2024 kisoihin näillä tiedoilla:\n ';
   const firstNameLine = `Etunimi: ${object.firstName} \n`
   const lastNameline = `Sukunimi: ${object.lastName} \n`
   const age = `Ikä: ${object.age} \n`
@@ -223,7 +223,7 @@ app.post('/userData', async function(req,res) {
   const freeText = `Vapaamuotoinen teksti: ${object.freeText} \n`
   const tasksLine = `Tehtävät: ${tasks} \n`
   const daysLine = `Päivät: ${arrayDays.toString()} \n`
-  const total = message+firstNameLine+lastNameline+age+email+gender+phone+tshirt+team+licenseCardLine+hopes+freeText+daysLine;
+  const total = message+firstNameLine+lastNameline+age+email+gender+phone+tshirt+team+licenseCardLine+hopes+freeText+tasksLine+daysLine;
   
 
   let mailOptions = {

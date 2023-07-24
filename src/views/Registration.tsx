@@ -37,7 +37,9 @@ const Registration = () => {
   const [checked, setChecked  ] = useState<boolean>(false);
   const [responseMessage, setLogResponseMessage ] = useState('');
   const [errorMessage, setErrorMessage ] = useState('');
+  const [validInputError, setValidInputError ] = useState('');
   const options = [
+    { value: '-', label: '-' },
     { value: 'XS', label: 'XS' },
     { value: 'S', label: 'S' },
     { value: 'M', label: 'M' },
@@ -45,6 +47,15 @@ const Registration = () => {
     { value: 'XL', label: 'XL' },
     { value: 'XXL', label: 'XXL' },
   ];
+
+  const checkValidInputs  = () => {
+    if(inputs.age === '' || inputs.tshirt === '-' || inputs.email === '' || inputs.firstName === '' || inputs.lastName === '' ||
+      (inputs.days.first === false && inputs.days.second === false && inputs.days.third === false) || inputs.gender === '' || inputs.tasks.length === 0 || inputs.phone === '') {
+        return false;
+    } else{
+      return true;
+    }
+  }
 
 
   const handleChange = (event:any) => {
@@ -72,23 +83,27 @@ const Registration = () => {
   const handleSubmit = (event:any) => {
     event.preventDefault();
     console.log(inputs);
-    let uid = uuid();
-    console.log('UID', uid);
+    if ( !checkValidInputs() ){
+      setValidInputError('Tähdellä merkittyjä tekstikenttiä ei ole täytetty. Täytä tarvittavat tekstikentät.')
+    } else {
+      setValidInputError('')
+      let uid = uuid();
+      const date = new Date();
+      let day = date.getDate();
+      let month = date.getMonth() + 1;
+      let year = date.getFullYear();
+      let currentDate = `${day}-${month}-${year}`;
+      const object = {...inputs, PersonID : uid, date: currentDate};
       
-    const date = new Date();
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
-    let currentDate = `${day}-${month}-${year}`;
-    const object = {...inputs, PersonID : uid, date: currentDate};
-    
-    axios.post("http://localhost:3001/userData", object).then((response) => {
-      console.log('Post succesful', response);
-      setLogResponseMessage('Tietojen lähettäminen onnistui. Voit sulkea ikkunan.')
-    }).catch((error) => {
-      console.log('Error', error)
-      setErrorMessage('Tietojen lähettäminen epäonnistui. Ota yhteyttä ylläpitäjään..')
-    });
+      axios.post("http://localhost:3001/userData", object).then((response) => {
+        console.log('Post succesful', response);
+        setLogResponseMessage('Tietojen lähettäminen onnistui. Voit sulkea ikkunan.')
+      }).catch((error) => {
+        console.log('Error', error)
+        setErrorMessage('Tietojen lähettäminen epäonnistui. Ota yhteyttä ylläpitäjään..')
+      });
+    }
+
   };
 
   const removeSelectedTask = (taskName: string) => {
@@ -123,7 +138,20 @@ const Registration = () => {
                 name="firstName" 
                 value={inputs?.firstName || ""} 
                 onChange={handleChange}
+              /> 
+              <p className='star'> * </p>
+            </div>
+
+            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
+              <label className='columnLabel'> Email:</label>
+              <input 
+                className='inputStyle'
+                type="text" 
+                name="email" 
+                value={inputs?.email || ""} 
+                onChange={handleChange}
               />
+              <p className='star'> * </p>
             </div>
 
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
@@ -134,7 +162,8 @@ const Registration = () => {
                 name="lastName" 
                 value={inputs?.lastName || ""} 
                 onChange={handleChange}
-              />
+              /> 
+              <p className='star'> * </p>
             </div>
 
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
@@ -145,7 +174,8 @@ const Registration = () => {
                 name="age" 
                 value={inputs?.age || ""} 
                 onChange={handleChange}
-              />
+              /> 
+              <p className='star'> * </p>
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Gender:</label>
@@ -155,7 +185,8 @@ const Registration = () => {
                 name="gender" 
                 value={inputs?.gender || ""} 
                 onChange={handleChange}
-              />
+              />   
+              <p className='star'> * </p>
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Team:</label>
@@ -165,12 +196,13 @@ const Registration = () => {
                 name="team" 
                 value={inputs?.team || ""} 
                 onChange={handleChange}
-              />
+              /> 
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>T-Shirt:</label>
-               <Select value={{label: inputs.tshirt, value: inputs.tshirt}} options={options}  onChange={(e) => selectHandleChange(e)}   />
-            </div>
+               <Select className='inputStyleTshirtTwo' value={{label: inputs.tshirt, value: inputs.tshirt}} options={options}  onChange={(e) => selectHandleChange(e)}   />
+               <p className='star'> * </p>
+            </div> 
            
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Phone:</label>
@@ -181,12 +213,14 @@ const Registration = () => {
                 value={inputs?.phone || ""} 
                 onChange={handleChange}
               />
+                <p className='star'> * </p>
             </div>
 
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>License Card:</label>
             
                <Switch onChange={handleLicenseCard} checked={inputs.licenseCard} />
+               <p style={{color: ' red'}}> * </p>
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'> Hopes:</label>
@@ -203,20 +237,13 @@ const Registration = () => {
               <input type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, first: !inputs.days.first}})} /> <p>28.6.2024</p>
               <input type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, second: !inputs.days.second}})} /> <p>29.6.2024</p>
               <input type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, third: !inputs.days.third}})} /> <p>30.6.2024</p>
+              <p className='star'> * </p>
             </div>
-            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'> Email:</label>
-              <input 
-                className='inputStyle'
-                type="text" 
-                name="email" 
-                value={inputs?.email || ""} 
-                onChange={handleChange}
-              />
-            </div>
+           
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '40%'}}>
               <label className='columnLabel'> Tasks</label>
               <SelectBoxes selectedValues={inputs.tasks} selectHandleChange={handleTasks} remove={removeSelectedTask} />
+              <p className='star'> * </p>
             </div>
            
              <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
@@ -233,6 +260,7 @@ const Registration = () => {
             <input type='submit' disabled={!checked} value='Lähetä'/>  
             <p style={{color:'green'}}> {responseMessage? responseMessage: null}</p>
             <p style={{color:'red'}}> {errorMessage? errorMessage: null}</p>
+            <p style={{color:'red'}}> {validInputError? validInputError: null}</p>
           </form>
           <div style={{flexDirection:'row'}}>
             <input type="checkbox" onClick={() => setChecked(!checked)} /> En ole robotti
