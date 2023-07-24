@@ -15,13 +15,13 @@ jobs:
           node-version: '16'
       - name: Install dependencies
         run: npm install
-  Create env:
-    runs on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      run: |
-        with: # Set the secret as an input
-      super_secret: ${{ secrets.SuperSecret }}
-    env: # Or as an environment variable
-      super_secret: ${{ secrets.SuperSecret }}
+      - name: Create env
+        env: # Or as an environment variable
+          RDS_HOSTNAME: ${{ secrets.RDS_HOSTNAME }}
+          RDS_PASSWORD: ${{ secrets.RDS_PASSWORD }}
+        run: |
+          echo $RDS_HOSTNAME | base64 --decode > .env
+          echo $RDS_PASSWORD | base64 --decode > .env
