@@ -41,10 +41,10 @@ const verifyUserToken = (req, res, next) => {
 };
 
 const connection = mysql.createConnection({
-  host     : process.env.LOCAL_NAME,
-  user     : process.env.LOCAL_USER,
-  password : process.env.LOCAL_USERPW,
-  port     : process.env.LOCAL_RDSPORT
+  host     : process.env.RDS_HOSTNAME,
+  user     : 'admin',
+  password : process.env.RDS_PASSWORD,
+  port     : '3306'
 });
 
 connection.connect(function(err) {
@@ -70,10 +70,10 @@ app.use(express.json())
 app.post('/admin', async (req, res) => {
 
   const connection = mysql.createConnection({
-    host     : process.env.LOCAL_NAME,
-    user     : process.env.LOCAL_USER,
-    password : process.env.LOCAL_USERPW,
-    port     : process.env.LOCAL_RDSPORT
+    host     : process.env.RDS_HOSTNAME,
+    user     : 'admin',
+    password : process.env.RDS_PASSWORD,
+    port     : '3306'
   });
   
   connection.connect(function(err) {
@@ -165,10 +165,10 @@ app.get('/', async (req, res) => {
 app.post('/userData', async function(req,res) {
 
   const connection = mysql.createConnection({
-    host     : process.env.LOCAL_NAME,
-    user     : process.env.LOCAL_USER,
-    password : process.env.LOCAL_USERPW,
-    port     : process.env.LOCAL_RDSPORT
+    host     : process.env.RDS_HOSTNAME,
+    user     : 'admin',
+    password : process.env.RDS_PASSWORD,
+    port     : '3306'
   });
 
   connection.connect(function(err) {
@@ -294,10 +294,10 @@ app.get('/userData', verifyUserToken,  function(req,res) {
 app.delete('/delete/:id', function(req,res) {
 
   const connection = mysql.createConnection({
-    host     : process.env.LOCAL_NAME,
-    user     : process.env.LOCAL_USER,
-    password : process.env.LOCAL_USERPW,
-    port     : process.env.LOCAL_RDSPORT
+    host     : process.env.RDS_HOSTNAME,
+    user     : 'admin',
+    password : process.env.RDS_PASSWORD,
+    port     : '3306'
   });
   
   let id = req.params.id;
