@@ -20,6 +20,6 @@ jobs:
           RDS_HOSTNAME: ${{ secrets.RDS_HOSTNAME }}
           RDS_PASSWORD: ${{ secrets.RDS_PASSWORD }}
         run: |
-          echo $RDS_HOSTNAME | base64 --di > .env
-          echo $RDS_PASSWORD | base64 --di > .env
+          echo $RDS_HOSTNAME | base64 -di > .env
+          echo $RDS_PASSWORD | base64 -di > .env
           cat .env
