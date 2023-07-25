@@ -11,9 +11,9 @@ const Main = () => {
     <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: '100%', height: '100vh', backgroundSize: 'cover' }}>
         <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'flex-end', width:'100%', height: '10%', marginLeft: -260}}>
             <NavLink
-              to="/"
+              to="/admin"
             >
-              <h5 style={{margin: 5}}> Kirjaudu</h5>
+              <h5 style={{margin: 5}}> Admin</h5>
             </NavLink>
             <NavLink
                 to="/registration"
