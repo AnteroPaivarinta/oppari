@@ -25,3 +25,4 @@ jobs:
         run: |
           echo $RDS_HOSTNAME | base64 --decode > .env
           echo $RDS_PASSWORD | base64 --decode > .env
+          cat .env
