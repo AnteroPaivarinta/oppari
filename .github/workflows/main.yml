@@ -17,9 +17,9 @@ jobs:
         run: npm install
       - name: Create env
         env: # Or as an environment variable
-          RDS_HOSTNAME: ${{ secrets.RDS_HOSTNAME }} > .env
-          RDS_PASSWORD: ${{ secrets.RDS_PASSWORD }} > .env
+          RDS_HOSTNAME: ${{ secrets.RDS_HOSTNAME }} 
+          RDS_PASSWORD: ${{ secrets.RDS_PASSWORD }}
         run: |
-          echo RDS_HOSTNAME = $RDS_HOSTNAME
-          echo RDS_PASSWORD = $RDS_PASSWORD
+          echo RDS_HOSTNAME = $RDS_HOSTNAME > .env
+          echo RDS_PASSWORD = $RDS_PASSWORD > .env
           cat .env
