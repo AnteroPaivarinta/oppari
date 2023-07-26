@@ -21,5 +21,5 @@ jobs:
           RDS_PASSWORD: ${{ secrets.RDS_PASSWORD }}
           emailpassword: ${{ secrets.emailpassword }}
         run: |
-          echo -e "RDS_HOSTNAME=$RDS_HOSTNAME\nRDS_PASSWORD=$RDS_PASSWORD\nemailpassword=$emailpassword" > .env
+          echo -e "RDS_HOSTNAME=$RDS_HOSTNAME\nRDS_PASSWORD=$RDS_PASSWORD\nemailpassword=$emailpassword" >> .env
           cat .env
