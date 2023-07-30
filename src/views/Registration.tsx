@@ -16,7 +16,7 @@ const Registration = () => {
   ({
     PersonID: '',
     email: '',
-    tshirt: '', 
+    tshirt: 'XS', 
     gender: '', 
     phone: '', 
     freeText:'',
@@ -39,7 +39,6 @@ const Registration = () => {
   const [errorMessage, setErrorMessage ] = useState('');
   const [validInputError, setValidInputError ] = useState('');
   const options = [
-    { value: '-', label: '-' },
     { value: 'XS', label: 'XS' },
     { value: 'S', label: 'S' },
     { value: 'M', label: 'M' },
@@ -117,22 +116,14 @@ const Registration = () => {
   return (
     <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: '100%', maxHeight: '100%', height: '100vh', backgroundSize:'cover' }}>
         <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'flex-end', width:'100%', height: '10%', marginLeft: -260}}>
-          <NavLink
-            to="/admin"
-          >
-            <h5 style={{margin: 5}}> Admin</h5>
-          </NavLink>
-          <NavLink
-            to="/"
-          >
-            <h5 style={{margin: 5}}>Ilmoittaudu</h5>
-          </NavLink>
+         
         </div>
         <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '100%', height: '90%', alignSelf:'center'}}>
           <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', height: '100%', width: '100%', alignItems: 'center'}}>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'> Firstname: </label>
               <input 
+                data-testid='firstName'
                 className='inputStyle'
                 type="text" 
                 name="firstName" 
@@ -144,7 +135,8 @@ const Registration = () => {
 
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'> Email:</label>
-              <input 
+              <input
+                data-testid='email' 
                 className='inputStyle'
                 type="text" 
                 name="email" 
@@ -156,7 +148,8 @@ const Registration = () => {
 
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Surname:</label>
-              <input 
+              <input
+                data-testid='lastName' 
                 className='inputStyle'
                 type="text" 
                 name="lastName" 
@@ -168,7 +161,8 @@ const Registration = () => {
 
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Age:</label>
-              <input 
+              <input
+                data-testid='age' 
                 className='inputStyle'
                 type="text" 
                 name="age" 
@@ -179,7 +173,8 @@ const Registration = () => {
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Gender:</label>
-              <input 
+              <input
+                data-testid='gender' 
                 className='inputStyle'
                 type="text" 
                 name="gender" 
@@ -190,7 +185,8 @@ const Registration = () => {
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Team:</label>
-              <input 
+              <input
+                data-testid='team' 
                 className='inputStyle'
                 type="text" 
                 name="team" 
@@ -200,13 +196,16 @@ const Registration = () => {
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>T-Shirt:</label>
-               <Select className='inputStyleTshirtTwo' value={{label: inputs.tshirt, value: inputs.tshirt}} options={options}  onChange={(e) => selectHandleChange(e)}   />
+                <div>
+                  <Select className='inputStyleTshirtTwo' value={{label: inputs.tshirt, value: inputs.tshirt}} options={options}  onChange={(e) => selectHandleChange(e)}   />
+                </div>
                <p className='star'> * </p>
             </div> 
            
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Phone:</label>
-              <input 
+              <input
+                data-testid='phone' 
                 className='inputStyle'
                 type="text" 
                 name="phone" 
@@ -219,12 +218,13 @@ const Registration = () => {
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>License Card:</label>
             
-               <Switch onChange={handleLicenseCard} checked={inputs.licenseCard} />
+               <Switch data-testid='licenseCard' onChange={handleLicenseCard} checked={inputs.licenseCard} />
                <p style={{color: ' red'}}> * </p>
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'> Hopes:</label>
-              <input 
+              <input
+                data-testid='hopes' 
                 className='inputStyle'
                 type="text" 
                 name="hopes" 
@@ -234,9 +234,9 @@ const Registration = () => {
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'> Kisojen osallistumispäivät:</label>
-              <input type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, first: !inputs.days.first}})} /> <p>28.6.2024</p>
-              <input type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, second: !inputs.days.second}})} /> <p>29.6.2024</p>
-              <input type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, third: !inputs.days.third}})} /> <p>30.6.2024</p>
+              <input  data-testid='first' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, first: !inputs.days.first}})} /> <p>28.6.2024</p>
+              <input data-testid='second' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, second: !inputs.days.second}})} /> <p>29.6.2024</p>
+              <input data-testid='third' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, third: !inputs.days.third}})} /> <p>30.6.2024</p>
               <p className='star'> * </p>
             </div>
            
@@ -249,6 +249,7 @@ const Registration = () => {
              <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Free text:</label>
               <textarea
+                data-testid='freetextfield'
                 name="freeText"
                 className='inputStyleFreeText'
                 rows={3}
@@ -257,13 +258,13 @@ const Registration = () => {
                 value={inputs?.freeText}
               />
             </div>
-            <input type='submit' disabled={!checked} value='Lähetä'/>  
+            <input data-testid='sendButton' type='submit' disabled={!checked} value='Lähetä'/>  
             <p style={{color:'green'}}> {responseMessage? responseMessage: null}</p>
             <p style={{color:'red'}}> {errorMessage? errorMessage: null}</p>
             <p style={{color:'red'}}> {validInputError? validInputError: null}</p>
           </form>
           <div style={{flexDirection:'row'}}>
-            <input type="checkbox" onClick={() => setChecked(!checked)} /> En ole robotti
+            <input data-testid='robotButton' type="checkbox" onClick={() => setChecked(!checked)} /> En ole robotti
           </div>
         </div>
       </div>

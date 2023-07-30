@@ -26,7 +26,7 @@ const SelectBoxes = (props: any) => {
   return (
     <div className='square'>
       <div className='taskDropDown'>
-        <Select options={options.filter((value)=> !selectedValues.includes(value.label))}  onChange={(e) =>props.selectHandleChange(e)}   />
+        <Select data-testid='selectionbox' options={options.filter((value)=> !selectedValues.includes(value.label))}  onChange={(e) =>props.selectHandleChange(e)}   />
       </div>
       <div className='taskList'>
         {selectedValues.map((value : string) => 
