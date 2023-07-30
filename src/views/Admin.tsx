@@ -163,11 +163,12 @@ const Admin = () => {
            Authorization: "Bearer " + adiminObject.token
         }
       }
-      console.log(' ?????????', adiminObject)
       if(adiminObject.loginResponse === true) {
+        console.log('ONNISTUTTIIN')
         axios.get("http://localhost:3001/userData", config)
         .then(function (response) {
           const array = response.data;
+          console.log('ARRAY', array)
           const newRowData: any[] = [];
           array.forEach((element: IData, index:number) => {
             newRowData.push({index: index, data:element, update: false })
@@ -185,7 +186,8 @@ const Admin = () => {
         <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column',  width: '100%', height: '100%', marginTop: '5%'}}>
           <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
             <label className='columnLabel'>User:</label>
-            <input 
+            <input
+              data-testid='user' 
               className='inputStyle'
               type="text" 
               name="user" 
@@ -195,7 +197,8 @@ const Admin = () => {
           </div>
           <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
             <label className='columnLabel'>Password:</label>
-            <input 
+            <input
+              data-testid='password'  
               className='inputStyle'
               type="text" 
               name="password" 
@@ -204,12 +207,12 @@ const Admin = () => {
             />
           </div>  
          
-          { (!inputVerify && !adiminObject.token) &&<button style={{height: '3%', width: '5%', marginTop: '1%'}} onClick={handleSubmit}>Kirjaudu</button>} 
+          { (!inputVerify && !adiminObject.token) &&<button style={{height: '3%', width: '5%', marginTop: '1%'}} data-testid='login' onClick={handleSubmit}>Kirjaudu</button>} 
          
           { (inputVerify ) && 
             <div style={{color:'black'}}>
               <input value={inputCode} onChange={(e) => setInpuCode(e.target.value)}></input> 
-              <button onClick={() => sendVerifyCode()}> SEND VERIFY CODE</button> 
+              <button data-testid='sendCode' onClick={() => sendVerifyCode()}> SEND VERIFY CODE</button> 
             </div>}
        
           
@@ -217,23 +220,24 @@ const Admin = () => {
           <div style={{justifyContent: 'center', display: 'flex', justifyItems:'center', width: '60%'}}> 
              <input onChange={(e) =>setFiterInput(e.target.value)}/> <div>Seach by Surname</div>
             <button onClick={() => makeExcel()}> DOWNLOAD IN EXCEL</button>
-            <table>
-                <tr>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Age</th>
-                <th>Email</th>
-                <th>Gender</th>
-                <th>Phone</th>
-                <th>T-shirt</th>
-                <th>Team</th>
-                <th>Hopes</th>
-                <th>Free text</th>
-                <th>Date</th>
-              </tr>
-            {renderTable()}
-          </table>
-         
+            <div data-testid ='database'> 
+              <table >
+                  <tr>
+                  <th>FirstName</th>
+                  <th>LastName</th>
+                  <th>Age</th>
+                  <th>Email</th>
+                  <th>Gender</th>
+                  <th>Phone</th>
+                  <th>T-shirt</th>
+                  <th>Team</th>
+                  <th>Hopes</th>
+                  <th>Free text</th>
+                  <th>Date</th>
+                </tr>
+              {renderTable()}
+            </table>
+         </div>
           </div>}
 
         </div>

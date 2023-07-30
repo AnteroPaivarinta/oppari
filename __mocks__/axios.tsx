@@ -1,5 +1,6 @@
 export const mockObject = {
   get: jest.fn((url) => {
+    console.log('=')
     if (url === '/something') {
           return Promise.resolve({
               data: 'data'
