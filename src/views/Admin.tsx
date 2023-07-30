@@ -144,14 +144,15 @@ const Admin = () => {
           <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.date} name='date' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.date } </td>  
           { !value.update &&
             <div>
-              { !value.deleting ?<button onClick={() => deletingWarning(index)}> DELETE</button> : 
+              { !value.deleting ?
+                <button data-testid='deleteButton' onClick={() => deletingWarning(index)}> DELETE</button> : 
                 <div>
-                  <button onClick={() => onDelete(value.data.PersonID, index)}>Kyllä</button> 
+                  <button data-testid='acceptDelete' onClick={() => onDelete(value.data.PersonID, index)}>Kyllä</button> 
                   <button>Ei</button> 
                 </div>}
             </div> 
           }
-          { !value.update ? <button onClick={() => onUpdate(value.index)}> UPDATE</button> :  <div style={{flexDirection: 'row', display: 'flex'}}> <button onClick={() => onSaveUpdate(index)}>Save</button><button onClick={() => onCancel(index)}>Cancel</button></div>}
+          { !value.update ? <button data-testid='updateButton' onClick={() => onUpdate(value.index)}> UPDATE</button> :  <div style={{flexDirection: 'row', display: 'flex'}}> <button data-testid='updateButtonSave' onClick={() => onSaveUpdate(index)}>Save</button><button onClick={() => onCancel(index)}>Cancel</button></div>}
         </tr>
       )
       return (array)
@@ -220,8 +221,7 @@ const Admin = () => {
           <div style={{justifyContent: 'center', display: 'flex', justifyItems:'center', width: '60%'}}> 
              <input onChange={(e) =>setFiterInput(e.target.value)}/> <div>Seach by Surname</div>
             <button onClick={() => makeExcel()}> DOWNLOAD IN EXCEL</button>
-            <div data-testid ='database'> 
-              <table >
+              <table data-testid='database'>
                   <tr>
                   <th>FirstName</th>
                   <th>LastName</th>
@@ -238,7 +238,7 @@ const Admin = () => {
               {renderTable()}
             </table>
          </div>
-          </div>}
+        }
 
         </div>
       </div>
