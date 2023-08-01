@@ -80,13 +80,9 @@ const Registration = () => {
   }
 
   const handleSubmit = () => {
-    console.log('Mentiinklä tönne koskaa')
-    console.log(inputs);
     if ( !checkValidInputs() ){
-      console.log('VAloo?')
       setValidInputError('Tähdellä merkittyjä tekstikenttiä ei ole täytetty. Täytä tarvittavat tekstikentät.')
     } else {
-      console.log('valoo!')
       setValidInputError('')
       let uid = uuid();
       const date = new Date();
