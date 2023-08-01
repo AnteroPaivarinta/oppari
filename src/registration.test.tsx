@@ -27,29 +27,35 @@ describe('Registration', () => {
     }
     render(<Registration />)
     const flushPromises = () => new Promise(resolve => setTimeout(resolve, 0));
-    fireEvent.change(screen.getByTestId('firstName'), 'testi');
-    fireEvent.change(screen.getByTestId('lastName'), 'testi');
-    fireEvent.change(screen.getByTestId('age'), '23');
-    fireEvent.change(screen.getByTestId('gender'), 'Mies');
-    fireEvent.change(screen.getByTestId('email'), 'sposti@gmail.com');
-    fireEvent.change(screen.getByTestId('team'), 'tiimi');
-    fireEvent.change(screen.getByTestId('phone'), '+382309482309');
+    
+    fireEvent.change(screen.getByTestId('firstName') ,  {target: {value: 'testi'}});
+    fireEvent.change(screen.getByTestId('lastName'),  {target: {value: 'testi'}});
+    fireEvent.change(screen.getByTestId('age') ,  {target: {value: '23'}});
+    fireEvent.change(screen.getByTestId('gender'),  {target: {value: 'Mies'}});
+    fireEvent.change(screen.getByTestId('email'),  {target: {value: 'sposti@gmail.com'}});
+    fireEvent.change(screen.getByTestId('team'),  {target: {value: 'tiimi'}});
+    fireEvent.change(screen.getByTestId('phone'),  {target: {value: 'phone'}});
     fireEvent.change(screen.getByTestId('licenseCard'), true);
-    fireEvent.change(screen.getByTestId('hopes'), 'toivomuksia');
+    fireEvent.change(screen.getByTestId('hopes'),  {target: {value: 'toivomuksia'}});
     fireEvent.click(screen.getByTestId('first'));
-    fireEvent.change(screen.getByTestId('freetextfield'), 'vapaateksti');
+    fireEvent.change(screen.getByTestId('freetextfield'),  {target: {value: 'Vapaateksti'}});
     
     expect(screen.getByTestId('form')).toHaveFormValues({})
     await selectEvent.select(screen.getByLabelText('selectionbox'), ['avustaja palkintojen jaossa'])
     fireEvent.click(screen.getByTestId('robotButton'));
-    fireEvent.click(screen.getByTestId('sendButton'));
 
     const mockedAxios = axios as jest.Mocked<typeof axios>; 
+    mockedAxios.get.mockResolvedValueOnce({ data: [obj] });
     mockedAxios.post.mockResolvedValueOnce({ data: {loginResponse: 'Right user and password'}} );
+
+    fireEvent.click(screen.getByTestId('sendButtonTwo'));
+
 
     await flushPromises()
     await waitFor(() => {
-      expect(mockedAxios.post).toBeCalled();
+        expect(() => {screen.getByTestId('validInputError')}).toThrow('Unable to find an element by: [data-testid="validInputError"]');
+        expect(() => {screen.getByTestId('errorMessage')}).toThrow('Unable to find an element by: [data-testid="errorMessage"]');
+        expect(mockedAxios.post).toBeCalled();
     });
   })
 

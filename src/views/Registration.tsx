@@ -79,12 +79,14 @@ const Registration = () => {
 
   }
 
-  const handleSubmit = (event:any) => {
-    event.preventDefault();
+  const handleSubmit = () => {
+    console.log('Mentiinklä tönne koskaa')
     console.log(inputs);
     if ( !checkValidInputs() ){
+      console.log('VAloo?')
       setValidInputError('Tähdellä merkittyjä tekstikenttiä ei ole täytetty. Täytä tarvittavat tekstikentät.')
     } else {
+      console.log('valoo!')
       setValidInputError('')
       let uid = uuid();
       const date = new Date();
@@ -98,7 +100,7 @@ const Registration = () => {
         console.log('Post succesful :)', response);
         setLogResponseMessage('Tietojen lähettäminen onnistui. Voit sulkea ikkunan.')
       }).catch((error) => {
-        console.log('Error', error)
+        console.log('Error123', error)
         setErrorMessage('Tietojen lähettäminen epäonnistui. Ota yhteyttä ylläpitäjään..')
       });
     }
@@ -258,10 +260,10 @@ const Registration = () => {
                 value={inputs?.freeText}
               />
             </div>
-            <input data-testid='sendButton' type='submit' disabled={!checked} value='Lähetä'/>  
+            <input onClick={() => handleSubmit()} data-testid='sendButtonTwo' disabled={!checked} value='Lähetä'/>  
             <p style={{color:'green'}}> {responseMessage? responseMessage: null}</p>
-            <p style={{color:'red'}}> {errorMessage? errorMessage: null}</p>
-            <p style={{color:'red'}}> {validInputError? validInputError: null}</p>
+            {errorMessage? <p data-testid='errorMessage' style={{color:'red'}}> {errorMessage}</p> : null }
+            { validInputError ? <p style={{color:'red'}}> {validInputError}</p> : null }
           </form>
           <div style={{flexDirection:'row'}}>
             <input data-testid='robotButton' type="checkbox" onClick={() => setChecked(!checked)} /> En ole robotti
