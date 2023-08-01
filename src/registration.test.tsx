@@ -3,6 +3,7 @@ import '@testing-library/jest-dom/extend-expect'
 import { render, screen, waitFor, fireEvent, getByTestId } from '@testing-library/react'
 import Registration from './views/Registration';
 import axios from 'axios';
+import selectEvent from 'react-select-event'
 
 jest.mock('axios');
 describe('Registration', () => {
@@ -24,9 +25,8 @@ describe('Registration', () => {
       date: '123',
       days: [],
     }
-    const flushPromises = () => new Promise(setImmediate);
     render(<Registration />)
-
+    const flushPromises = () => new Promise(resolve => setTimeout(resolve, 0));
     fireEvent.change(screen.getByTestId('firstName'), 'testi');
     fireEvent.change(screen.getByTestId('lastName'), 'testi');
     fireEvent.change(screen.getByTestId('age'), '23');
@@ -37,16 +37,12 @@ describe('Registration', () => {
     fireEvent.change(screen.getByTestId('licenseCard'), true);
     fireEvent.change(screen.getByTestId('hopes'), 'toivomuksia');
     fireEvent.click(screen.getByTestId('first'));
-
-
-
     fireEvent.change(screen.getByTestId('freetextfield'), 'vapaateksti');
-
-    fireEvent.click(screen.getByText('selectionbox'));
-    fireEvent.click(screen.getByText('kisakansliatoimitsija'));
-    fireEvent.click(screen.getByText('robotButton'));
-    fireEvent.click(screen.getByText('sendButton'));
-
+    
+    expect(screen.getByTestId('form')).toHaveFormValues({})
+    await selectEvent.select(screen.getByLabelText('selectionbox'), ['avustaja palkintojen jaossa'])
+    fireEvent.click(screen.getByTestId('robotButton'));
+    fireEvent.click(screen.getByTestId('sendButton'));
 
     const mockedAxios = axios as jest.Mocked<typeof axios>; 
     mockedAxios.post.mockResolvedValueOnce({ data: {loginResponse: 'Right user and password'}} );

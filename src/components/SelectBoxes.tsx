@@ -6,8 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faCircleXmark} from '@fortawesome/free-solid-svg-icons'
 const SelectBoxes = (props: any) => {
   const selectedValues = props.selectedValues.map((value:any) => value.label)
-  // 
-  console.log('SELE', selectedValues)
   const options = [
     { value: '1', label: 'Kenttälajin toimitsja (kokenut)' },
     { value: '2', label: 'Kenttälajin toimitsija (ei kokemusta)' },
@@ -25,8 +23,11 @@ const SelectBoxes = (props: any) => {
   ]
   return (
     <div className='square'>
-      <div className='taskDropDown'>
-        <Select data-testid='selectionbox' options={options.filter((value)=> !selectedValues.includes(value.label))}  onChange={(e) =>props.selectHandleChange(e)}   />
+      <div className='taskDropDown' data-testid='selectionbox'>
+      <form data-testid="form">
+        <label htmlFor="selectionbox">selectionbox</label>
+        <Select inputId="selectionbox" name='selectionbox' options={options.filter((value)=> !selectedValues.includes(value.label))} onChange={(e) =>props.selectHandleChange(e)}   />
+      </form>
       </div>
       <div className='taskList'>
         {selectedValues.map((value : string) => 

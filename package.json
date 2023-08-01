@@ -66,6 +66,7 @@
     "@testing-library/react": "^14.0.0",
     "@types/chroma-js": "^2.4.0",
     "@types/file-saver": "^2.0.5",
-    "@types/uuid": "^9.0.2"
+    "@types/uuid": "^9.0.2",
+    "react-select-event": "^5.5.1"
   }
 }

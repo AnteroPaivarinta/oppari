@@ -95,7 +95,7 @@ const Registration = () => {
       const object = {...inputs, PersonID : uid, date: currentDate};
       
       axios.post("http://localhost:3001/userData", object).then((response) => {
-        console.log('Post succesful', response);
+        console.log('Post succesful :)', response);
         setLogResponseMessage('Tietojen lähettäminen onnistui. Voit sulkea ikkunan.')
       }).catch((error) => {
         console.log('Error', error)
