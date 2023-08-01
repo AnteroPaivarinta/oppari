@@ -14,7 +14,9 @@ jobs:
         with:
           node-version: '16'
       - name: Install dependencies
-        run: npm install
+        run: |
+         npm install
+         npm build
       - name: Create env
         env: # Or as an environment variable
           RDS_HOSTNAME: ${{ secrets.RDS_HOSTNAME }} 

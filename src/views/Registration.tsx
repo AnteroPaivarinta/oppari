@@ -106,9 +106,6 @@ const Registration = () => {
   const removeSelectedTask = (taskName: string) => {
     setInputs({...inputs, tasks: inputs.tasks.filter((value)=> taskName != value.label)})
   }
-
- 
-  
   
 
   return (
