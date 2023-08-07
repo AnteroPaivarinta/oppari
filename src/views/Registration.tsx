@@ -253,11 +253,12 @@ const Registration = () => {
                 value={inputs?.freeText}
               />
             </div>
-            <input onClick={() => handleSubmit()} data-testid='sendButtonTwo' disabled={!checked} value='Lähetä'/>  
             <p style={{color:'green'}}> {responseMessage? responseMessage: null}</p>
             {errorMessage? <p data-testid='errorMessage' style={{color:'red'}}> {errorMessage}</p> : null }
             { validInputError ? <p style={{color:'red'}}> {validInputError}</p> : null }
           </form>
+          <button type="submit"  onClick={() => handleSubmit()} data-testid='sendButtonTwo' disabled={!checked} > LÄHETÄ </button> 
+
           <div style={{flexDirection:'row'}}>
             <input data-testid='robotButton' type="checkbox" onClick={() => setChecked(!checked)} /> En ole robotti
           </div>
