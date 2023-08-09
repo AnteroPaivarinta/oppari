@@ -23,13 +23,11 @@ const Main = () => {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', width: '92%', height: '90%'}}>
           <div style={{marginLeft: '60%'}}>
-            <h1 style={{color:'white'}}>Kaleva2024</h1>
+            <h1 style={{color:'white'}}>Kalevan kisat 2024</h1>
             <h2 style={{marginTop: -30}}>Ilmotautuminen</h2>
             <hr></hr>
             <h3 style={{color:'white'}}>
-              So far we have looked at the behavior when our flex-direction is row, and while working in a language
-              written top to bottom. This means that the main axis runs along the row horizontally, and our cross
-              axis alignment moves the items up and down.
+            "Ilmoittaudu tässä Vaasan 2024 Kalevan kisojen vapaaehtoiseksi toimitsijaksi. Saat kuittauksen ilmoittautumisesta annettuun sähköpostiin. Otamme sinuun yhteyttä. Tervetuloa mukaan! | Här anmäler Du dig som frivillig funktionär till Kalevan kisat 2024 i Vasa. Du får en kvittering på gjord anmälan till den epost som angivits. Vi kontaktar Dig. Välkommen med!
             </h3>
           </div>
         </div>

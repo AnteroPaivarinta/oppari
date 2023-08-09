@@ -94,7 +94,7 @@ const Registration = () => {
       
       axios.post("http://localhost:3001/userData", object).then((response) => {
         console.log('Post succesful :)', response);
-        setLogResponseMessage('Tietojen lähettäminen onnistui. Voit sulkea ikkunan.')
+        setLogResponseMessage('Kiitos ilmoittautumisestisi - Otamme sinuun yhteyttä | Tack för anmälan - Vi kontaktar Dig senare!')
       }).catch((error) => {
         console.log('Error123', error)
         setErrorMessage('Tietojen lähettäminen epäonnistui. Ota yhteyttä ylläpitäjään..')
@@ -116,7 +116,7 @@ const Registration = () => {
         <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '100%', height: '90%', alignSelf:'center'}}>
           <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', height: '100%', width: '100%', alignItems: 'center'}}>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'> Firstname: </label>
+              <label className='columnLabel'>Etunimi | Förnamn </label>
               <input 
                 data-testid='firstName'
                 className='inputStyle'
@@ -127,22 +127,8 @@ const Registration = () => {
               /> 
               <p className='star'> * </p>
             </div>
-
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'> Email:</label>
-              <input
-                data-testid='email' 
-                className='inputStyle'
-                type="text" 
-                name="email" 
-                value={inputs?.email || ""} 
-                onChange={handleChange}
-              />
-              <p className='star'> * </p>
-            </div>
-
-            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'>Surname:</label>
+              <label className='columnLabel'>Sukunimi | Efternamn </label>
               <input
                 data-testid='lastName' 
                 className='inputStyle'
@@ -155,7 +141,22 @@ const Registration = () => {
             </div>
 
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'>Age:</label>
+              <label className='columnLabel'> Sposti | Epost:</label>
+              <input
+                data-testid='email' 
+                className='inputStyle'
+                type="text" 
+                name="email" 
+                value={inputs?.email || ""} 
+                onChange={handleChange}
+              />
+              <p className='star'> * </p>
+            </div>
+
+          
+
+            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
+              <label className='columnLabel'>Ikä | Ålder:</label>
               <input
                 data-testid='age' 
                 className='inputStyle'
@@ -167,7 +168,7 @@ const Registration = () => {
               <p className='star'> * </p>
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'>Gender:</label>
+              <label className='columnLabel'>Sukupuoli | Kön:</label>
               <input
                 data-testid='gender' 
                 className='inputStyle'
@@ -179,7 +180,10 @@ const Registration = () => {
               <p className='star'> * </p>
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'>Team:</label>
+              <label className='columnLabel'> Seura | Förening</label>
+                
+              
+             
               <input
                 data-testid='team' 
                 className='inputStyle'
@@ -190,15 +194,7 @@ const Registration = () => {
               /> 
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'>T-Shirt:</label>
-                <div>
-                  <Select className='inputStyleTshirtTwo' value={{label: inputs.tshirt, value: inputs.tshirt}} options={options}  onChange={(e) => selectHandleChange(e)}   />
-                </div>
-               <p className='star'> * </p>
-            </div> 
-           
-            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'>Phone:</label>
+              <label className='columnLabel'>Puhelin | Telefon:</label>
               <input
                 data-testid='phone' 
                 className='inputStyle'
@@ -209,38 +205,35 @@ const Registration = () => {
               />
                 <p className='star'> * </p>
             </div>
+            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
+              <label className='columnLabel'>T-paidan koko |  T-skjortans storlek:</label>
+                <div>
+                  <Select className='inputStyleTshirtTwo' value={{label: inputs.tshirt, value: inputs.tshirt}} options={options}  onChange={(e) => selectHandleChange(e)}   />
+                </div>
+               <p className='star'> * </p>
+            </div> 
+           
+           
 
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'>License Card:</label>
+              <label className='columnLabel'>Onko sinulla toimitsijakortti? | Har du domarkort?:</label>
             
                <Switch data-testid='licenseCard' onChange={handleLicenseCard} checked={inputs.licenseCard} />
                <p style={{color: ' red'}}> * </p>
             </div>
-            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'> Hopes:</label>
-              <input
-                data-testid='hopes' 
-                className='inputStyle'
-                type="text" 
-                name="hopes" 
-                value={inputs?.hopes || ""} 
-                onChange={handleChange}
-              />
-            </div>
-            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'> Kisojen osallistumispäivät:</label>
-              <input  data-testid='first' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, first: !inputs.days.first}})} /> <p>28.6.2024</p>
-              <input data-testid='second' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, second: !inputs.days.second}})} /> <p>29.6.2024</p>
-              <input data-testid='third' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, third: !inputs.days.third}})} /> <p>30.6.2024</p>
-              <p className='star'> * </p>
-            </div>
-           
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '40%'}}>
-              <label className='columnLabel'> Tasks</label>
+              <label className='columnLabel'>Tehtävätoivomus | Önskemål angående uppgift (nykyinen Tasks)</label>
               <SelectBoxes selectedValues={inputs.tasks} selectHandleChange={handleTasks} remove={removeSelectedTask} />
               <p className='star'> * </p>
             </div>
            
+            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
+              <label className='columnLabel'> Mitkä päivät olet kätettävissä | Vilka dagar kan Du ställa upp (Ohjeteksi: "Ainoastaan kokopäivä | Endast hela dagar"):</label>
+              <input  data-testid='first' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, first: !inputs.days.first}})} /> <p className='dayLabel'>28.6.2024</p>
+              <input data-testid='second' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, second: !inputs.days.second}})} /> <p className='dayLabel'>29.6.2024</p>
+              <input data-testid='third' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, third: !inputs.days.third}})} /> <p className='dayLabel'>30.6.2024</p>
+              <p className='star'> * </p>
+            </div>
              <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Free text:</label>
               <textarea
