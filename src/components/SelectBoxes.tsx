@@ -7,19 +7,18 @@ import { faAngleRight, faCircleXmark} from '@fortawesome/free-solid-svg-icons'
 const SelectBoxes = (props: any) => {
   const selectedValues = props.selectedValues.map((value:any) => value.label)
   const options = [
-    { value: '1', label: 'Kenttälajin toimitsja (kokenut)' },
-    { value: '2', label: 'Kenttälajin toimitsija (ei kokemusta)' },
-    { value: '3', label: 'järjestyksen valvoja (kortillinen)'},
-    {value: '4', label: 'järjestys- tai liikennevalvoja (ilman korttia)'},
-    {value: '5', label: 'avustaja palkintojen jaossa'},
-    {value: '6', label: 'tulospalvelu (atk) '},
-    {value: '7', label: 'kisakansliatoimitsija'},
-    {value: '8', label: 'Vaatekorin kantaja (väh. 10 v.)'},
-    {value: '9', label: 'kioskimyyjä '},
-    {value: '10', label: 'VIP-teltan toimitsija'},
-    {value: '11', label: 'lipunmyyjä'},
-    {value: '12', label: 'rakentamistiimin jäsen (ennen kisoja)'},
-    {value: '13', label: 'muu (kerro kommenteissa)'},
+    { value: '1', label: 'Tuomari | Domare'},
+    { value: '2', label: 'järjestyksen valvoja (kortillinen)'},
+    {value: '3', label: 'järjestys- tai liikennevalvoja (ilman korttia)'},
+    {value: '4', label: 'avustaja palkintojen jaossa'},
+    {value: '5', label: 'tulospalvelu (atk) '},
+    {value: '6', label: 'kisakansliatoimitsija'},
+    {value: '7', label: 'Vaatekorin kantaja (väh. 10 v.)'},
+    {value: '8', label: 'kioskimyyjä '},
+    {value: '9', label: 'VIP-teltan toimitsija'},
+    {value: '10', label: 'lipunmyyjä'},
+    {value: '11', label: 'rakentamistiimin jäsen (ennen kisoja)'},
+    {value: '12', label: 'muu (kerro kommenteissa)'},
   ]
   return (
     <div className='square'>
