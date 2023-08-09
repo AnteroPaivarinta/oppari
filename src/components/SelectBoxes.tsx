@@ -8,17 +8,17 @@ const SelectBoxes = (props: any) => {
   const selectedValues = props.selectedValues.map((value:any) => value.label)
   const options = [
     { value: '1', label: 'Tuomari | Domare'},
-    { value: '2', label: 'järjestyksen valvoja (kortillinen)'},
-    {value: '3', label: 'järjestys- tai liikennevalvoja (ilman korttia)'},
-    {value: '4', label: 'avustaja palkintojen jaossa'},
-    {value: '5', label: 'tulospalvelu (atk) '},
-    {value: '6', label: 'kisakansliatoimitsija'},
-    {value: '7', label: 'Vaatekorin kantaja (väh. 10 v.)'},
-    {value: '8', label: 'kioskimyyjä '},
-    {value: '9', label: 'VIP-teltan toimitsija'},
-    {value: '10', label: 'lipunmyyjä'},
-    {value: '11', label: 'rakentamistiimin jäsen (ennen kisoja)'},
-    {value: '12', label: 'muu (kerro kommenteissa)'},
+    { value: '2', label: 'Järjestyksen valvoja (kortillinen) | Ordningsövervakare (med kort)'},
+    {value: '3', label: 'Järjestyksen tai liikennevalvoja (ilmankorttia) | Ordnings- eller trafikövervakare (utan kort)'},
+    {value: '4', label: 'Avustaja palkintojen jaossa | Assistens vid prisutdelningar'},
+    {value: '5', label: 'Tulospalvelu (atk) | Resultatservice (adb) '},
+    {value: '6', label: 'Kisakansliatoimitsija | Funktionär i tävlingskansliet'},
+    {value: '7', label: 'Vaatekorin kantaja (väh. 10 v) | Klädkorgbärare (min. 10 år)'},
+    {value: '8', label: 'Kioskinmyyjä | Kioskförsäljare'},
+    {value: '9', label: 'VIP-teltan toimitsija | Funktionär i VIP-tältet'},
+    {value: '10', label: 'Lipunmyyjä | Biljettförsäljare '},
+    {value: '11', label: 'Rakentamistiimin jäsen (ennen kisoja) | Medlem av byggteamet (före tävlingarna)'},
+    {value: '12', label: 'Muu (kerro kommenteissa) | Annat önskemål (ange i kommentarerna)'},
   ]
   return (
     <div className='square'>
