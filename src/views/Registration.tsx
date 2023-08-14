@@ -7,7 +7,6 @@ import axios from 'axios';
 import { v4 as uuid } from 'uuid';
 import Select from 'react-select';
 import Switch from "react-switch";
-import SelectBoxes from '../components/SelectBoxes';
 import Tasks from '../components/tasks';
 
 const Registration = () => {
@@ -16,7 +15,7 @@ const Registration = () => {
   ({
     PersonID: '',
     email: '',
-    tshirt: 'XS', 
+    tshirt: 'M', 
     gender: '', 
     phone: '', 
     freeText:'',
@@ -61,13 +60,20 @@ const Registration = () => {
   ];
 
   const checkValidInputs  = () => {
+    function checkEntries  (arr:any)  {
+       console.log('ARR',arr, arr.find((value:any) => value === true) ? true : false )
+      return arr.find((value:any) => value[1] === false) ? true : false
+    }
+    console.log('!!!!!!',  Object.entries(inputs.tasks).every(checkEntries))
     if(inputs.age === '' || inputs.tshirt === '-' || inputs.email === '' || inputs.firstName === '' || inputs.lastName === '' ||
-      (inputs.days.first === false && inputs.days.second === false && inputs.days.third === false) || inputs.gender === ''|| inputs.phone === '') {
+      (inputs.days.first === false && inputs.days.second === false && inputs.days.third === false) || inputs.gender === ''|| inputs.phone === '' || Object.entries(inputs.tasks).every(checkEntries) === true) {
         return false;
     } else{
       return true;
     }
   }
+
+
 
   const tasksCheckBoxes = () => {
     return Tasks.map((ob:ITaskOption)  => {
@@ -150,7 +156,7 @@ const Registration = () => {
         <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '100%', height: '90%', alignSelf:'center'}}>
           <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', height: '100%', width: '100%', alignItems: 'center'}}>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'>Etunimi | Förnamn </label>
+              <label className='columnLabel'>Etunimi | Förnamn *</label>
               <input 
                 data-testid='firstName'
                 className='inputStyle'
@@ -159,10 +165,9 @@ const Registration = () => {
                 value={inputs?.firstName || ""} 
                 onChange={handleChange}
               /> 
-              <p className='star'> * </p>
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'>Sukunimi | Efternamn </label>
+              <label className='columnLabel'>Sukunimi | Efternamn * </label>
               <input
                 data-testid='lastName' 
                 className='inputStyle'
@@ -171,11 +176,10 @@ const Registration = () => {
                 value={inputs?.lastName || ""} 
                 onChange={handleChange}
               /> 
-              <p className='star'> * </p>
             </div>
 
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'> Sposti | Epost:</label>
+              <label className='columnLabel'> Sposti | Epost *</label>
               <input
                 data-testid='email' 
                 className='inputStyle'
@@ -184,13 +188,12 @@ const Registration = () => {
                 value={inputs?.email || ""} 
                 onChange={handleChange}
               />
-              <p className='star'> * </p>
             </div>
 
           
 
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'>Ikä | Ålder:</label>
+              <label className='columnLabel'>Ikä | Ålder *</label>
               <input
                 data-testid='age' 
                 className='inputStyle'
@@ -199,10 +202,9 @@ const Registration = () => {
                 value={inputs?.age || ""} 
                 onChange={handleChange}
               /> 
-              <p className='star'> * </p>
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'>Sukupuoli | Kön:</label>
+              <label className='columnLabel'>Sukupuoli | Kön *</label>
               <input
                 data-testid='gender' 
                 className='inputStyle'
@@ -211,10 +213,9 @@ const Registration = () => {
                 value={inputs?.gender || ""} 
                 onChange={handleChange}
               />   
-              <p className='star'> * </p>
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'> Seura | Förening</label>
+              <label className='columnLabel'> Seura | Förening </label>
                 
               
              
@@ -228,7 +229,7 @@ const Registration = () => {
               /> 
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'>Puhelin | Telefon:</label>
+              <label className='columnLabel'>Puhelin | Telefon *</label>
               <input
                 data-testid='phone' 
                 className='inputStyle'
@@ -237,43 +238,32 @@ const Registration = () => {
                 value={inputs?.phone || ""} 
                 onChange={handleChange}
               />
-                <p className='star'> * </p>
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'>T-paidan koko |  T-skjortans storlek:</label>
+              <label className='columnLabel'>Unisex koko/storlek *</label>
                 <div>
                   <Select className='inputStyleTshirtTwo' value={{label: inputs.tshirt, value: inputs.tshirt}} options={options}  onChange={(e) => selectHandleChange(e)}   />
                 </div>
-               <p className='star'> * </p>
             </div> 
-           
-           
-
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'>Onko sinulla toimitsijakortti? | Har du domarkort?:</label>
+              <label className='columnLabel'>Onko sinulla toimitsijakortti? | Har du domarkort? *</label>
             
                <Switch data-testid='licenseCard' onChange={handleLicenseCard} checked={inputs.licenseCard} />
-               <p style={{color: ' red'}}> * </p>
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '40%'}}>
-              <label className='columnLabel'>Tehtävätoivomus | Önskemål angående uppgift</label>
+              <label className='columnLabel'>Tehtävätoivomus | Önskemål angående uppgift *</label>
               <div className='taskList'>
                 { tasksCheckBoxes() }
               </div>
-              
-              <div></div>
-              <p className='star'> * </p>
             </div>
-           
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'> Mitkä päivät olet kätettävissä | Vilka dagar kan Du ställa upp (Ohjeteksi: "Ainoastaan kokopäivä | Endast hela dagar"):</label>
+              <label className='columnLabel'> Mitkä päivät olet kätettävissä | Vilka dagar kan Du ställa upp *</label>
               <input  data-testid='first' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, first: !inputs.days.first}})} /> <p className='dayLabel'>28.6.2024</p>
               <input data-testid='second' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, second: !inputs.days.second}})} /> <p className='dayLabel'>29.6.2024</p>
               <input data-testid='third' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, third: !inputs.days.third}})} /> <p className='dayLabel'>30.6.2024</p>
-              <p className='star'> * </p>
             </div>
              <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
-              <label className='columnLabel'>Free text:</label>
+              <label className='columnLabel'> Vapaat kommentit | Fria kommentarer *</label>
               <textarea
                 data-testid='freetextfield'
                 name="freeText"
