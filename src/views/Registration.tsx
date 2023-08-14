@@ -8,6 +8,7 @@ import { v4 as uuid } from 'uuid';
 import Select from 'react-select';
 import Switch from "react-switch";
 import Tasks from '../components/tasks';
+import ConfirmModal from '../components/Modal';
 
 const Registration = () => {
   
@@ -50,6 +51,8 @@ const Registration = () => {
   const [responseMessage, setLogResponseMessage ] = useState('');
   const [errorMessage, setErrorMessage ] = useState('');
   const [validInputError, setValidInputError ] = useState('');
+  const [showModal, setShowModal] = useState(false);
+
   const options = [
     { value: 'XS', label: 'XS' },
     { value: 'S', label: 'S' },
@@ -61,10 +64,8 @@ const Registration = () => {
 
   const checkValidInputs  = () => {
     function checkEntries  (arr:any)  {
-       console.log('ARR',arr, arr.find((value:any) => value === true) ? true : false )
       return arr.find((value:any) => value[1] === false) ? true : false
     }
-    console.log('!!!!!!',  Object.entries(inputs.tasks).every(checkEntries))
     if(inputs.age === '' || inputs.tshirt === '-' || inputs.email === '' || inputs.firstName === '' || inputs.lastName === '' ||
       (inputs.days.first === false && inputs.days.second === false && inputs.days.third === false) || inputs.gender === ''|| inputs.phone === '' || Object.entries(inputs.tasks).every(checkEntries) === true) {
         return false;
@@ -129,6 +130,7 @@ const Registration = () => {
       const object = {...inputs, PersonID : uid, date: currentDate, tasks: array};
       axios.post("http://localhost:3001/userData", object).then((response) => {
         console.log('Post succesful :)', response);
+        setShowModal(true);
         setLogResponseMessage('Kiitos ilmoittautumisestisi - Otamme sinuun yhteyttä | Tack för anmälan - Vi kontaktar Dig senare!')
       }).catch((error) => {
         console.log('Error123', error)
@@ -153,7 +155,7 @@ const Registration = () => {
       }}
     >
         
-        <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '100%', height: '90%', alignSelf:'center'}}>
+        { !showModal ? <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '100%', height: '90%', alignSelf:'center'}}>
           <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', height: '100%', width: '100%', alignItems: 'center'}}>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Etunimi | Förnamn *</label>
@@ -177,7 +179,6 @@ const Registration = () => {
                 onChange={handleChange}
               /> 
             </div>
-
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'> Sposti | Epost *</label>
               <input
@@ -189,9 +190,6 @@ const Registration = () => {
                 onChange={handleChange}
               />
             </div>
-
-          
-
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'>Ikä | Ålder *</label>
               <input
@@ -216,9 +214,6 @@ const Registration = () => {
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
               <label className='columnLabel'> Seura | Förening </label>
-                
-              
-             
               <input
                 data-testid='team' 
                 className='inputStyle'
@@ -284,10 +279,7 @@ const Registration = () => {
               <input data-testid='robotButton' type="checkbox" onClick={() => setChecked(!checked)} /> <div style={{color: 'white'}}>En ole robotti</div>
             </div>
           </div>
-        </div>
-         
-          
-       
+        </div> : ConfirmModal() }
       </div>
   )
 };

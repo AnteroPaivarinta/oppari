@@ -33,7 +33,6 @@ const SelectBoxes = (props: any) => {
           <div className='taskSelectedListItem'>
             <div onClick={() => props.remove(value)} style={{alignSelf:'flex-start'}}><FontAwesomeIcon icon={faCircleXmark} color='red '  size='2x'/> </div>
              <div>{value} </div>
-            
           </div> ) 
         } 
       </div>
