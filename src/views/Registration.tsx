@@ -105,14 +105,22 @@ const Registration = () => {
       setValidInputError('Tähdellä merkittyjä tekstikenttiä ei ole täytetty. Täytä tarvittavat tekstikentät.')
     } else {
       setValidInputError('')
+      const array: string[] = [];
       let uid = uuid();
       const date = new Date();
       let day = date.getDate();
       let month = date.getMonth() + 1;
       let year = date.getFullYear();
       let currentDate = `${day}-${month}-${year}`;
-      const object = {...inputs, PersonID : uid, date: currentDate};
-      
+      for (const [key, value] of Object.entries(inputs.tasks)) {
+        if ( value === true) {
+          const taskItem = Tasks.find((ob) => ob.value === key);
+          if (taskItem) {
+            array.push(taskItem?.label)
+          }
+        }
+      }
+      const object = {...inputs, PersonID : uid, date: currentDate, tasks: array};
       axios.post("http://localhost:3001/userData", object).then((response) => {
         console.log('Post succesful :)', response);
         setLogResponseMessage('Kiitos ilmoittautumisestisi - Otamme sinuun yhteyttä | Tack för anmälan - Vi kontaktar Dig senare!')

@@ -180,12 +180,6 @@ app.post('/userData', async function(req,res) {
   });
   const object = req.body;
   const licenseCard = object.licenseCard === true? 1 : 0
-  let currentTime = new Date();
-  let clockTime = currentTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-  let pv = currentTime.getDate();
-  let kk = currentTime.getMonth() + 1; 
-  let vuosi = currentTime.getFullYear();
-  let time = clockTime + '/' + pv + '/' + kk + '/' + vuosi
   let tasks = object.tasks.map((value) => value.label).toString();
   let days = object.days;
   let arrayDays = []
@@ -204,7 +198,7 @@ app.post('/userData', async function(req,res) {
   }
 
   const use = "USE kaleva;";
-  const sql= `INSERT INTO PERSON VALUES ('${object.PersonID}', '${object.firstName}', '${object.lastName}', '${object.age}', '${object.email}', '${object.gender}', '${object.phone}', '${object.tshirt}', '${object.team}', '${licenseCard}', '${object.hopes}', '${object.freeText}', '${time}', '${tasks}', '${object.date}', '${arrayDays.toString}');`;
+  const sql= `INSERT INTO PERSON VALUES ('${object.PersonID}', '${object.firstName}', '${object.lastName}', '${object.age}', '${object.email}', '${object.gender}', '${object.phone}', '${object.tshirt}', '${object.team}', '${licenseCard}', '${object.freeText}',  '${tasks}', '${arrayDays.toString()}', '${object.date}');`;
   connection.query(use);
   connection.query(sql);
   connection.end();
