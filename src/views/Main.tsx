@@ -28,6 +28,7 @@ const Main = () => {
             <button>
               <NavLink
                   to="/registration"
+                  style={{ textDecoration: 'none'}}
               >
                 <h5 style={{margin: 5}}>Ilmoittaudu</h5>
               </NavLink>
