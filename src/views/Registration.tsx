@@ -8,7 +8,7 @@ import { v4 as uuid } from 'uuid';
 import Select from 'react-select';
 import Switch from "react-switch";
 import SelectBoxes from '../components/SelectBoxes';
-
+import Tasks from '../components/tasks';
 
 const Registration = () => {
   
@@ -54,6 +54,17 @@ const Registration = () => {
     } else{
       return true;
     }
+  }
+
+  const tasksCheckBoxes = () => {
+    return Tasks.map((value) => {
+      return (
+        <div style={{ display: 'flex', flexDirection: 'row'}}>
+          <input data-testid='first' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, first: !inputs.days.first}})} /> <p className='dayLabel'>{value.label}</p>
+        </div>
+      )
+    })
+    
   }
 
 
@@ -109,10 +120,20 @@ const Registration = () => {
   
 
   return (
-    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: '100%', maxHeight: '100%', height: '100vh', backgroundSize:'cover' }}>
-        <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'flex-end', width:'100%', height: '10%', marginLeft: -260}}>
-         
-        </div>
+    <div style={{ 
+        backgroundImage: `url(${kuva})`,
+        backgroundRepeat: 'no-repeat',
+        minHeight: '100%', 
+        maxHeight: '100%', 
+        height: '100vh', 
+        backgroundSize: 'cover',
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
+        
         <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '100%', height: '90%', alignSelf:'center'}}>
           <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', height: '100%', width: '100%', alignItems: 'center'}}>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
@@ -222,8 +243,12 @@ const Registration = () => {
                <p style={{color: ' red'}}> * </p>
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '40%'}}>
-              <label className='columnLabel'>Tehtävätoivomus | Önskemål angående uppgift (nykyinen Tasks)</label>
-              <SelectBoxes selectedValues={inputs.tasks} selectHandleChange={handleTasks} remove={removeSelectedTask} />
+              <label className='columnLabel'>Tehtävätoivomus | Önskemål angående uppgift</label>
+              <div className='taskList'>
+                { tasksCheckBoxes() }
+              </div>
+              
+              <div></div>
               <p className='star'> * </p>
             </div>
            
@@ -250,12 +275,16 @@ const Registration = () => {
             {errorMessage? <p data-testid='errorMessage' style={{color:'red'}}> {errorMessage}</p> : null }
             { validInputError ? <p style={{color:'red'}}> {validInputError}</p> : null }
           </form>
-          <button type="submit"  onClick={() => handleSubmit()} data-testid='sendButtonTwo' disabled={!checked} > LÄHETÄ </button> 
-
-          <div style={{flexDirection:'row'}}>
-            <input data-testid='robotButton' type="checkbox" onClick={() => setChecked(!checked)} /> En ole robotti
+          <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', alignSelf: 'center'}}>
+            <button type="submit"  onClick={() => handleSubmit()} data-testid='sendButtonTwo' disabled={!checked} > LÄHETÄ </button> 
+            <div style={{flexDirection:'row', display: 'flex'}}>
+              <input data-testid='robotButton' type="checkbox" onClick={() => setChecked(!checked)} /> <div style={{color: 'white'}}>En ole robotti</div>
+            </div>
           </div>
         </div>
+         
+          
+       
       </div>
   )
 };
