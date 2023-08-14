@@ -11,13 +11,35 @@ export interface IData {
     licenseCard: boolean;
     hopes: string; 
     freeText: string;
-    tasks: ISelect[];
+    tasks: ITaskObject;
     date?: string;
     days: IDays;
     
 }
 
 export interface ISelect {
+    value: string;
+    label: string;
+}
+
+export interface ITaskObject {
+    firstTask: boolean,
+    secondTask: boolean,
+    thirdTask: boolean,
+    fourthTask: boolean,
+    fifthTask: boolean,
+    sixthTask: boolean,
+    seventhTask: boolean,
+    eightTask: boolean,
+    ninthTask: boolean,
+    tenthTask: boolean,
+    eleventhTask: boolean,
+    other: boolean,
+}
+
+
+
+export interface ITaskOption {
     value: string;
     label: string;
 }

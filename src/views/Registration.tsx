@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import kuva from '../kuva.png';
-import { IData } from '../types';
+import { IData, ITaskOption } from '../types';
 import '../styles.css';
 import axios from 'axios';
 import { v4 as uuid } from 'uuid';
@@ -26,7 +26,20 @@ const Registration = () => {
     hopes: '',
     team: '',
     age:'',
-    tasks: [],
+    tasks:{
+      firstTask: false,
+      secondTask: false,
+      thirdTask: false,
+      fourthTask: false,
+      fifthTask: false,
+      sixthTask: false,
+      seventhTask:false,
+      eightTask: false,
+      ninthTask: false,
+      tenthTask: false,
+      eleventhTask: false,
+      other: false,
+    },
     days: {
       first: false, 
       second: false,
@@ -49,7 +62,7 @@ const Registration = () => {
 
   const checkValidInputs  = () => {
     if(inputs.age === '' || inputs.tshirt === '-' || inputs.email === '' || inputs.firstName === '' || inputs.lastName === '' ||
-      (inputs.days.first === false && inputs.days.second === false && inputs.days.third === false) || inputs.gender === '' || inputs.tasks.length === 0 || inputs.phone === '') {
+      (inputs.days.first === false && inputs.days.second === false && inputs.days.third === false) || inputs.gender === ''|| inputs.phone === '') {
         return false;
     } else{
       return true;
@@ -57,10 +70,13 @@ const Registration = () => {
   }
 
   const tasksCheckBoxes = () => {
-    return Tasks.map((value) => {
+    return Tasks.map((ob:ITaskOption)  => {
       return (
         <div style={{ display: 'flex', flexDirection: 'row'}}>
-          <input data-testid='first' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, first: !inputs.days.first}})} /> <p className='dayLabel'>{value.label}</p>
+          <input data-testid='first' type="checkbox" onClick={() =>
+             setInputs({...inputs, tasks: {...inputs.tasks, [ob.value]: !{...inputs.tasks}[ob.value]}})} 
+          />
+          <p className='dayLabel'>{ob.label}</p>
         </div>
       )
     })
@@ -82,13 +98,7 @@ const Registration = () => {
     setInputs(values => ({...values, licenseCard: checked}))
   }
 
-  const handleTasks = (e:any) => {
-
-    const tasks = inputs.tasks;
-    tasks.push(e);
-    setInputs(values => ({...values, tasks: tasks}))
-
-  }
+ 
 
   const handleSubmit = () => {
     if ( !checkValidInputs() ){
@@ -113,11 +123,6 @@ const Registration = () => {
     }
 
   };
-
-  const removeSelectedTask = (taskName: string) => {
-    setInputs({...inputs, tasks: inputs.tasks.filter((value)=> taskName != value.label)})
-  }
-  
 
   return (
     <div style={{ 
