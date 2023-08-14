@@ -18,6 +18,10 @@ h1 {
   color: white;
 }
 
+p span {
+  display: block;
+}
+
 .square {
   flex-direction: column;
   height: 100%;

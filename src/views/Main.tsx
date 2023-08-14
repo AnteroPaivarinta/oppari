@@ -20,17 +20,20 @@ const Main = () => {
         <div style={{ display: 'flex', alignItems: 'center', width: '92%', height: '90%'}}>
           <div style={{marginLeft: '60%'}}>
             <h1 style={{color:'white'}}>Kalevan kisat 2024</h1>
-            <h2 style={{marginTop: -30}}> Ilmoittautuminen | Anmälan</h2>
+            <h2 style={{marginTop: -30}}> <p><span>Ilmottautuminen</span><span>Anmälan</span></p></h2>
             <hr></hr>
             <h3 style={{color:'white'}}>
-            "Ilmoittaudu tässä Vaasan 2024 Kalevan kisojen vapaaehtoiseksi toimitsijaksi. Saat kuittauksen ilmoittautumisesta annettuun sähköpostiin. Otamme sinuun yhteyttä. Tervetuloa mukaan! | Här anmäler Du dig som frivillig funktionär till Kalevan kisat 2024 i Vasa. Du får en kvittering på gjord anmälan till den epost som angivits. Vi kontaktar Dig. Välkommen med!
+              <p>
+                <span>Ilmoittaudu tässä Vaasan 2024 Kalevan kisojen vapaaehtoiseksi toimitsijaksi. Saat kuittauksen ilmoittautumisesta annettuun sähköpostiin. Otamme sinuun yhteyttä. Tervetuloa mukaan! </span>
+                <span>Här anmäler Du dig som frivillig funktionär till Kalevan kisat 2024 i Vasa. Du får en kvittering på gjord anmälan till den epost som angivits. Vi kontaktar Dig. Välkommen med!</span>
+              </p>
             </h3>
             <button>
               <NavLink
                   to="/registration"
                   style={{ textDecoration: 'none'}}
               >
-                <h5 style={{margin: 5}}>Ilmoittaudu</h5>
+                <p><span>Ilmoittaudu</span><span>Anmälan</span></p>
               </NavLink>
             </button>
            
