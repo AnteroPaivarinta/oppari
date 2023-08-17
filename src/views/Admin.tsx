@@ -222,7 +222,7 @@ const Admin = () => {
              <input onChange={(e) =>setFiterInput(e.target.value)}/> <div>Seach by Surname</div>
             <button onClick={() => makeExcel()}> DOWNLOAD IN EXCEL</button>
               <table data-testid='database'>
-                  <tr>
+                <tr>
                   <th>FirstName</th>
                   <th>LastName</th>
                   <th>Age</th>

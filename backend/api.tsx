@@ -2,7 +2,6 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const  AWS = require('aws-sdk');
 const mysql = require('mysql');
 const dotenv = require('dotenv').config();
 const jwt = require("jsonwebtoken");
