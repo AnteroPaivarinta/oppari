@@ -66,6 +66,11 @@ connection.end();
 app.use(cors())
 app.use(express.json())
 
+
+app.get('/test23',  function(req,res) {
+  res.send('HELLO WORLD');
+});
+ 
 app.post('/admin', async (req, res) => {
 
   const connection = mysql.createConnection({
@@ -282,7 +287,7 @@ app.get('/userData', verifyUserToken,  function(req,res) {
   res.json(dataArray.map((value) => value.licenseCard === 1 ? {...value, licenseCad: true} : {...value, licenseCard: false}))
 });
 
- 
+
 
 app.delete('/delete/:id', function(req,res) {
 
