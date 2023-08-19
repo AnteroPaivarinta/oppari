@@ -53,7 +53,7 @@ const Registration = () => {
   const [validInputError, setValidInputError ] = useState('');
   const [showModal, setShowModal] = useState(false);
   
-  const ip =  '172.31.36.167';
+  const ip =  '13.51.169.250';
   const options = [
     { value: 'XS', label: 'XS' },
     { value: 'S', label: 'S' },
