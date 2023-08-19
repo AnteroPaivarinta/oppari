@@ -20,7 +20,7 @@ const Main = () => {
         <div style={{ display: 'flex', alignItems: 'center', width: '92%', height: '90%'}}>
           <div style={{marginLeft: '60%'}}>
             <h1 style={{color:'white'}}>Kalevan kisat 2024</h1>
-            <h2 style={{marginTop: -30}}> <p><span>Ilmoittautuminen</span><span>Anmälan</span></p></h2>
+            <h2 style={{marginTop: -30}}><p><span>Ilmoittautuminen</span><span>Anmälan</span></p></h2>
             <hr></hr>
             <h3 style={{color:'white'}}>
               <p>
@@ -33,7 +33,7 @@ const Main = () => {
                   to="/registration"
                   style={{ textDecoration: 'none'}}
               >
-                <p>Ilmoittautuminen | Anmälan</p>
+                <p>Ilmoittautuminen | Anmälan </p>
               </NavLink>
             </button>
            

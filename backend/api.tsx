@@ -11,7 +11,7 @@ const jwtSecret = '123';
 const reader = require('xlsx');
 const file = reader.readFile('./backend/test.xlsx')
 const nodemailer = require('nodemailer');
-
+const aws = require('aws-sdk')
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
