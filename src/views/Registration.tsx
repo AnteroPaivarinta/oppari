@@ -9,6 +9,9 @@ import Select from 'react-select';
 import Switch from "react-switch";
 import Tasks from '../components/tasks';
 import ConfirmModal from '../components/Modal';
+import validator from 'validator';
+import isEmail from 'validator/lib/isEmail';
+
 
 const Registration = () => {
   
@@ -67,11 +70,19 @@ const Registration = () => {
     function checkEntries  (arr:any)  {
       return arr.find((value:any) => value[1] === false) ? true : false
     }
-    if(inputs.age === '' || inputs.tshirt === '-' || inputs.email === '' || inputs.firstName === '' || inputs.lastName === '' ||
-      (inputs.days.first === false && inputs.days.second === false && inputs.days.third === false) || inputs.gender === ''|| inputs.phone === '' || Object.entries(inputs.tasks).every(checkEntries) === true) {
+    if( inputs.age === '' ||
+      inputs.tshirt === '-' ||
+      inputs.email === '' ||
+      inputs.firstName === '' ||
+      inputs.lastName === '' ||
+      (inputs.days.first === false && inputs.days.second === false && inputs.days.third === false) ||
+      inputs.gender === ''|| 
+      inputs.phone === '' || 
+      isEmail(inputs.email) === false ||
+      Object.entries(inputs.tasks).every(checkEntries) === true)  {
         return false;
-    } else{
-      return true;
+      } else {
+        return true;
     }
   }
 
@@ -121,14 +132,18 @@ const Registration = () => {
       let year = date.getFullYear();
       let currentDate = `${day}-${month}-${year}`;
       for (const [key, value] of Object.entries(inputs.tasks)) {
+        console.log('VALUE', value, 'KEY', key)
         if ( value === true) {
           const taskItem = Tasks.find((ob) => ob.value === key);
           if (taskItem) {
+            console.log('HEWEWEGO', taskItem.label)
             array.push(taskItem?.label)
           }
         }
       }
+      console.log('ARRAY', array);
       const object = {...inputs, PersonID : uid, date: currentDate, tasks: array};
+    
       axios.post(`https://${ip}/userData`, object).then((response) => {
         console.log('Post succesful :)', response);
         setShowModal(true);

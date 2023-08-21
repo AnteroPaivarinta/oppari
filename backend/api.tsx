@@ -12,6 +12,7 @@ const reader = require('xlsx');
 const file = reader.readFile('./backend/test.xlsx')
 const nodemailer = require('nodemailer');
 const aws = require('aws-sdk')
+const safeValidator = require('validator');
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -184,7 +185,8 @@ app.post('/userData', async function(req,res) {
   });
   const object = req.body;
   const licenseCard = object.licenseCard === true? 1 : 0
-  let tasks = object.tasks.map((value) => value.label).toString();
+  let tasks = object.tasks;
+  console.log('TASKS', tasks);
   let days = object.days;
   let arrayDays = []
   for (const key in days) {
@@ -202,7 +204,7 @@ app.post('/userData', async function(req,res) {
   }
 
   const use = "USE kaleva;";
-  const sql= `INSERT INTO PERSON VALUES ('${object.PersonID}', '${object.firstName}', '${object.lastName}', '${object.age}', '${object.email}', '${object.gender}', '${object.phone}', '${object.tshirt}', '${object.team}', '${licenseCard}', '${object.freeText}',  '${tasks}', '${arrayDays.toString()}', '${object.date}');`;
+  const sql= `INSERT INTO PERSON VALUES ('${object.PersonID}', '${safeValidator(object.firstName)}', '${safeValidator(object.lastName)}', '${safeValidator(object.age)}', '${safeValidator(object.email)}', '${safeValidator(object.gender)}', '${safeValidator(object.phone)}', '${safeValidator(object.tshirt)}', '${safeValidator(object.team)}', '${licenseCard.toString()}', '${safeValidator(object.freeText)}',  '${tasks.toString()}', '${arrayDays.toString()}', '${object.date}');`;
   connection.query(use);
   connection.query(sql);
   connection.end();
