@@ -204,9 +204,9 @@ app.post('/userData', async function(req,res) {
   }
 
   const use = "USE kaleva;";
-  const sql= `INSERT INTO PERSON VALUES ('${object.PersonID}', '${safeValidator(object.firstName)}', '${safeValidator(object.lastName)}', '${safeValidator(object.age)}', '${safeValidator(object.email)}', '${safeValidator(object.gender)}', '${safeValidator(object.phone)}', '${safeValidator(object.tshirt)}', '${safeValidator(object.team)}', '${licenseCard.toString()}', '${safeValidator(object.freeText)}',  '${tasks.toString()}', '${arrayDays.toString()}', '${object.date}');`;
+  const sql= `INSERT INTO PERSON VALUES ( ? , ?,  ?, ?, ?, ?', ?, ?, ?,  ?, ?', ? ,  ?,  ?);`;
   connection.query(use);
-  connection.query(sql);
+  connection.query(sql, [object.PersonID, safeValidator(object.firstName), safeValidator(object.lastName), safeValidator(object.age), safeValidator(object.email), safeValidator(object.gender), safeValidator(object.tshirt), safeValidator(object.team), licenseCard.toString(), safeValidator(object.freeText), safeValidator(tasks.toString(), arrayDays.toString())]);
   connection.end();
   dataArray.push(req.body);
   const message = 'Hei, olet ilmoittanut Kalevan 2024 kisoihin näillä tiedoilla:\n ';
