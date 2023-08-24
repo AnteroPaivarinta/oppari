@@ -276,8 +276,8 @@ app.put('/userData', function(req,res) {
 
   const useSql = 'USE kaleva;'
   connection.query(useSql);
-  const sql = `UPDATE PERSON SET firstName = '${firstName}', lastName = '${lastName}', age ='${age}', email ='${email}', gender = '${gender}', phone ='${phone}', tshirt = '${tshirt}', team = '${team}' , freeText = '${freeText}', hopes = '${hopes}' WHERE PersonID = '${PersonID}'`;
-  connection.query(sql);
+  const sql = `UPDATE PERSON SET firstName = ?, lastName = ?, age = ?, email =?, gender = ?, phone =?, tshirt =?, team =? , freeText = ?, hopes =? WHERE PersonID =?`;
+  connection.query(sql, [firstName, lastName, age, email, gender, phone, tshirt, team, freeText, hopes, PersonID]);
   connection.end();
   
 
