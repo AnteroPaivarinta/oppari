@@ -9,38 +9,41 @@ const Main = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   return (
-    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', height: screenHeight, backgroundSize: 'cover',  width: screenWidth, objectFit: 'fill' }}>
-        <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'flex-end', width:'100%', height: '10%'}}>
+    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', height: screenHeight, backgroundSize: 'cover',  width: screenWidth, objectFit: 'fill'}}>
+        <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'flex-end', width:'100%', height: '1%'}}>
+          <div style={{marginRight: '5%'}}>
             <NavLink
               to="/admin"
             >
               <h5> Admin</h5>
             </NavLink>
-            
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', width: '92%', height: '90%'}}>
-          <div>
-            <h1 style={{color:'white'}}>Kalevan kisat 2024</h1>
-            <h2 ><p><span>Ilmoittautuminen</span><span>Anmälan</span></p></h2>
-            <hr></hr>
-            <h3 style={{color:'white'}}>
-              <p>
-                <span>Ilmoittaudu tässä Vaasan 2024 Kalevan kisojen vapaaehtoiseksi toimitsijaksi. Saat kuittauksen ilmoittautumisesta annettuun sähköpostiin. Otamme sinuun yhteyttä. Tervetuloa mukaan! </span>
-                <span>Här anmäler Du dig som frivillig funktionär till Kalevan kisat 2024 i Vasa. Du får en kvittering på gjord anmälan till den epost som angivits. Vi kontaktar Dig. Välkommen med!</span>
-              </p>
-            </h3>
-            <button style={{width : '30%'}}>
-              <NavLink
-                  to="/registration"
-                  style={{ textDecoration: 'none'}}
-              >
-                <p>Ilmoittautuminen | Anmälan </p>
-              </NavLink>
-            </button>
-           
           </div>
         </div>
-      </div>
+        <div style={{ display: 'flex', alignItems: 'center', width: '100%', height: '90%'}}>
+          <div style={{display: 'flex', flexDirection: 'row', alignItems:'center', height: '20%', width: '100%', justifyContent: 'center' }}>
+            <div style={{ height:'100%', width: '50%'}}>
+              <h1 style={{color:'white'}}>Kalevan kisat 2024</h1>
+              <h2> <p><span>Ilmoittautuminen</span><span>Anmälan</span></p> </h2>
+              <hr></hr>
+              <h3 style={{color:'white'}}>
+                <p>
+                  <span> Ilmoittaudu tässä Vaasan 2024 Kalevan kisojen vapaaehtoiseksi toimitsijaksi. Saat kuittauksen ilmoittautumisesta annettuun sähköpostiin. Otamme sinuun yhteyttä. Tervetuloa mukaan! </span>
+                  <span> Här anmäler Du dig som frivillig funktionär till Kalevan kisat 2024 i Vasa. Du får en kvittering på gjord anmälan till den epost som angivits. Vi kontaktar Dig. Välkommen med!</span>
+                </p>
+              </h3>
+              <button style={{width : '30%'}}>
+                <NavLink
+                    to="/registration"
+                    style={{ textDecoration: 'none'}}
+                >
+                  <p>Ilmoittautuminen | Anmälan </p>
+                </NavLink>
+              </button>
+            
+            </div>
+          </div>
+        </div>
+    </div>
   );
 }
 
