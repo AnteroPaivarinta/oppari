@@ -9,7 +9,7 @@ const Main = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   return (
-    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat' , height: '100vh', backgroundSize: '100% 100%',  width: '100vw'}}>
+    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat' , height: '100vh', backgroundSize: '100% 100%',  width: '100vw' }}>
         <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'flex-end', width:'100%', height: '1%'}}>
           <div style={{marginRight: '5%'}}>
             <NavLink
@@ -27,8 +27,8 @@ const Main = () => {
               <hr></hr>
               <h3 style={{color:'white'}}>
                 <p>
-                  <span> Ilmoittaudu tässä Vaasan 2024 Kalevan kisojen vapaaehtoiseksi toimitsijaksi. Saat kuittauksen ilmoittautumisesta annettuun sähköpostiin. Otamme sinuun yhteyttä. Tervetuloa mukaan! </span>
-                  <span> Här anmäler Du dig som frivillig funktionär till Kalevan kisat 2024 i Vasa. Du får en kvittering på gjord anmälan till den epost som angivits. Vi kontaktar Dig. Välkommen med!</span>
+                  <span style={{fontSize: 3}}> Ilmoittaudu tässä Vaasan 2024 Kalevan kisojen vapaaehtoiseksi toimitsijaksi. Saat kuittauksen ilmoittautumisesta annettuun sähköpostiin. Otamme sinuun yhteyttä. Tervetuloa mukaan! </span>
+                  <span style={{fontSize: 3}}> Här anmäler Du dig som frivillig funktionär till Kalevan kisat 2024 i Vasa. Du får en kvittering på gjord anmälan till den epost som angivits. Vi kontaktar Dig. Välkommen med!</span>
                 </p>
               </h3>
               <button style={{width : '30%'}}>
