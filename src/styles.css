@@ -4,7 +4,7 @@ h1 {
 
 .columnLabel {
   width: 42%;
-  height: 10%;
+  height: 15%;
   color: white;
   font-size: 13;
 }
@@ -17,6 +17,7 @@ h1 {
 
 .dayLabel {
   color: white;
+  font-size: 7;
 }
 
 p span {

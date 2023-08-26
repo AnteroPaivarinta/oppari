@@ -94,7 +94,7 @@ const Registration = () => {
     return Tasks.map((ob:ITaskOption)  => {
       return (
         <div style={{ display: 'flex', flexDirection: 'row'}}>
-          <input data-testid='first' type="checkbox" onClick={() =>
+          <input style={{width: 10, height: 10}} data-testid='first' type="checkbox" onClick={() =>
              setInputs({...inputs, tasks: {...inputs.tasks, [ob.value]: !{...inputs.tasks}[ob.value]}})} 
           />
           <p className='dayLabel'>{ob.label}</p>
