@@ -14,7 +14,9 @@ import isEmail from 'validator/lib/isEmail';
 
 
 const Registration = () => {
-  
+
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const [inputs, setInputs] = useState < IData >
   ({
     PersonID: '',
@@ -160,14 +162,15 @@ const Registration = () => {
     <div style={{ 
         backgroundImage: `url(${kuva})`,
         backgroundRepeat: 'no-repeat',
-        minHeight: '100%', 
+        minHeight: screenHeight, 
         maxHeight: '100%', 
         height: '100vh', 
         backgroundSize: 'cover',
         display: 'flex',
         flexWrap: 'wrap',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width: '100vw' 
       }}
     >
         
