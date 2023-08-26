@@ -174,7 +174,7 @@ const Registration = () => {
                 onChange={handleChange}
               /> 
             </div>
-            <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '25%'}}>
               <label className='columnLabel'>Sukunimi | Efternamn * </label>
               <input
                 data-testid='lastName' 
@@ -185,7 +185,7 @@ const Registration = () => {
                 onChange={handleChange}
               /> 
             </div>
-            <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '25%'}}>
               <label className='columnLabel'> Sposti | Epost *</label>
               <input
                 data-testid='email' 
@@ -196,7 +196,7 @@ const Registration = () => {
                 onChange={handleChange}
               />
             </div>
-            <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '25%'}}>
               <label className='columnLabel'>Ikä | Ålder *</label>
               <input
                 data-testid='age' 
@@ -207,7 +207,7 @@ const Registration = () => {
                 onChange={handleChange}
               /> 
             </div>
-            <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '25%'}}>
               <label className='columnLabel'>Sukupuoli | Kön *</label>
               <input
                 data-testid='gender' 
@@ -218,7 +218,7 @@ const Registration = () => {
                 onChange={handleChange}
               />   
             </div>
-            <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '25%'}}>
               <label className='columnLabel'> Seura | Förening </label>
               <input
                 data-testid='team' 
@@ -229,7 +229,7 @@ const Registration = () => {
                 onChange={handleChange}
               /> 
             </div>
-            <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '25%'}}>
               <label className='columnLabel'>Puhelin | Telefon *</label>
               <input
                 data-testid='phone' 
@@ -240,13 +240,13 @@ const Registration = () => {
                 onChange={handleChange}
               />
             </div>
-            <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '25%'}}>
               <label className='columnLabel'>Unisex koko/storlek *</label>
                 <div>
                   <Select className='inputStyleTshirtTwo' value={{label: inputs.tshirt, value: inputs.tshirt}} options={options}  onChange={(e) => selectHandleChange(e)}   />
                 </div>
             </div> 
-            <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '25%'}}>
               <label className='columnLabel'>Onko sinulla toimitsijakortti? | Har du domarkort? *</label>
             
                <Switch data-testid='licenseCard' onChange={handleLicenseCard} checked={inputs.licenseCard} />
