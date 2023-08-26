@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import '../App.css';
 import kuva from '../kuva.png';
 import '../styles.css';
 
-
 const Main = () => {
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   return (
-    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: '100%', height: '100vh', backgroundSize: 'cover' }}>
+    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: screenHeight, backgroundSize: 'cover', minWidth: screenWidth }}>
         <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'flex-end', width:'100%', height: '10%', marginLeft: -260}}>
             <NavLink
               to="/admin"
