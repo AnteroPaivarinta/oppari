@@ -27,16 +27,16 @@ const Main = () => {
               <hr></hr>
               <h3 style={{color:'white'}}>
                 <p>
-                  <span style={{fontSize: 3}}> Ilmoittaudu tässä Vaasan 2024 Kalevan kisojen vapaaehtoiseksi toimitsijaksi. Saat kuittauksen ilmoittautumisesta annettuun sähköpostiin. Otamme sinuun yhteyttä. Tervetuloa mukaan! </span>
-                  <span style={{fontSize: 3}}> Här anmäler Du dig som frivillig funktionär till Kalevan kisat 2024 i Vasa. Du får en kvittering på gjord anmälan till den epost som angivits. Vi kontaktar Dig. Välkommen med!</span>
+                  <span style={{fontSize: 13}}> Ilmoittaudu tässä Vaasan 2024 Kalevan kisojen vapaaehtoiseksi toimitsijaksi. Saat kuittauksen ilmoittautumisesta annettuun sähköpostiin. Otamme sinuun yhteyttä. Tervetuloa mukaan! </span>
+                  <span style={{fontSize: 13}}> Här anmäler Du dig som frivillig funktionär till Kalevan kisat 2024 i Vasa. Du får en kvittering på gjord anmälan till den epost som angivits. Vi kontaktar Dig. Välkommen med!</span>
                 </p>
               </h3>
-              <button style={{width : '30%', height: '20%'}}>
+              <button style={{width : '20%', height: 'auto', textJustify: 'auto'}}>
                 <NavLink
                     to="/registration"
                     style={{ textDecoration: 'none'}}
                 >
-                  <p style={{fontSize: 3}}>Ilmoittautuminen | Anmälan </p>
+                  <p style={{fontSize: 13, textAlign: 'center'}}>Ilmoittautuminen | Anmälan </p>
                 </NavLink>
               </button>
             </div>
