@@ -59,6 +59,30 @@ p span {
   align-items: center; /* Keskittää pystysuunnassa */
 }
 
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.dynamic-button {
+  font-size: 1em; /* Oletuskoko */
+  padding: 10px 20px;
+  background-color: white;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Lisää media queryt tarvittaessa esim. eri näyttökooille */
+@media (max-width: 768px) {
+  .dynamic-button {
+    font-size: 0.8em;
+  }
+}
+
 .fontIcon {
   flex: 'display';
   align-items: flex-start;

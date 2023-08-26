@@ -31,7 +31,7 @@ const Main = () => {
                   <span style={{fontSize: 13}}> Här anmäler Du dig som frivillig funktionär till Kalevan kisat 2024 i Vasa. Du får en kvittering på gjord anmälan till den epost som angivits. Vi kontaktar Dig. Välkommen med!</span>
                 </p>
               </h3>
-              <button style={{width : '30%', height: 'auto', textJustify: 'auto'}}>
+              <button className="dynamic-button">
                 <NavLink
                     to="/registration"
                     style={{ textDecoration: 'none'}}
