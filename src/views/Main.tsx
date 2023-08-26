@@ -21,7 +21,7 @@ const Main = () => {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', width: '100%', height: '90%'}}>
           <div style={{display: 'flex', flexDirection: 'row', alignItems:'center', height: '20%', width: '100%', justifyContent: 'center' }}>
-            <div style={{ height:'100%', width: '50%'}}>
+            <div style={{ height:'100%', width: '60%'}}>
               <h1 style={{color:'white'}}>Kalevan kisat 2024</h1>
               <h2><p><span>Ilmoittautuminen</span><span>Anmälan</span></p> </h2>
               <hr></hr>
