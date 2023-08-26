@@ -17,7 +17,14 @@ h1 {
 
 .dayLabel {
   color: white;
+  font-size: 13;
+}
+
+.taskLabel {
+  color: white;
   font-size: 7;
+  height: 20%;
+  width: 100%;
 }
 
 p span {
@@ -95,8 +102,9 @@ p span {
 .taskList {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
-  width: 45%;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
   border-radius: 10px;
 }
 

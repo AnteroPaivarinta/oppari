@@ -97,7 +97,7 @@ const Registration = () => {
           <input style={{width: 10, height: 10}} data-testid='first' type="checkbox" onClick={() =>
              setInputs({...inputs, tasks: {...inputs.tasks, [ob.value]: !{...inputs.tasks}[ob.value]}})} 
           />
-          <p className='dayLabel'>{ob.label}</p>
+          <p className='taskLabel'>{ob.label}</p>
         </div>
       )
     })
