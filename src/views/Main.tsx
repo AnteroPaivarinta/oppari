@@ -9,7 +9,7 @@ const Main = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   return (
-    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: screenHeight, backgroundSize: 'cover', minWidth: screenWidth, width: screenWidth }}>
+    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', height: screenHeight, backgroundSize: 'cover',  width: screenWidth, objectFit: 'fill' }}>
         <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'flex-end', width:'100%', height: '10%', marginLeft: -260}}>
             <NavLink
               to="/admin"
