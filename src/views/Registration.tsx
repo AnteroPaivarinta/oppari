@@ -163,7 +163,7 @@ const Registration = () => {
         
         { !showModal ? <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '100%', height: '90%', alignSelf:'center'}}>
           <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', height: '100%', width: '100%', alignItems: 'center'}}>
-            <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
+            <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '25%'}}>
               <label className='columnLabel'>Etunimi | Förnamn *</label>
               <input 
                 data-testid='firstName'
