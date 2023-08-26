@@ -10,18 +10,18 @@ const Main = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   return (
     <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', height: screenHeight, backgroundSize: 'cover',  width: screenWidth, objectFit: 'fill' }}>
-        <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'flex-end', width:'100%', height: '10%', marginLeft: -260}}>
+        <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'flex-end', width:'100%', height: '10%'}}>
             <NavLink
               to="/admin"
             >
-              <h5 style={{margin: 5}}> Admin</h5>
+              <h5> Admin</h5>
             </NavLink>
             
         </div>
         <div style={{ display: 'flex', alignItems: 'center', width: '92%', height: '90%'}}>
-          <div style={{marginLeft: '60%'}}>
+          <div>
             <h1 style={{color:'white'}}>Kalevan kisat 2024</h1>
-            <h2 style={{marginTop: -30}}><p><span>Ilmoittautuminen</span><span>Anmälan</span></p></h2>
+            <h2 ><p><span>Ilmoittautuminen</span><span>Anmälan</span></p></h2>
             <hr></hr>
             <h3 style={{color:'white'}}>
               <p>
