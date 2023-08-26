@@ -9,7 +9,7 @@ const Main = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   return (
-    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat' , height: '100vh', backgroundSize: '100% 100%',  width: '100vw', objectFit: 'fill'}}>
+    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat' , height: '100vh', backgroundSize: '100% 100%',  width: '100vw'}}>
         <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'flex-end', width:'100%', height: '1%'}}>
           <div style={{marginRight: '5%'}}>
             <NavLink
@@ -23,7 +23,7 @@ const Main = () => {
           <div style={{display: 'flex', flexDirection: 'row', alignItems:'center', height: '20%', width: '100%', justifyContent: 'center' }}>
             <div style={{ height:'100%', width: '50%'}}>
               <h1 style={{color:'white'}}>Kalevan kisat 2024</h1>
-              <h2> <p><span>Ilmoittautuminen</span><span>Anmälan</span></p> </h2>
+              <h2><p><span>Ilmoittautuminen</span><span>Anmälan</span></p> </h2>
               <hr></hr>
               <h3 style={{color:'white'}}>
                 <p>
