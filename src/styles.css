@@ -22,7 +22,7 @@ h1 {
 
 .taskLabel {
   color: white;
-  font-size: 7;
+  font-size: 3;
   height: 20%;
   width: 100%;
 }
@@ -103,7 +103,7 @@ p span {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  height: 100%;
+  height: 30%;
   width: 100%;
   border-radius: 10px;
 }
