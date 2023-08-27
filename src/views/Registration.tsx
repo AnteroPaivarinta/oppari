@@ -186,7 +186,7 @@ const Registration = () => {
   };
 
   return (
-    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat',  maxHeight: screenHeight,  minHeight: screenHeight , height: '99vh', backgroundSize: '100% 100%',  width: '99vw' }}>
+    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat',  maxHeight: screenHeight,  minHeight: screenHeight , height: '99vh', backgroundSize: '100% 100%',  width: '100vw' }}>
         
         { !showModal ? 
           <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '100%', height: '100%', alignSelf:'center'}}>
