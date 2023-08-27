@@ -31,6 +31,30 @@ p span {
   display: block;
 }
 
+.scroll-box {
+  width: 300px;
+  height: 300px;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
 .square {
   flex-direction: column;
   height: 100%;
@@ -104,7 +128,7 @@ p span {
   flex-wrap: wrap;
   flex-direction: row;
   height: 30%;
-  width: 100%;
+  width: 45%;
   border-radius: 10px;
 }
 

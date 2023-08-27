@@ -58,6 +58,33 @@ const Registration = () => {
   const [validInputError, setValidInputError ] = useState('');
   const [showModal, setShowModal] = useState(false);
   
+
+  const items = Array.from({ length: 20 }, (_, index) => ({
+    id: index,
+    label: `Label ${index}`,
+    checked: false,
+  }));
+
+  const box = () => {
+    return (
+      <div>
+        <div className="scroll-box">
+          {Tasks.map(item => (
+            <div key={item.value} className="row">
+              <label>
+                <input
+                  type="checkbox"
+                  onClick={() =>
+                    setInputs({...inputs, tasks: {...inputs.tasks, [item.value]: !{...inputs.tasks}[item.value]}})}
+                />
+                {item.label}
+              </label>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
   const ip =  '13.51.169.250';
   const options = [
     { value: 'XS', label: 'XS' },
@@ -230,7 +257,7 @@ const Registration = () => {
               /> 
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '25%'}}>
-              <label className='columnLabel'>Puhelin | Telefon *</label>
+              <label className='columnLabel'> Puhelin | Telefon *</label>
               <input
                 data-testid='phone' 
                 className='inputStyle'
@@ -254,7 +281,7 @@ const Registration = () => {
             <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '40%'}}>
               <label className='columnLabel'>Tehtävätoivomus | Önskemål angående uppgift *</label>
               <div className='taskList'>
-                { tasksCheckBoxes() }
+                { box() }
               </div>
             </div>
             <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '5%'}}>
@@ -263,7 +290,7 @@ const Registration = () => {
               <input data-testid='second' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, second: !inputs.days.second}})} /> <p className='dayLabel'>29.6.2024</p>
               <input data-testid='third' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, third: !inputs.days.third}})} /> <p className='dayLabel'>30.6.2024</p>
             </div>
-             <div style={{display: 'flex', flexDirection:  'row', width: '60%', height: '5%'}}>
+             <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '5%'}}>
               <label className='columnLabel'> Vapaat kommentit | Fria kommentarer *</label>
               <textarea
                 data-testid='freetextfield'
