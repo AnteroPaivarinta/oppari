@@ -213,7 +213,7 @@ const Registration = () => {
                   onChange={handleChange}
                 /> 
               </div>
-              <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '7%'}}>
+              <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '10%'}}>
                 <label className='columnLabel'> Sposti | Epost *</label>
                 <input
                   data-testid='email' 
