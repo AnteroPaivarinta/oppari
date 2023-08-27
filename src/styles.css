@@ -33,15 +33,15 @@ p span {
 
 .scroll-box {
   width: 100%;
-  height: 15%;
+  height: 35%;
   overflow-y: scroll;
   border: 1px solid #ccc;
 }
 
 .row {
   display: flex;
+  height: 60%;
   align-items: center;
-  padding: 10px;
   border-bottom: 1px solid #eee;
 }
 
