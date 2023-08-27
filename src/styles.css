@@ -32,8 +32,8 @@ p span {
 }
 
 .scroll-box {
-  width: 30%;
-  height: 20%;
+  width: 20%;
+  height: 10%;
   overflow-y: scroll;
   border: 1px solid #ccc;
 }
