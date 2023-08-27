@@ -127,14 +127,13 @@ input[type="checkbox"] {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  height: 30%;
+  height: 25%;
   width: 45%;
   border-radius: 10px;
 }
 
 .inputStyle {
   width: 45%;
-  padding: 12;
   border-style: solid;
   border-radius: 5px;
   resize: vertical;
