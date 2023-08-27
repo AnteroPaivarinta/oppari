@@ -285,13 +285,13 @@ const Registration = () => {
                   { box() }
                 </div>
               </div>
-              <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '10%'}}>
+              <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '20%'}}>
                 <label className='columnLabel'> Mitkä päivät olet kätettävissä | Vilka dagar kan Du ställa upp *</label>
                 <input  data-testid='first' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, first: !inputs.days.first}})} /> <p className='dayLabel'>28.6.2024</p>
                 <input data-testid='second' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, second: !inputs.days.second}})} /> <p className='dayLabel'>29.6.2024</p>
                 <input data-testid='third' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, third: !inputs.days.third}})} /> <p className='dayLabel'>30.6.2024</p>
               </div>
-              <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '5%'}}>
+              <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '10%'}}>
                 <label className='columnLabel'> Vapaat kommentit | Fria kommentarer *</label>
                 <textarea
                   data-testid='freetextfield'
