@@ -186,10 +186,10 @@ const Registration = () => {
   };
 
   return (
-    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat',  maxHeight: screenHeight,  minHeight: screenHeight ,  height: screenHeight, backgroundSize: 'cover',  width: '100vw' }}>
+    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: screenHeight ,  height: screenHeight, backgroundSize: 'cover',  width: screenWidth }}>
         
         { !showModal ? 
-          <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '100%', height: '100%', alignSelf:'center', overflowY: 'scroll'}}>
+          <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '90%', height: '100%', alignSelf:'center', overflowY: 'scroll', padding: '5%'}}>
             <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', height: '100%', width: '100%', alignItems: 'center'}}>
               <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '7%'}}>
                 <label className='columnLabel'>Etunimi | Förnamn *</label>
