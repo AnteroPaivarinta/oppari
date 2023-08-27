@@ -274,18 +274,18 @@ const Registration = () => {
                     <Select className='inputStyleTshirtTwo' value={{label: inputs.tshirt, value: inputs.tshirt}} options={options}  onChange={(e) => selectHandleChange(e)}   />
                   </div>
               </div> 
-              <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '7%'}}>
+              <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '10%'}}>
                 <label className='columnLabel'>Onko sinulla toimitsijakortti? | Har du domarkort? *</label>
               
                 <Switch data-testid='licenseCard' onChange={handleLicenseCard} checked={inputs.licenseCard} />
               </div>
-              <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '7%'}}>
+              <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '10%'}}>
                 <label className='columnLabel'>Tehtävätoivomus | Önskemål angående uppgift *</label>
                 <div className='taskList'>
                   { box() }
                 </div>
               </div>
-              <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '5%'}}>
+              <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '10%'}}>
                 <label className='columnLabel'> Mitkä päivät olet kätettävissä | Vilka dagar kan Du ställa upp *</label>
                 <input  data-testid='first' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, first: !inputs.days.first}})} /> <p className='dayLabel'>28.6.2024</p>
                 <input data-testid='second' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, second: !inputs.days.second}})} /> <p className='dayLabel'>29.6.2024</p>
