@@ -72,6 +72,7 @@ const Registration = () => {
             <div key={item.value} className="row">
               <label style={{fontSize: '1vh', color:'white'}}>
                 <input
+                  className='checkbox'
                   type="checkbox"
                   onClick={() =>
                     setInputs({...inputs, tasks: {...inputs.tasks, [item.value]: !{...inputs.tasks}[item.value]}})}
@@ -171,7 +172,7 @@ const Registration = () => {
   return (
     <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: screenHeight ,  height: '100%', backgroundSize: 'cover',  width: screenWidth }}>
         { !showModal ? 
-          <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '90%', height: '100%', alignSelf:'center', overflowY: 'scroll', padding: '5%'}}>
+          <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '90%', height: '100%', alignSelf:'center', overflowY: 'auto', padding: '5%'}}>
             <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', height: '100%', width: '90%',  alignItems: 'center'}}>
               <div style={{display: 'flex', flexDirection:  'row', width: '100%'}}>
                 <label className='columnLabel'>Etunimi| Förnamn *</label>
@@ -252,14 +253,12 @@ const Registration = () => {
               </div>
               <div style={{display: 'flex', flexDirection:  'row', width: '100%'}}>
                 <label className='columnLabel'>Unisex koko/storlek *</label>
-                  <div>
-                    <Select className='inputStyleTshirtTwo' value={{label: inputs.tshirt, value: inputs.tshirt}} options={options}  onChange={(e) => selectHandleChange(e)}   />
-                  </div>
+                <Select className='inputStyleTshirtTwo' value={{label: inputs.tshirt, value: inputs.tshirt}} options={options}  onChange={(e) => selectHandleChange(e)}   />
               </div> 
               <div style={{display: 'flex', flexDirection:  'row', width: '100%'}}>
                 <label className='columnLabel'>Onko sinulla toimitsijakortti? | Har du domarkort? *</label>
               
-                <Switch data-testid='licenseCard' onChange={handleLicenseCard} checked={inputs.licenseCard} />
+                <Switch data-testid='licenseCard' onChange={handleLicenseCard} checked={inputs.licenseCard}  />
               </div>
               <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '1%'}}>
                 <label className='columnLabel'>Tehtävätoivomus | Önskemål angående uppgift *</label>
