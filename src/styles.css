@@ -17,7 +17,7 @@ h1 {
 
 .dayLabel {
   color: white;
-  font-size: 13;
+  font-size: '1vh';
 }
 
 .taskLabel {
