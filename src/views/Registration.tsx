@@ -171,9 +171,11 @@ const Registration = () => {
 
   return (
     <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: screenHeight , backgroundSize: 'cover',  minWidth: screenWidth }}>
+        
         { !showModal ? 
           <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '90%', height: '100%', alignSelf:'center', overflowY: 'auto', padding: '5%'}}>
-            <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', height: '100%', width: '90%',  alignItems: 'center'}}>
+            <div style={{ width: '10%', height: '10%', alignItems: 'center'}}> <h1 style={{fontSize: 12}}>Tähdellä merkityt asiat ovat pakollisia</h1></div>
+            <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', height: '90%', width: '90%',  alignItems: 'center'}}>
               <div style={{display: 'flex', flexDirection:  'row', width: '100%'}}>
                 <label className='columnLabel'>Etunimi| Förnamn *</label>
                 <input 

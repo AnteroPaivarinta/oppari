@@ -10,7 +10,7 @@ const Main = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   return (
     <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat' , maxHeight: screenHeight,  minHeight: screenHeight , height: '100vh', backgroundSize: '100% 100%',  width: '100vw' }}>
-        <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'flex-end', width:'100%', height: '1%'}}>
+        <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'flex-end', width:'100%', height: '5%'}}>
           <div style={{marginRight: '5%'}}>
             <NavLink
               to="/admin"
