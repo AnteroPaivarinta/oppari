@@ -22,7 +22,7 @@ const Admin = () => {
     const [inputVerify, setInputVerify] = useState<boolean>(false);
     const [adiminObject, setAdminObject ] = useState<IAdminObject>({inputVerify: false, token:'', loginResponse: false});
     const [filterInput, setFiterInput] = useState<string>('');
-
+    const [error, setError] = useState<string>('');
     const handleChange = (event:any) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -36,6 +36,9 @@ const Admin = () => {
         if(response.data.loginResponse === 'Right user and password'){
           setInputVerify(true);
         } 
+        else{
+          setError('Käyttäjänimi tai salasana on virheellinen-')
+        }
       });
     }
 
@@ -208,7 +211,7 @@ const Admin = () => {
               onChange={handleChange}
             />
           </div>  
-         
+         { error &&<div style={{color:'white'}}> {error}</div>}
           { (!inputVerify && !adiminObject.token) &&<button style={{height: '3%', width: '5%', marginTop: '1%'}} data-testid='login' onClick={handleSubmit}>Kirjaudu</button>} 
          
           { (inputVerify ) && 
