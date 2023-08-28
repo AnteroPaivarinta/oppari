@@ -70,7 +70,7 @@ const Registration = () => {
         <div className="scroll-box">
           {Tasks.map(item => (
             <div key={item.value} className="row">
-              <label style={{fontSize: '2vh'}}>
+              <label style={{fontSize: '0.3vh', color:'white'}}>
                 <input
                   type="checkbox"
                   onClick={() =>
