@@ -170,12 +170,11 @@ const Registration = () => {
 
   return (
     <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: screenHeight ,  height: '100%', backgroundSize: 'cover',  width: screenWidth }}>
-        
         { !showModal ? 
           <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '90%', height: '100%', alignSelf:'center', overflowY: 'scroll', padding: '5%'}}>
-            <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', height: '100%', width: '90%', alignItems: 'center'}}>
+            <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', height: '100%', width: '90%'}}>
               <div style={{display: 'flex', flexDirection:  'row', width: '100%'}}>
-                <label className='columnLabel'>Etunimi | Förnamn *</label>
+                <label className='columnLabel'>Etunimi| Förnamn *</label>
                 <input 
                   data-testid='firstName'
                   className='inputStyle'
@@ -262,7 +261,7 @@ const Registration = () => {
               
                 <Switch data-testid='licenseCard' onChange={handleLicenseCard} checked={inputs.licenseCard} />
               </div>
-              <div style={{display: 'flex', flexDirection:  'row', width: '100%'}}>
+              <div style={{display: 'flex', flexDirection:  'row', width: '100%', height: '1%'}}>
                 <label className='columnLabel'>Tehtävätoivomus | Önskemål angående uppgift *</label>
                 <div className='taskList'>
                   { box() }

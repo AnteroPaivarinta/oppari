@@ -32,6 +32,7 @@ p span {
 }
 
 .scroll-box {
+  height: '3%';
   width: 100%;
   overflow-y: scroll;
   border: 1px solid #ccc;
@@ -123,11 +124,13 @@ input[type="checkbox"] {
 }
 
 .taskList {
+  height: 2 px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  width: 55%;
+  width: 30%;
   border-radius: 10px;
+  height: 1%;
 }
 
 .inputStyle {
@@ -194,7 +197,6 @@ input[type="checkbox"] {
   border-radius: 5px;
   resize: vertical;
   margin-top: 3px;
-  height: 120%;
 }
 
 
