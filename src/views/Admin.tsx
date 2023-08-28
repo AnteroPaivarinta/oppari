@@ -30,7 +30,7 @@ const Admin = () => {
     }
 
     const handleSubmit = () => {
-      axios.post(`http://${ip}/admin`, inputs).then((response) => {
+      axios.post(`https://${ip}/admin`, inputs).then((response) => {
         
         console.log('Post succesful', response);
         if(response.data.loginResponse === 'Right user and password'){
