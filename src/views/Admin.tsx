@@ -8,7 +8,7 @@ import * as ExcelJS from 'exceljs';
 import FileSaver from 'file-saver';
 
 const Admin = () => {
-    const ip =  '172.31.36.167';
+    const ip =  '13.51.169.250';
     const [inputs, setInputs] = useState< IAdmin >
     ({
       user: '',
