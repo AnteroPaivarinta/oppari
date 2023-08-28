@@ -21,8 +21,8 @@ h1 {
 }
 
 .checkbox {
-  height: 2vh;
-  width: 2vw;
+  height: 3vh;
+  width: 3vw;
   align-self: center;
   justify-content: center;
 }
