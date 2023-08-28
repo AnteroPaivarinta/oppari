@@ -14,7 +14,9 @@ const Admin = () => {
       user: '',
       password: ''
     });
-
+    
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [screenHeight, setScreenHeight] = useState(window.innerHeight);
     const [logResponse, setLogResponse ] = useState(false);
     const [rowData, setRowData] = useState<IDataIndex[]>([]);
     const [updatedRowData, setUpdatedRowData] = useState<IDataIndex[]>([]);
@@ -142,9 +144,8 @@ const Admin = () => {
           <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.phone} name='phone' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.phone } </td> 
           <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.tshirt} name='tshirt' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.tshirt } </td> 
           <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.team} name='team' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.team } </td> 
-          <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.hopes} name='hopes' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.hopes } </td> 
           <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.freeText} name='freeText' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.freeText } </td>
-          <td> {value.update ? <input className='smallInput' value = {updatedRowData[index].data.date} name='date' onChange={(e) => handleChangeUpdate(e, index)}/> : value.data.date } </td>  
+          <td>  { value.data.date } </td>  
           { !value.update &&
             <div>
               { !value.deleting ?
@@ -186,7 +187,7 @@ const Admin = () => {
  
 
   return (
-    <div data-testid='Admin' style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: '100%', height: '100vh', backgroundSize: 'cover' }}>
+    <div data-testid='Admin' style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: screenHeight , backgroundSize: 'cover',  minWidth: screenWidth }}>
       <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'row', }}>
         <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column',  width: '100%', height: '100%', marginTop: '5%'}}>
           <div style={{display: 'flex', flexDirection:  'row', width: '40%', height: '5%'}}>
@@ -222,10 +223,11 @@ const Admin = () => {
        
           
         { adiminObject.token && 
+        
           <div style={{justifyContent: 'center', display: 'flex', justifyItems:'center', width: '60%'}}> 
-             <input onChange={(e) =>setFiterInput(e.target.value)}/> <div>Seach by Surname</div>
-            <button onClick={() => makeExcel()}> DOWNLOAD IN EXCEL</button>
-              <table data-testid='database'>
+            <div style={{color:'white'}}>Seach by Surname</div> <input style={{height: '3vh', borderRadius: 10}} onChange={(e) =>setFiterInput(e.target.value)}/> 
+             <button style={{height: '5vh'}} onClick={() => makeExcel()}> DOWNLOAD IN EXCEL</button>
+              <table data-testid='database' style={{  overflowY: 'auto'}}>
                 <tr>
                   <th>FirstName</th>
                   <th>LastName</th>
@@ -235,14 +237,16 @@ const Admin = () => {
                   <th>Phone</th>
                   <th>T-shirt</th>
                   <th>Team</th>
-                  <th>Hopes</th>
                   <th>Free text</th>
                   <th>Date</th>
                 </tr>
               {renderTable()}
             </table>
+
          </div>
         }
+            
+
 
         </div>
       </div>
