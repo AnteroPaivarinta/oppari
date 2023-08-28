@@ -213,7 +213,7 @@ const Admin = () => {
             />
           </div>  
          { error &&<div style={{color:'white'}}> {error}</div>}
-          { (!inputVerify && !adiminObject.token) &&<button style={{height: '3%', width: '5%', marginTop: '1%'}} data-testid='login' onClick={handleSubmit}>Kirjaudu</button>} 
+          { (!inputVerify && !adiminObject.token) &&<button style={{height: '3%', width: '30%', marginTop: '1%'}} data-testid='login' onClick={handleSubmit}>Kirjaudu</button>} 
          
           { (inputVerify ) && 
             <div style={{color:'black'}}>
