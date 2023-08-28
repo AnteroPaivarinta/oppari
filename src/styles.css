@@ -20,6 +20,13 @@ h1 {
   width: 45%;
 }
 
+.checkbox {
+  height: 2vh;
+  width: 2vw;
+  align-self: center;
+  justify-content: center;
+}
+
 
 .dayLabel {
   color: white;

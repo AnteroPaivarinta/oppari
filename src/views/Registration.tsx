@@ -270,9 +270,9 @@ const Registration = () => {
               <div style={{display: 'flex', flexDirection:  'row', width: '100%'}}>
                 <label className='columnLabel'> Mitkä päivät olet käytettävissä | Vilka dagar kan Du ställa upp *</label>
                 <div className='daysContainer'>
-                  <input  data-testid='first' style={{height: '1.5vh', width: '1.5vw', alignSelf: 'center', justifySelf: 'center'}} type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, first: !inputs.days.first}})} /> <p className='dayLabel'>28.6.2024</p>
-                  <input data-testid='second' style={{height: '1.5vh', width: '1.5vw', alignSelf: 'center', justifySelf: 'center'}} type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, second: !inputs.days.second}})} /> <p className='dayLabel'>29.6.2024</p>
-                  <input data-testid='third' style={{height: '1.5vh', width: '1.5vw', alignSelf: 'center', justifySelf: 'center'}} type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, third: !inputs.days.third}})} /> <p className='dayLabel'>30.6.2024</p>
+                  <input  data-testid='first' className='checkbox' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, first: !inputs.days.first}})} /> <p className='dayLabel'>28.6.2024</p>
+                  <input data-testid='second' className='checkbox' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, second: !inputs.days.second}})} /> <p className='dayLabel'>29.6.2024</p>
+                  <input data-testid='third' className='checkbox' type="checkbox" onClick={() => setInputs({...inputs, days: {...inputs.days, third: !inputs.days.third}})} /> <p className='dayLabel'>30.6.2024</p>
                 </div>
                
               </div>
