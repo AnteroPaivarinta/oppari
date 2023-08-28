@@ -14,6 +14,12 @@ h1 {
   height: 2%
 }
 
+.daysContainer {
+  display: flex;
+  flex-direction: row;
+  width: 45%;
+}
+
 
 .dayLabel {
   color: purple;
