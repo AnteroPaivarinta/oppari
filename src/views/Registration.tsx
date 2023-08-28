@@ -70,7 +70,7 @@ const Registration = () => {
         <div className="scroll-box">
           {Tasks.map(item => (
             <div key={item.value} className="row">
-              <label style={{fontSize: '2vh', color:'purple'}}>
+              <label style={{fontSize: '1vh', color:'white'}}>
                 <input
                   type="checkbox"
                   onClick={() =>
@@ -206,7 +206,7 @@ const Registration = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div style={{display: 'flex', flexDirection:  'row', width: '100%', backgroundColor: 'green'}}>
+              <div style={{display: 'flex', flexDirection:  'row', width: '100%'}}>
                 <label className='columnLabel'>Ikä | Ålder *</label>
                 <input
                   data-testid='age' 
