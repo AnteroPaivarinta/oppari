@@ -43,7 +43,7 @@ const Admin = () => {
     }
 
     const sendVerifyCode = () => {
-      axios.post(`http://${ip}/admin/verify`, inputCode).then((response) => {
+      axios.post(`https://${ip}/admin/verify`, inputCode).then((response) => {
         
         console.log('Post succesful', response);
         if(response.data.token){
@@ -69,7 +69,7 @@ const Admin = () => {
     }
     
     const onDelete = (PersonID: string, i: number) => {
-      axios.delete(`http://${ip}/delete/`+PersonID).then((response) => {
+      axios.delete(`https://${ip}/delete/`+PersonID).then((response) => {
         const newRowData: any[] = [];
         response.data.forEach((element: IData, index:number) => {
           newRowData.push({index: index, data:element, update: false, deleting: false})
@@ -116,7 +116,7 @@ const Admin = () => {
 
       const array = updatedRowData.map((object: IDataIndex) => object.update === true? {...object, update: false} : object );
       const ob = array.find((object) => object.index === index);
-      axios.put(`http://${ip}/userData`, ob).then((response) => {
+      axios.put(`https://${ip}/userData`, ob).then((response) => {
         
         console.log('Putsuccesful', response);
       });
@@ -170,7 +170,7 @@ const Admin = () => {
 
       if(adiminObject.loginResponse === true) {
         console.log('ONNISTUTTIIN')
-        axios.get(`http://${ip}/userData`, config)
+        axios.get(`https://${ip}/userData`, config)
         .then(function (response) {
           const array = response.data;
           console.log('ARRAY', array)
