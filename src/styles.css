@@ -24,6 +24,8 @@ h1 {
 .dayLabel {
   color: purple;
   font-size: 1vh;
+  align-self: center;
+  justify-self: center;
 }
 
 .taskLabel {
