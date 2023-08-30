@@ -13,7 +13,7 @@ const file = reader.readFile('./backend/test.xlsx')
 const nodemailer = require('nodemailer');
 const aws = require('aws-sdk')
 const safeValidator = require('validator');
-
+const use = "USE norrgard_kalevaTesti;";
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -54,7 +54,6 @@ connection.connect(function(err) {
   }
   console.log('Connected to database.');
 });
-const use = "USE kaleva;";
 connection.query(use);
 let dataArray = [];
 connection.query("SELECT * FROM PERSON", function (err, result, fields) {
@@ -92,7 +91,6 @@ app.post('/admin', async (req, res) => {
   const { user, password } = req.body;
 
   const sqlQuery = `SELECT * FROM ADMIN WHERE email ='${user}';`
-  const use = "USE kaleva;";
   connection.query(use);
   connection.query(sqlQuery, async function (err, result, fields) {
     if (err) throw err;
@@ -171,7 +169,7 @@ app.post('/userData', async function(req,res) {
 
   const connection = mysql.createConnection({
     host     : process.env.RDS_HOSTNAME,
-    user     : 'admin',
+    user     : 'norrgard_AP',
     password : process.env.RDS_PASSWORD,
     port     : '3306'
   });
@@ -203,7 +201,6 @@ app.post('/userData', async function(req,res) {
     }
   }
 
-  const use = "USE kaleva;";
   const sql= `INSERT INTO PERSON VALUES ( ? , ?,  ?, ?, ?, ?', ?, ?, ?,  ?, ?', ? ,  ?,  ?);`;
   connection.query(use);
   connection.query(sql, [object.PersonID, safeValidator(object.firstName), safeValidator(object.lastName), safeValidator(object.age), safeValidator(object.email), safeValidator(object.gender), safeValidator(object.tshirt), safeValidator(object.team), licenseCard.toString(), safeValidator(object.freeText), safeValidator(tasks.toString(), arrayDays.toString())]);
@@ -310,7 +307,6 @@ app.delete('/delete/:id', function(req,res) {
     console.log('Connected to database.');
   });
 
-  const use = "USE kaleva;";
   connection.query(use);
   connection.query(deleteQuery);
   connection.end();
