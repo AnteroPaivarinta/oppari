@@ -41,9 +41,9 @@ const verifyUserToken = (req, res, next) => {
 };
 
 const connection = mysql.createConnection({
-  host     : process.env.RDS_HOSTNAME,
-  user     : 'admin',
-  password : process.env.RDS_PASSWORD,
+  host     : process.env.webHostName,
+  user     : process.env.webUserName,
+  password : process.env.webPassword,
   port     : '3306'
 });
 
@@ -74,9 +74,9 @@ app.get('/test23',  function(req,res) {
 app.post('/admin', async (req, res) => {
 
   const connection = mysql.createConnection({
-    host     : process.env.RDS_HOSTNAME,
-    user     : 'admin',
-    password : process.env.RDS_PASSWORD,
+    host     : process.env.webHostName,
+    user     : process.env.webUserName,
+    password : process.env.webPassword,
     port     : '3306'
   });
   
@@ -168,11 +168,13 @@ app.get('/', async (req, res) => {
 app.post('/userData', async function(req,res) {
 
   const connection = mysql.createConnection({
-    host     : process.env.RDS_HOSTNAME,
-    user     : 'norrgard_AP',
-    password : process.env.RDS_PASSWORD,
+    host     : process.env.webHostName,
+    user     : process.env.webUserName,
+    password : process.env.webUserPassword,
     port     : '3306'
   });
+
+  
 
   connection.connect(function(err) {
     if (err) {
@@ -257,9 +259,9 @@ app.put('/userData', function(req,res) {
   } = req.body.data;
 
   const connection = mysql.createConnection({
-    host     : process.env.RDS_HOSTNAME,
-    user     : 'admin',
-    password : process.env.RDS_PASSWORD,
+    host     : process.env.webHostName,
+    user     : process.env.webUserName,
+    password : process.env.webPassword,
     port     : '3306'
   });
 
@@ -291,9 +293,9 @@ app.get('/userData', verifyUserToken,  function(req,res) {
 app.delete('/delete/:id', function(req,res) {
 
   const connection = mysql.createConnection({
-    host     : process.env.RDS_HOSTNAME,
-    user     : 'admin',
-    password : process.env.RDS_PASSWORD,
+    host     : process.env.webHostName,
+    user     : process.env.webUserName,
+    password : process.env.webPassword,
     port     : '3306'
   });
   
