@@ -100,11 +100,6 @@ app.post('/admin', async (req, res) => {
   let emailHash = cryptoNodejs.createHash(algorithm).update(user).digest("hex")
   let passwordHash = cryptoNodejs.createHash(algorithm).update(password).digest("hex")
 
-  console.log('emailHash', emailHash)
-  console.log('passwordHash', passwordHash)
-
-  console.log('salis', password)
-  console.log('Käyttis', user)
   const sqlQuery = `SELECT * FROM ADMIN WHERE email ='${emailHash}';`
   connection.query(use);
   connection.query(sqlQuery, async function (err, result, fields) {
