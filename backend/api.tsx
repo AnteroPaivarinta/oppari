@@ -205,7 +205,7 @@ app.post('/userData', async function(req,res) {
 
   const sql= `INSERT INTO PERSON VALUES ( ? , ?,  ?, ?, ?, ?', ?, ?, ?,  ?, ?', ? ,  ?,  ?);`;
   connection.query(use);
-  connection.query(sql, [object.PersonID, safeValidator(object.firstName), safeValidator(object.lastName), safeValidator(object.age), safeValidator(object.email), safeValidator(object.gender), safeValidator(object.tshirt), safeValidator(object.team), licenseCard.toString(), safeValidator(object.freeText), safeValidator(tasks.toString(), arrayDays.toString())]);
+  connection.query(sql, [object.PersonID, (object.firstName), (object.lastName), (object.age), (object.email), (object.gender), (object.tshirt), (object.team), licenseCard.toString(), (object.freeText), (tasks.toString(), arrayDays.toString())]);
   connection.end();
   dataArray.push(req.body);
   const message = 'Hei, olet ilmoittanut Kalevan 2024 kisoihin näillä tiedoilla:\n ';
