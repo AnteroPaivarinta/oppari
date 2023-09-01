@@ -105,7 +105,6 @@ app.post('/admin', async (req, res) => {
   connection.query(sqlQuery, async function (err, result, fields) {
     if (err) throw err;
     const userData = result[0];
-    console.log('MENTIINKÖ TÄNNE?')
     if (emailHash === userData.email && userData.password === passwordHash) {
     
       let code = Math.floor(1000 + Math.random() * 9000);
