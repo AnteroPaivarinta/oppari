@@ -84,7 +84,7 @@ const Registration = () => {
         </div>
     );
   }
-  const ip =  'localhost'; //46.101.246.243
+  const ip =  '46.101.246.243'; //46.101.246.243
   const options = [
     { value: 'XS', label: 'XS' },
     { value: 'S', label: 'S' },

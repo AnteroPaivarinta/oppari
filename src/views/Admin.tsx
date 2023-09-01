@@ -8,7 +8,7 @@ import * as ExcelJS from 'exceljs';
 import FileSaver from 'file-saver';
 
 const Admin = () => {
-    const ip =  'localhost';
+    const ip =  '46.101.246.243';
     const [inputs, setInputs] = useState< IAdmin >
     ({
       user: '',
@@ -32,7 +32,6 @@ const Admin = () => {
     }
 
     const handleSubmit = () => {
-      console.log("HANDLESUBMIT")
       axios.post(`http://${ip}:3001/admin`, inputs).then((response) => {
         
         console.log('Post succesful', response);
