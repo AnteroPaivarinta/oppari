@@ -13,7 +13,9 @@ const file = reader.readFile('./backend/test.xlsx')
 const nodemailer = require('nodemailer');
 const aws = require('aws-sdk')
 const safeValidator = require('validator');
+const cryptoNodejs = require("crypto");
 const use = "USE norrgard_kalevaTesti;";
+const algorithm = "sha256";
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -21,6 +23,12 @@ const transporter = nodemailer.createTransport({
     pass: process.env.emailpassword
   }
 });
+//let emailHash = cryptoNodejs.createHash(algorithm).update(user).digest("hex")
+//let passwordHash = cryptoNodejs.createHash(algorithm).update(password).digest("hex")
+
+  
+//console.log("In hex email : \n " + emailHash + "\n")
+//console.log("In hex password: \n " + passwordHash)
 
 
 const verifyUserToken = (req, res, next) => {
@@ -89,18 +97,26 @@ app.post('/admin', async (req, res) => {
   });
   
   const { user, password } = req.body;
+  let emailHash = cryptoNodejs.createHash(algorithm).update(user).digest("hex")
+  let passwordHash = cryptoNodejs.createHash(algorithm).update(password).digest("hex")
 
-  const sqlQuery = `SELECT * FROM ADMIN WHERE email ='${user}';`
+  console.log('emailHash', emailHash)
+  console.log('passwordHash', passwordHash)
+
+  console.log('salis', password)
+  console.log('Käyttis', user)
+  const sqlQuery = `SELECT * FROM ADMIN WHERE email ='${emailHash}';`
   connection.query(use);
   connection.query(sqlQuery, async function (err, result, fields) {
     if (err) throw err;
     const userData = result[0];
-    if (user === userData.email && userData.password === password) {
+    console.log('MENTIINKÖ TÄNNE?')
+    if (emailHash === userData.email && userData.password === passwordHash) {
     
       let code = Math.floor(1000 + Math.random() * 9000);
       let mailOptions = {
         from: 'opparitesti3@gmail.com',
-        to: userData.email,
+        to: user,
         subject: 'Verify  Code',
         text: code.toString(),
       };
