@@ -170,7 +170,7 @@ const Registration = () => {
   };
 
   return (
-    <div style={{ backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: screenHeight , backgroundSize: 'cover',  minWidth: screenWidth }}>
+    <div style={{ display: 'flex' ,backgroundImage: `url(${kuva})`, backgroundRepeat: 'no-repeat', minHeight: screenHeight , backgroundSize: 'cover',  minWidth: screenWidth, alignItems: 'center', justifyContent: 'center' }}>
         
         { !showModal ? 
           <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '90%', height: '100%', alignSelf:'center', overflowY: 'auto', padding: '5%'}}>
