@@ -84,7 +84,7 @@ const Registration = () => {
         </div>
     );
   }
-  const ip =  '46.101.246.243'; //46.101.246.243
+  const ip =  '13.51.169.250'; 
   const options = [
     { value: 'XS', label: 'XS' },
     { value: 'S', label: 'S' },
@@ -157,7 +157,7 @@ const Registration = () => {
       console.log('ARRAY', array);
       const object = {...inputs, PersonID : uid, date: currentDate, tasks: array};
     
-      axios.post(`http://${ip}:3001/userData`, object).then((response) => {
+      axios.post(`https://${ip}:3001/userData`, object).then((response) => {
         console.log('Post succesful :)', response);
         setShowModal(true);
         setLogResponseMessage('Kiitos ilmoittautumisestisi - Otamme sinuun yhteyttä | Tack för anmälan - Vi kontaktar Dig senare!')

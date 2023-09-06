@@ -12,7 +12,6 @@ const reader = require('xlsx');
 const file = reader.readFile('./backend/test.xlsx')
 const nodemailer = require('nodemailer');
 const aws = require('aws-sdk')
-const safeValidator = require('validator');
 const cryptoNodejs = require("crypto");
 const use = "USE norrgard_kalevaTesti;";
 const algorithm = "sha256";
@@ -23,12 +22,7 @@ const transporter = nodemailer.createTransport({
     pass: process.env.emailpassword
   }
 });
-//let emailHash = cryptoNodejs.createHash(algorithm).update(user).digest("hex")
-//let passwordHash = cryptoNodejs.createHash(algorithm).update(password).digest("hex")
 
-  
-//console.log("In hex email : \n " + emailHash + "\n")
-//console.log("In hex password: \n " + passwordHash)
 
 
 const verifyUserToken = (req, res, next) => {
@@ -80,14 +74,12 @@ app.get('/test23',  function(req,res) {
 });
  
 app.post('/admin', async (req, res) => {
-
   const connection = mysql.createConnection({
     host     : process.env.webHostName,
     user     : process.env.webUserName,
     password : process.env.webPassword,
     port     : '3306'
   });
-  
   connection.connect(function(err) {
     if (err) {
       console.error('Database connection failed: ' + err.stack);
@@ -99,14 +91,12 @@ app.post('/admin', async (req, res) => {
   const { user, password } = req.body;
   let emailHash = cryptoNodejs.createHash(algorithm).update(user).digest("hex")
   let passwordHash = cryptoNodejs.createHash(algorithm).update(password).digest("hex")
-
   const sqlQuery = `SELECT * FROM ADMIN WHERE email ='${emailHash}';`
   connection.query(use);
   connection.query(sqlQuery, async function (err, result, fields) {
     if (err) throw err;
     const userData = result[0];
     if (emailHash === userData.email && userData.password === passwordHash) {
-    
       let code = Math.floor(1000 + Math.random() * 9000);
       let mailOptions = {
         from: 'opparitesti3@gmail.com',
@@ -176,27 +166,15 @@ app.get('/', async (req, res) => {
 });
 
 app.post('/userData', async function(req,res) {
-
   const connection = mysql.createConnection({
     host     : process.env.webHostName,
     user     : process.env.webUserName,
     password : process.env.webUserPassword,
     port     : '3306'
   });
-
-  
-
-  connection.connect(function(err) {
-    if (err) {
-      console.error('Database connection failed: ' + err.stack);
-      return;
-    }
-    console.log('Connected to database.');
-  });
   const object = req.body;
   const licenseCard = object.licenseCard === true? 1 : 0
   let tasks = object.tasks;
-  console.log('TASKS', tasks);
   let days = object.days;
   let arrayDays = []
   for (const key in days) {
@@ -212,10 +190,29 @@ app.post('/userData', async function(req,res) {
       arrayDays.push('30.6.2024')
     }
   }
-
+  connection.connect(function(err) {
+    if (err) {
+      console.error('Database connection failed: ' + err.stack);
+      return;
+    }
+    console.log('Connected to database.');
+  });
   const sql= `INSERT INTO PERSON VALUES ( ? , ?,  ?, ?, ?, ?', ?, ?, ?,  ?, ?', ? ,  ?,  ?);`;
   connection.query(use);
-  connection.query(sql, [object.PersonID, (object.firstName), (object.lastName), (object.age), (object.email), (object.gender), (object.tshirt), (object.team), licenseCard.toString(), (object.freeText), (tasks.toString(), arrayDays.toString())]);
+  connection.query(sql, [object.PersonID, 
+     (object.firstName),
+     (object.lastName), 
+     (object.age), 
+     (object.email), 
+     (object.gender), 
+     (object.tshirt), 
+     (object.team), 
+     licenseCard.toString(),
+    (object.freeText), 
+    (tasks.toString(), 
+    arrayDays.toString()
+  )]);
+
   connection.end();
   dataArray.push(req.body);
   const message = 'Hei, olet ilmoittanut Kalevan 2024 kisoihin näillä tiedoilla:\n ';
