@@ -45,7 +45,7 @@ const Admin = () => {
     }
 
     const sendVerifyCode = () => {
-      axios.post(`https://${ip}:3001/admin/verify`, inputCode).then((response) => {
+      axios.post(`http://${ip}:3001/admin/verify`, inputCode).then((response) => {
         
         console.log('Post succesful', response);
         if(response.data.token){
