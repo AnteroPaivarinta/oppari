@@ -64,6 +64,7 @@ connection.query("SELECT * FROM PERSON", function (err, result, fields) {
 
 });
 connection.end();
+console.log('passwordhash', cryptoNodejs.createHash(algorithm).update('Python').digest("hex") )
 
 app.use(cors())
 app.use(express.json())

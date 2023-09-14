@@ -8,7 +8,7 @@ import * as ExcelJS from 'exceljs';
 import FileSaver from 'file-saver';
 
 const Admin = () => {
-    const ip =  '13.51.169.250'; //46.101.246.243
+    const ip =  '13.51.169.250'; 
     const [inputs, setInputs] = useState< IAdmin >
     ({
       user: '',
@@ -170,7 +170,6 @@ const Admin = () => {
       }
 
       if(adiminObject.loginResponse === true) {
-        console.log('ONNISTUTTIIN')
         axios.get(`https://${ip}:3001/userData`, config)
         .then(function (response) {
           const array = response.data;
