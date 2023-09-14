@@ -31,7 +31,6 @@ const Admin = () => {
         const value = event.target.value;
         setInputs(values => ({...values, [name]: value}));
     }
-    https://13.51.169.250/
     const handleSubmit = () => {
       axios.post(`https://${ip}/admin`, inputs).then((response) => {
         
