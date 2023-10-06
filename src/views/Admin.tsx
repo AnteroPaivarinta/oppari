@@ -8,7 +8,8 @@ import * as ExcelJS from 'exceljs';
 import FileSaver from 'file-saver';
 
 const Admin = () => {
-    const ip = 'https://13.51.169.250'; 
+  ///13.51.169.250
+    const ip = '13.51.169.250'; 
     
     const [inputs, setInputs] = useState< IAdmin >
     ({
@@ -70,7 +71,7 @@ const Admin = () => {
         .catch(err => console.log('Error writing excel export', err))
     }
     
-    const onDelete = (PersonID: string, i: number) => {
+    const onDelete = (PersonID: string) => {
       axios.delete(`${ip}/delete/`+PersonID).then((response) => {
         const newRowData: any[] = [];
         console.log('Response', response)
@@ -154,7 +155,7 @@ const Admin = () => {
               { !value.deleting ?
                 <button data-testid='deleteButton' onClick={() => deletingWarning(index)}> DELETE</button> : 
                 <div>
-                  <button data-testid='acceptDelete' onClick={() => onDelete(value.data.PersonID, index)}>Kyllä</button> 
+                  <button data-testid='acceptDelete' onClick={() => onDelete(value.data.PersonID)}>Kyllä</button> 
                   <button>Ei</button> 
                 </div>}
             </div> 

@@ -1,4 +1,3 @@
-
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -64,9 +63,6 @@ connection.query("SELECT * FROM PERSON", function (err, result, fields) {
 
 });
 connection.end();
-const AA = cryptoNodejs.createHash(algorithm).update('Python').digest("hex");
-const b = '18885f27b5af9012df19e496460f9294d5ab76128824c6f993787004f6d9a7db'
-console.log('passwordhash',  AA.toString() === b, AA )
 
 app.use(cors())
 app.use(express.json())
@@ -90,7 +86,6 @@ app.post('/admin', async (req, res) => {
     }
     console.log('Connected to database.');
   });
-  
   const { user, password } = req.body;
   let emailHash = cryptoNodejs.createHash(algorithm).update(user).digest("hex")
   let passwordHash = cryptoNodejs.createHash(algorithm).update(password).digest("hex")
@@ -172,10 +167,13 @@ app.post('/userData', async function(req,res) {
   const connection = mysql.createConnection({
     host     : process.env.webHostName,
     user     : process.env.webUserName,
-    password : process.env.webUserPassword,
+    password : process.env.webPassword,
     port     : '3306'
   });
   const object = req.body;
+  console.log('R',req.body)
+  console.log(connection)
+
   const licenseCard = object.licenseCard === true? 1 : 0
   let tasks = object.tasks;
   let days = object.days;
@@ -200,21 +198,25 @@ app.post('/userData', async function(req,res) {
     }
     console.log('Connected to database.');
   });
-  const sql= `INSERT INTO PERSON VALUES ( ? , ?,  ?, ?, ?, ?', ?, ?, ?,  ?, ?', ? ,  ?,  ?);`;
   connection.query(use);
-  connection.query(sql, [object.PersonID, 
-     (object.firstName),
-     (object.lastName), 
-     (object.age), 
-     (object.email), 
-     (object.gender), 
-     (object.tshirt), 
-     (object.team), 
-     licenseCard.toString(),
-    (object.freeText), 
-    (tasks.toString(), 
-    arrayDays.toString()
-  )]);
+  const sql = `INSERT INTO PERSON VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
+  const nyt = new Date();
+  connection.query(sql, [
+      object.PersonID,
+      object.firstName,
+      object.lastName,
+      object.age,
+      object.email,
+      object.phone,
+      object.gender,
+      object.tshirt,
+      object.team,
+      licenseCard.toString(),
+      object.freeText,
+      tasks.toString(),
+      arrayDays.toString(),
+      nyt.toString(),
+  ]);
 
   connection.end();
   dataArray.push(req.body);

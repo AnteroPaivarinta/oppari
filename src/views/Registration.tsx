@@ -84,6 +84,7 @@ const Registration = () => {
         </div>
     );
   }
+  //https://13.51.169.250
   const ip =  'https://13.51.169.250'; 
   const options = [
     { value: 'XS', label: 'XS' },
@@ -95,9 +96,7 @@ const Registration = () => {
   ];
 
   const checkValidInputs = () => {
-    function checkEntries  (arr:any)  {
-      return arr.find((value:any) => value[1] === false) ? true : false
-    }
+    
     if( inputs.age === '' ||
       inputs.tshirt === '-' ||
       inputs.email === '' ||
