@@ -73,11 +73,14 @@ const Admin = () => {
     const onDelete = (PersonID: string, i: number) => {
       axios.delete(`${ip}/delete/`+PersonID).then((response) => {
         const newRowData: any[] = [];
+        console.log('Response', response)
         response.data.forEach((element: IData, index:number) => {
           newRowData.push({index: index, data:element, update: false, deleting: false})
         });
         setLogResponse(true);
         setRowData(newRowData);
+      }).catch((error)=> {
+        console.log('ERROR', error)
       });
     }
 
