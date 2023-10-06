@@ -19,7 +19,7 @@ const Registration = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const [inputs, setInputs] = useState < IData >
   ({
-    PersonID: '',
+    PersonID: 'thgrth',
     email: '',
     tshirt: 'M', 
     gender: '', 
@@ -94,7 +94,7 @@ const Registration = () => {
     { value: 'XXL', label: 'XXL' },
   ];
 
-  const checkValidInputs  = () => {
+  const checkValidInputs = () => {
     function checkEntries  (arr:any)  {
       return arr.find((value:any) => value[1] === false) ? true : false
     }
@@ -103,11 +103,9 @@ const Registration = () => {
       inputs.email === '' ||
       inputs.firstName === '' ||
       inputs.lastName === '' ||
-      (inputs.days.first === false && inputs.days.second === false && inputs.days.third === false) ||
+      ((inputs.days.first === false && inputs.days.second === false) && inputs.days.third === false) ||
       inputs.gender === ''|| 
-      inputs.phone === '' || 
-      isEmail(inputs.email) === false ||
-      Object.entries(inputs.tasks).every(checkEntries) === true)  {
+      inputs.phone === '') {
         return false;
       } else {
         return true;
@@ -132,6 +130,7 @@ const Registration = () => {
 
   const handleSubmit = () => {
     if ( !checkValidInputs() ){
+      console.log('Inputs', inputs)
       setValidInputError('Tähdellä merkittyjä tekstikenttiä ei ole täytetty. Täytä tarvittavat tekstikentät.')
     } else {
       setValidInputError('')
@@ -282,7 +281,7 @@ const Registration = () => {
                   className='inputStyleFreeText'
                   rows={3}
                   cols={40}
-                  onChange={(e) => handleChange(e)}
+                  onChange={handleChange}
                   value={inputs?.freeText}
                 />
               </div>
