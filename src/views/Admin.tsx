@@ -8,7 +8,7 @@ import * as ExcelJS from 'exceljs';
 import FileSaver from 'file-saver';
 
 const Admin = () => {
-    const ip =  '13.51.169.250'; 
+    const ip =  'https://13.51.169.250'; 
     
     const [inputs, setInputs] = useState< IAdmin >
     ({
@@ -32,7 +32,7 @@ const Admin = () => {
         setInputs(values => ({...values, [name]: value}));
     }
     const handleSubmit = () => {
-      axios.post(`https://${ip}/admin`, inputs).then((response) => {
+      axios.post(`${ip}/admin`, inputs).then((response) => {
         
         console.log('Post succesful', response);
         if(response.data.loginResponse === 'Right user and password'){
@@ -45,7 +45,7 @@ const Admin = () => {
     }
 
     const sendVerifyCode = () => {
-      axios.post(`https://${ip}/admin/verify`, inputCode).then((response) => {
+      axios.post(`${ip}/admin/verify`, inputCode).then((response) => {
         
         console.log('Post succesful', response);
         if(response.data.token){
@@ -71,7 +71,7 @@ const Admin = () => {
     }
     
     const onDelete = (PersonID: string, i: number) => {
-      axios.delete(`https://${ip}/delete/`+PersonID).then((response) => {
+      axios.delete(`${ip}/delete/`+PersonID).then((response) => {
         const newRowData: any[] = [];
         response.data.forEach((element: IData, index:number) => {
           newRowData.push({index: index, data:element, update: false, deleting: false})
@@ -118,7 +118,7 @@ const Admin = () => {
 
       const array = updatedRowData.map((object: IDataIndex) => object.update === true? {...object, update: false} : object );
       const ob = array.find((object) => object.index === index);
-      axios.put(`https://${ip}/userData`, ob).then((response) => {
+      axios.put(`${ip}/userData`, ob).then((response) => {
         
         console.log('Putsuccesful', response);
       });
@@ -170,7 +170,7 @@ const Admin = () => {
       }
 
       if(adiminObject.loginResponse === true) {
-        axios.get(`https://${ip}/userData`, config)
+        axios.get(`${ip}/userData`, config)
         .then(function (response) {
           const array = response.data;
           console.log('ARRAY', array)
@@ -244,9 +244,6 @@ const Admin = () => {
 
          </div>
         }
-            
-
-
         </div>
       </div>
     </div>
