@@ -154,7 +154,7 @@ const Registration = () => {
       console.log('ARRAY', array);
       const object = {...inputs, PersonID : uid, date: currentDate, tasks: array};
     
-      axios.post(`${ip}:3001/userData`, object).then((response) => {
+      axios.post(`${ip}/userData`, object).then((response) => {
         console.log('Post succesful :)', response);
         setShowModal(true);
         setLogResponseMessage('Kiitos ilmoittautumisestisi - Otamme sinuun yhteyttä | Tack för anmälan - Vi kontaktar Dig senare!')
